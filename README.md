@@ -1,5 +1,5 @@
 # gyankosh
 
-a Repository crated by Arti Aggarwal to setup a unix server (rhel/ubuntu) from scratch
+a Repository crated by Arti Aggarwal to setup a Red Hat® Enterprise Linux 9.0 (Red Hat Developer) systems from scratch
 
-Detailed steps to reproduce a working system, and various cheat sheets
+Detailed steps to reproduce a working system, and Red Hat Developer cheat sheets
