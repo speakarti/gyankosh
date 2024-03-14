@@ -166,24 +166,6 @@ or add four to the stack pointer1 with
 
 Whenever possible, these four standard register names are available on your machine even though the machine has different canonical mnemonics, so long as there is no conflict. The info registers command shows the canonical names.
 
-
-setup c programming development environment setup - netbeans IDE (ubuntu 22.04)
-================================================================
-sudo apt install build-essential gcc gdb
-
-sudo apt install default-jdk
-sudo apt install default-jre
-
-sudo install netbeans
-sudo snap install netbeans --classic
-
-Install c/c++ plugins in apache netbeans : netbeans c/c++ plugin download : n the NetBeans IDE, select Tools > Plugins. In the Available Plugins tab, select the checkbox for Java or C/C++, depending on which is missing from your IDE.
-https://netbeans.apache.org/tutorial/main/kb/docs/cnd/
-https://netbeans.apache.org/tutorial/main/kb/docs/cnd/debugging/
-https://www.youtube.com/watch?v=Trw1mQ5r_sQ
-https://sciences.utsa.edu/_documents/computer-science/lab/netbeans-for-c-on-linux.pdf
-
-
 /proc/<PID>/maps file stores the memory-related information of the process.
 
 
