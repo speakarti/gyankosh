@@ -1,5 +1,5 @@
 setup c programming development environment setup - netbeans IDE (ubuntu 22.04)
-================================================================
+==============================================================================
 sudo apt install build-essential gcc gdb
 
 sudo apt install default-jdk
