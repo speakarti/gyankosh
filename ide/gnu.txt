@@ -1,0 +1,226 @@
+Debugging a Crashed Application - GDB can be used to read the core dump file and view some useful information about the program when it crashed
+How to enable core file dumps when an application crashes or segmentation faults (access a memory which is not permitted)
+What is a sosreport and how to create one in Red Hat Enterprise Linux 4.6 and later?
+gdb is a gnu debugger that allows you to step through your code line by line, inspect variables, and set breakpoints.
+Valgrind is a memory profiler that can help you find memory leaks and other memory errors.
+
+Core Dumps and sos report
+GDB and elfutils
+
+sudo apt install elfutils, build-essentials, gdb, sosreport
+sudo sos report
+
+generate core dump file  (objdump)
+=========================
+https://www.youtube.com/watch?v=3MsiN27xE4c&t=2065s
+https://www.youtube.com/watch?v=4M06v-2h7E8
+
+process status
+	signals, pid, ppid, set of registers
+
+man signal
+
+set size of core dump file.
+man setrlimit
+ulimit -c unlimited
+ulimit -c 1000
+
+execute program, it will generate coredump file core.ss
+
+objdump -h core.ss
+gdb ./memory_management core.21492
+
+for debugging source we need debugging symbols. it will be useful in telling line numbers and parameters
+
+info files
+core-file
+
+https://www.youtube.com/watch?v=_shKdU7mGxs
+
+
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/developer_guide/debugging-crashed-application
+
+dgb command line options
+-------------------------
+'layout reg' to have gdb show a table of all integer and flag registers,
+'info registers' shows all the registers;
+'info registers eax' shows just the register eax. The command can be abbreviated as i r
+info args
+info registers rip
+backtrace
+command x (for "examine")
+dump function of gdb  - Copy Between Memory and a File
+dump binary memory result.bin 0x200000000 0x20000c350
+dump ihex memory result.bin 0x200000000 0x20000c350
+
+assembly and registers level code
+https://bob.cs.sonoma.edu/IntroCompOrg-RPi/sec-gdb2.html
+
+stanford
+https://see.stanford.edu/Course/CS107/199
+https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/lab7/
+https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/schedule.html
+https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/resources/gdb
+https://see.stanford.edu/Course/CS107
+https://see.stanford.edu/Course
+http://web.stanford.edu/class/archive/cs/cs108/cs108.1092/
+https://see.stanford.edu/Course/CS106B
+
+
+GDB - how uninitialised variables cause issues. and how to use GDB to find and fix it.
+https://www.youtube.com/watch?v=sCtY--xRUyI
+
+memory regions
+https://www.youtube.com/watch?v=jKcg3ze10Hk
+
+buffer overflow
+https://www.youtube.com/watch?v=B4v56Ns3QhQ
+
+stack smashing
+https://www.youtube.com/watch?v=ny6y0pPO--4
+https://www.youtube.com/watch?v=DyqstSE470s
+https://www.youtube.com/watch?v=DyqstSE470s
+
+
+generate, read core dump file
+----------------------------
+# in getting mem allocated for core dump file at leadt 512 kb
+ulimit -c unlimited
+change DefaultLimitCORE=infinity in /etc/systemd/system.conf and reboot
+run program in debug mode
+
+how to read core file, as it's a binary file
+cat core - binary file
+gdb ./test core
+gdb -Wall
+
+To capture a memory dump in Linux, you can use a tool called "gcore". The gcore tool generates a core dump of a running process, which includes the process's memory space. Here are the steps to capture a memory dump using gcore: Identify the process ID (PID) of the process you want to capture a memory dump for
+gcore - Generate a core file of a running program with process ID pid
+sage: gcore [-o filename] pid
+gdb --pid=4049 --batch -ex gcore
+getpid() to get process id wihtin a process
+
+Once GDB is attached to a process, the next thing to do is work out which memory range needs to be dumped. One way to do this is to look at the /proc/ file system. More specifically /proc/<pid>/maps and /proc/<pid>/smaps .
+
+
+
+
+
+
+
+Valgrind:
+The Valgrind distribution currently includes six production-quality tools:
+  * a memory error detector (Memcheck)
+  * two thread error detectors (Helgrind and DRD)
+  * a cache and branch-prediction profiler (Cachegrind)
+  * a call-graph generating cache and branch-prediction profiler (Callgrind)
+  * a heap profiler (Massif)
+ It also includes three experimental tools:
+  * a stack/global array overrun detector (SGCheck)
+  * a second heap profiler that examines how heap blocks are used (DHAT)
+  * a SimPoint basic block vector generator (BBV)
+strace valgrind
+
+
+
+(gdb) start
+Temporary breakpoint 1 at 0x80483f0: file test.cpp, line 5.
+Starting program: /home/bazis/test
+
+Temporary breakpoint 1, main (argc=1, argv=0xbffff064) at test.cpp:5
+5 return 0;
+(gdb) info registers
+eax 0x1 1
+ecx 0xbffff064 -1073745820
+edx 0x80483ed 134513645
+ebx 0xb7fbe000 -1208229888
+esp 0xbfffefc8 0xbfffefc8
+ebp 0xbfffefc8 0xbfffefc8
+esi 0x0 0
+edi 0x0 0
+eip 0x80483f0 0x80483f0 <main(int, char**)+3>
+eflags 0x246 [ PF ZF IF ]
+cs 0x73 115
+ss 0x7b 123
+ds 0x7b 123
+es 0x7b 123
+fs 0x0 0
+gs 0x33 51
+(gdb) info registers eax
+
+https://reverseengineering.stackexchange.com/questions/9221/output-of-gdb-info-registers
+http://www.physics.ntua.gr/~konstant/HetCluster/intel12.1/debugger/cl/index.htm#commandref/gdb_mode/cmd_info_registe.htm
+https://developer.apple.com/library/archive/documentation/DeveloperTools/gdb/gdb/gdb_7.html#SEC44
+
+gdb has four “standard” register names that are available (in expressions) on most machines—whenever they do not conflict with an architecture's canonical mnemonics for registers. The register names $pc and $sp are used for the program counter register and the stack pointer. $fp is used for a register that contains a pointer to the current stack frame, and $ps is used for a register that contains the processor status. For example, you could print the program counter in hex with
+
+     p/x $pc
+
+or print the instruction to be executed next with
+
+     x/i $pc
+
+or add four to the stack pointer1 with
+
+     set $sp += 4
+
+Whenever possible, these four standard register names are available on your machine even though the machine has different canonical mnemonics, so long as there is no conflict. The info registers command shows the canonical names.
+
+
+setup c programming development environment setup - netbeans IDE (ubuntu 22.04)
+================================================================
+sudo apt install build-essential gcc gdb
+
+sudo apt install default-jdk
+sudo apt install default-jre
+
+sudo install netbeans
+sudo snap install netbeans --classic
+
+Install c/c++ plugins in apache netbeans : netbeans c/c++ plugin download : n the NetBeans IDE, select Tools > Plugins. In the Available Plugins tab, select the checkbox for Java or C/C++, depending on which is missing from your IDE.
+https://netbeans.apache.org/tutorial/main/kb/docs/cnd/
+https://netbeans.apache.org/tutorial/main/kb/docs/cnd/debugging/
+https://www.youtube.com/watch?v=Trw1mQ5r_sQ
+https://sciences.utsa.edu/_documents/computer-science/lab/netbeans-for-c-on-linux.pdf
+
+
+/proc/<PID>/maps file stores the memory-related information of the process.
+
+
+native memory leap
+monitor memory using
+ps, top, pmap, /proc/smaps, perfmon, vmmap
+RSS usage
+ps v pid
+
+jconsole
+
+
+ps v pid
+
+diff pmap.1 pmap.2
+
+
+
+
+https://www.youtube.com/watch?v=3MsiN27xE4c&t=2065s
+
+footprint / coredump / address space
+
+error type (segmentation fault (core dumped)
+===================================
+Instruction address where the problem is
+what are local variable contain
+what were parameters to the function
+who has called this function
+Values of global variables
+information of Registers, stack
+
+Instruction pointer -> address of the fault instruction
+stack (need whole stack data), as it contains "local variables" and argumments
+Global data in "Data segment"
+who has called, where call has come from. - call trace
+heap
+
+
+
