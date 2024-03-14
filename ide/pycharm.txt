@@ -1,0 +1,35 @@
+setup python dev environment using pycharm and git on ubuntu 22.04
+======================================================================
+download pycharm community edition tar file (pycharm-community-2023.3.4.tar.gz)
+#mv pycharm-community-2023.3.4.tar.gz to /opt/
+#sudo tar xzf pycharm-*.tar.gz -C /opt/
+//start pyharm by running
+#sh pycharm.sh
+
+-------------------------------------------
+set up PyCharm to launch from the Launcher
+
+    Start PyCharm.
+    From the Tools menu, select "Create Desktop Entry..."
+    Tick the corresponding box if you want the launcher for all users.
+    If you selected "Create entry for all users", you will be asked for your password.
+    A green message bubble should appear informing you that it was successful.
+    You should then be able to find PyCharm in the Unity Dash or pin it to the launcher.
+ OR
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PyCharm
+Icon=/opt/pycharm-community-2023.3.4/bin/pycharm.png
+Exec="/opt/pycharm-community-2023.3.4/bin/pycharm.sh" %f
+Comment=The Drive to Develop
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-pycharm
+
+Then save it to /home/yourname/.local/share/applications/pycharm.desktop for a launcher tied to your own login, or to /usr/share/applications/appname.desktop if you want it to apply to other users of your system.
+-------------------------------------------
+
+Configure git and github to work with pycharm
+-------------------------------------------
