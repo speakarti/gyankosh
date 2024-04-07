@@ -1,0 +1,10 @@
+guide to install, setup and learn git
+
+install git on windows and ubuntu
+git --version
+git -h
+git status
+git log
+
+git init
+git clone https://github.com/speakarti/gyankosh.git
