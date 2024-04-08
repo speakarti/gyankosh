@@ -56,33 +56,38 @@ push changes
 
 
 ======================================================================
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
-A
+SSH keypair setup for GitHub  - for Windows 10x64 - virtual vm
+================================================================
+install git - unix kind terminal
+use git bash
+
+artia@windows10x64 MINGW64 ~
+$ git show
+fatal: not a git repository (or any of the parent directories): .git
+
+artia@windows10x64 MINGW64 ~
+$ git clone https://github.com/speakarti/gyankosh.git gyankosh_git_repo
+
+artia@windows10x64 MINGW64 ~/gyankosh_git_repo (main)
+
+
+artia@windows10x64 MINGW64 ~/gyankosh_git_repo (main)
+$ ssh -t git@github.com
+The authenticity of host 'github.com (140.82.114.3)' can't be established.
+ED25519 key fingerprint is SHA256:+xyz
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+git@github.com: Permission denied (publickey).
+
+artia@windows10x64 MINGW64 ~/gyankosh_git_repo (main)
+
+copy previously created private key (cat ~/.ssh/id_ed25519) into 
+vi ~/.ssh/id_ed25519
+
+artia@windows10x64 MINGW64 ~/gyankosh_git_repo (main)
+$ ssh -t git@github.com
+PTY allocation request failed on channel 0
+
+================================================================
 
