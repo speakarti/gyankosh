@@ -8,3 +8,81 @@ git log
 
 git init
 git clone https://github.com/speakarti/gyankosh.git
+
+
+
+
+
+
+SSH keypair setup for GitHub 
+======================================================
+
+https://gist.github.com/xirixiz/b6b0c6f4917ce17a90e00f9b60566278
+
+for Git repository use ed25519 - this is a new algorithm added in OpenSSH (Ed25519 (Edwards-curve DSA)
+
+generate ssh key pair for git push/pull on local host
+
+#ssh-keygen -t ed25519 -C "speakarti@gmail.com"
+
+following two files will be generated
+~/.ssh/id_ed25519.pub
+~/.ssh/id_ed25519
+
+
+keep private key (id_ed25519) on local server and Copy public key to a remote server to connect, in this case its github, but use below command if we need to access other unix server
+$ ssh-copy-id -i ~/.ssh/id_rsa.pub artia@192.168.1.135/home/artia/.ssh/authorized_keys
+
+
+On github portal - go to main github account settings -> ssh and GPG keys ->  new ssh keys - > 
+githubkey_agupta_speakarti_repo
+
+paste .pub key contents
+
+test ssh keys connection frm local server having provate key
+#ssh -T git@github.com
+Hi speakarti! You've successfully authenticated, but GitHub does not provide shell access.
+
+
+move to local repository (where above cloned repository is available)
+#git remote -v
+agupta@hl001:~/gyankosh$ git remote -v
+origin  https://github.com/speakarti/gyankosh.git (fetch)
+origin  https://github.com/speakarti/gyankosh.git (push)
+
+push changes
+#git remote set-url origin git@github.com:speakarti/gyankosh.git
+
+
+
+======================================================================
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+A
+
