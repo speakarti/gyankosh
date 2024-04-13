@@ -1,0 +1,357 @@
+https://docs.docker.com/manuals/
+
+Install docker on ubuntu 22.04 
+4 Ways (https://kinsta.com/blog/install-docker-ubuntu/)
+
+1. Installing Docker Using the apt Repository
+=============================================
+agupta@hl001:~$ sudo apt list | grep docker.io
+docker.io/jammy-updates 24.0.5-0ubuntu1~22.04.1 amd64
+
+pros: easy to install
+cons: stale version in apt repository (ubuntu repos)
+
+
+agupta@hl001:~$ sudo apt show docker.io/jammy-updates
+Package: docker.io
+Version: 24.0.5-0ubuntu1~22.04.1
+Built-Using: glibc (= 2.35-0ubuntu3.3), golang-1.20 (= 1.20.3-1ubuntu0.1~22.04)
+Priority: optional
+Section: universe/admin
+Source: docker.io-app
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 113 MB
+Depends: adduser, containerd (>= 1.2.6-0ubuntu1~), iptables, debconf (>= 0.5) | debconf-2.0, libc6 (>= 2.34), libdevmapper1.02.1 (>= 2:1.02.97), libsystemd0 (>= 209~)
+Recommends: ca-certificates, git, pigz, ubuntu-fan, xz-utils, apparmor
+Suggests: aufs-tools, btrfs-progs, cgroupfs-mount | cgroup-lite, debootstrap, docker-doc, rinse, zfs-fuse | zfsutils
+Homepage: https://mobyproject.org/
+Download-Size: 28.9 MB
+APT-Sources: http://us.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages
+Description: Linux container runtime
+ Docker complements kernel namespacing with a high-level API which operates at
+ the process level. It runs unix processes with strong guarantees of isolation
+ and repeatability across servers.
+ .
+ Docker is a great building block for automating distributed systems:
+ large-scale web deployments, database clusters, continuous deployment systems,
+ private PaaS, service-oriented architectures, etc.
+
+
+
+
+2. Installing Docker Using the snap Repository
+=======================================================
+sudo snap install docker         # version 24.0.5, or
+sudo apt  install docker.io      # version 24.0.5-0ubuntu1~22.04.1
+sudo apt  install podman-docker  # version 3.4.4+ds1-1ubuntu1.22.04.2
+See 'snap info docker' for additional versions.
+
+
+
+
+3. Install the latest stable version of Docker from apt repository available in Docker website on Ubuntu 22.04
+========================================================================================
+Docker publishes packages to its own apt repository. You’ll need to add this repository to your apt sources list, otherwise, your apt installation won’t be able to find the Docker packages.
+
+
+Remove any existing Docker packages
+sudo apt remove docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc
+sudo apt install ca-certificates curl gnupg lsb-release
+
+agupta@hl001:~$ sudo apt show ca-certificates -a
+Package: ca-certificates
+Version: 20230311ubuntu0.22.04.1
+Priority: important
+Section: misc
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Julien Cristau <jcristau@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 399 kB
+Depends: openssl (>= 1.1.1), debconf (>= 0.5) | debconf-2.0
+Breaks: ca-certificates-java (<< 20121112+nmu1)
+Enhances: openssl
+Task: minimal, server-minimal
+Download-Size: 155 kB
+APT-Manual-Installed: no
+APT-Sources: http://us.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages
+Description: Common CA certificates
+ Contains the certificate authorities shipped with Mozilla's browser to allow
+ SSL-based applications to check for the authenticity of SSL connections.
+ .
+ Please note that Debian can neither confirm nor deny whether the
+ certificate authorities whose certificates are included in this package
+ have in any way been audited for trustworthiness or RFC 3647 compliance.
+ Full responsibility to assess them belongs to the local system
+ administrator.
+
+
+
+agupta@hl001:~$ sudo apt show curl -a
+Package: curl
+Version: 7.81.0-1ubuntu1.16
+Priority: optional
+Section: web
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Alessandro Ghedini <ghedo@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 454 kB
+Depends: libc6 (>= 2.34), libcurl4 (= 7.81.0-1ubuntu1.16), zlib1g (>= 1:1.1.4)
+Homepage: https://curl.haxx.se
+Task: server-minimal, cloud-image, ubuntu-wsl, server, ubuntu-server-raspi, ubuntustudio-publishing, ubuntu-budgie-desktop, ubuntu-budgie-desktop-raspi
+Download-Size: 194 kB
+APT-Manual-Installed: yes
+APT-Sources: http://us.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages
+Description: command line tool for transferring data with URL syntax
+ curl is a command line tool for transferring data with URL syntax, supporting
+ DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3,
+ POP3S, RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET and TFTP.
+ .
+ curl supports SSL certificates, HTTP POST, HTTP PUT, FTP uploading, HTTP form
+ based upload, proxies, cookies, user+password authentication (Basic, Digest,
+ NTLM, Negotiate, kerberos...), file transfer resume, proxy tunneling and a
+ busload of other useful tricks.
+
+
+lsb-release - get Linux Standard Base (LSB) details and distribution-specific information
+agupta@hl001:~$ sudo apt show lsb-release -a
+Package: lsb-release
+Version: 11.1.0ubuntu4
+Priority: important
+Section: misc
+Source: lsb
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian sysvinit maintainers <debian-init-diversity@chiark.greenend.org.uk>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 67.6 kB
+Depends: python3:any, distro-info-data
+Recommends: apt
+Homepage: https://wiki.linuxfoundation.org/lsb/start
+Task: minimal, server-minimal
+Download-Size: 10.8 kB
+APT-Manual-Installed: no
+APT-Sources: http://us.archive.ubuntu.com/ubuntu jammy/main amd64 Packages
+Description: Linux Standard Base version reporting utility
+ The Linux Standard Base (http://www.linuxbase.org/) is a standard
+ core system that third-party applications written for Linux can
+ depend upon.
+ .
+ The lsb-release command is a simple tool to help identify the Linux
+ distribution being used and its compliance with the Linux Standard Base.
+ LSB conformance will not be reported unless the required metapackages are
+ installed.
+ .
+ While it is intended for use by LSB packages, this command may also
+ be useful for programmatically distinguishing between a pure Debian
+ installation and derived distributions.
+
+
+agupta@hl001:~$ apt show gnupg -a
+Package: gnupg
+Version: 2.2.27-3ubuntu2.1
+Priority: optional
+Section: utils
+Source: gnupg2
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GnuPG Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 484 kB
+Depends: dirmngr (<< 2.2.27-3ubuntu2.1.1~), dirmngr (>= 2.2.27-3ubuntu2.1), gnupg-l10n (= 2.2.27-3ubuntu2.1), gnupg-utils (<< 2.2.27-3ubuntu2.1.1~), gnupg-utils (>= 2.2.27-3ubuntu2.1), gpg (<< 2.2.27-3ubuntu2.1.1~), gpg (>= 2.2.27-3ubuntu2.1), gpg-agent (<< 2.2.27-3ubuntu2.1.1~), gpg-agent (>= 2.2.27-3ubuntu2.1), gpg-wks-client (<< 2.2.27-3ubuntu2.1.1~), gpg-wks-client (>= 2.2.27-3ubuntu2.1), gpg-wks-server (<< 2.2.27-3ubuntu2.1.1~), gpg-wks-server (>= 2.2.27-3ubuntu2.1), gpgsm (<< 2.2.27-3ubuntu2.1.1~), gpgsm (>= 2.2.27-3ubuntu2.1), gpgv (<< 2.2.27-3ubuntu2.1.1~), gpgv (>= 2.2.27-3ubuntu2.1)
+Suggests: parcimonie, xloadimage
+Breaks: debsig-verify (<< 0.15), dirmngr (<< 2.2.27-3ubuntu2.1), gnupg2 (<< 2.1.11-7+exp1), libgnupg-interface-perl (<< 0.52-3), libgnupg-perl (<= 0.19-1), libmail-gnupg-perl (<= 0.22-1), monkeysphere (<< 0.38~), php-crypt-gpg (<= 1.4.1-1), python-apt (<= 1.1.0~beta4), python-gnupg (<< 0.3.8-3), python3-apt (<= 1.1.0~beta4)
+Replaces: gnupg2 (<< 2.1.11-7+exp1)
+Homepage: https://www.gnupg.org/
+Task: ubuntu-desktop-minimal, samba-server, ubuntu-desktop, cloud-image, ubuntu-desktop-raspi, ubuntu-wsl, mail-server, server, ubuntu-server-raspi, kubuntu-desktop, xubuntu-core, xubuntu-desktop, lubuntu-desktop, ubuntustudio-desktop-core, ubuntustudio-desktop, ubuntukylin-desktop, ubuntu-mate-core, ubuntu-mate-desktop, ubuntu-budgie-desktop, ubuntu-budgie-desktop-raspi
+Download-Size: 315 kB
+APT-Manual-Installed: no
+APT-Sources: http://us.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages
+Description: GNU privacy guard - a free PGP replacement
+ GnuPG is GNU's tool for secure communication and data storage.
+ It can be used to encrypt data and to create digital signatures.
+ It includes an advanced key management facility and is compliant
+ with the proposed OpenPGP Internet standard as described in RFC4880.
+ .
+ This package contains the full suite of GnuPG tools for cryptographic
+ communications and data storage.
+
+
+Add GPG key (public) of Docker repository into apt and add it to sources.list.d of apt
+=======================================================================================
+explanation: Now, create a directory with special permissions suitable for storing cryptographic keyrings by the apt package manager for package verification:
+URL - https://download.docker.com/linux/ubuntu/gpg will download gpg - public key file in ascii format. we can test it by running
+curl https://download.docker.com/linux/ubuntu/gpg -o dockerPGP_PUBLIC_KEY
+cat dockerPGP_PUBLIC_KEY
+--enarmor
+--dearmor
+Pack or unpack an arbitrary input into/from an OpenPGP ASCII armor. This is a GnuPG extension to OpenPGP and in general not very useful. The --dearmor command can also be used to dearmor PEM armors.
+sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg - read ascii file and convert into binary gnugp file and will save in keyrings
+add into ubuntu apt repositories
+deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu jammy stable
+
+agupta@hl001:~$ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \
+&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null \
+&& sudo apt update
+Get:1 https://download.docker.com/linux/ubuntu jammy InRelease [48.8 kB]
+Hit:2 http://us.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:3 http://us.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:4 http://us.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Get:5 https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages [29.9 kB]
+Hit:6 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Fetched 78.8 kB in 1s (112 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+27 packages can be upgraded. Run 'apt list --upgradable' to see them.
+agupta@hl001:~$
+
+
+agupta@hl001:/var/lib/apt/lists$ ls | grep docker
+download.docker.com_linux_ubuntu_dists_jammy_InRelease
+download.docker.com_linux_ubuntu_dists_jammy_stable_binary-amd64_Packages
+agupta@hl001:/var/lib/apt/lists$
+
+apt list --all-versions package_name
+
+sudo apt show docker-ce -a
+sudo apt list docker-ce -a
+
+$ sudo apt install docker-ce docker-ce-cli containerd.io
+sudo apt install docker-ce - to install latest version
+sudo apt install docker-ce=5:26.0.1-1~ubuntu.22.04~jammy - to install specific version
+
+
+
+agupta@hl001:/var/lib/apt/lists$ sudo apt list --installed | grep docker
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+docker-buildx-plugin/jammy,now 0.13.1-1~ubuntu.22.04~jammy amd64 [installed,automatic]
+docker-ce-cli/jammy,now 5:26.0.1-1~ubuntu.22.04~jammy amd64 [installed]
+docker-ce-rootless-extras/jammy,now 5:26.0.1-1~ubuntu.22.04~jammy amd64 [installed,automatic]
+docker-ce/jammy,now 5:26.0.1-1~ubuntu.22.04~jammy amd64 [installed]
+docker-compose-plugin/jammy,now 2.26.1-1~ubuntu.22.04~jammy amd64 [installed,automatic]
+agupta@hl001:/var/lib/apt/lists$
+
+
+agupta@hl001:/var/lib/apt/lists$ sudo apt list --installed | grep containerd.io
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+containerd.io/jammy,now 1.6.31-1 amd64 [installed]
+
+
+agupta@hl001:/var/lib/apt/lists$ sudo apt show containerd.io
+Package: containerd.io
+Version: 1.6.31-1
+Priority: optional
+Section: devel
+Maintainer: Containerd team <help@containerd.io>
+Installed-Size: 118 MB
+Provides: containerd, runc
+Depends: libc6 (>= 2.34), libseccomp2 (>= 2.5.0)
+Conflicts: containerd, runc
+Replaces: containerd, runc
+Homepage: https://containerd.io
+Download-Size: 29.8 MB
+APT-Manual-Installed: yes
+APT-Sources: https://download.docker.com/linux/ubuntu jammy/stable amd64 Packages
+Description: An open and reliable container runtime
+
+N: There are 25 additional records. Please use the '-a' switch to see them.
+
+
+
+adding docker apt package repository in local machine's apt reposiory, thsi method is recommended by above portal.
+$ sudo mkdir -p /etc/apt/keyrings
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+$ sudo chmod a+r /etc/apt/keyrings/docker.gpg
+$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+$ sudo apt update
+
+
+
+
+
+4. Installing Docker Using the Debian Package
+==================================================
+$ curl https://download.docker.com/linux/ubuntu/dists/$(lsb_release --codename | cut -f2)/pool/stable/$(dpkg --print-architecture)/docker-ce_<DOCKER_VERSION>~3-0~ubuntu-focal_amd64.deb -o docker-ce.deb
+$ curl https://download.docker.com/linux/ubuntu/dists/$(lsb_release --codename | cut -f2)/pool/stable/$(dpkg --print-architecture)/docker-ce-cli_<DOCKER_VERSION>~3-0~ubuntu-focal_amd64.deb -o docker-ce-cli.deb
+$ curl https://download.docker.com/linux/ubuntu/dists/$(lsb_release --codename | cut -f2)/pool/stable/$(dpkg --print-architecture)/containerd.io_<CONTAINERD_VERISON>-1_amd64.deb -o containerd.deb
+
+$ sudo apt install ./docker-ce.deb ./docker-ce-cli.deb ./containerd.deb
+
+but we need to download and install everytime new version is available.
+
+
+
+Test running a container
+=============================
+agupta@hl001:/var/lib/apt/lists$ sudo docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+c1ec31eb5944: Pull complete
+Digest: sha256:03b30c6a3c320ff172b52bd68eddffde6ded08ce47e650fe52de861c5e9df46d
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+agupta@hl001:/var/lib/apt/lists$
+
+
+
+
+
+Setting Docker Engine Permissions on Ubuntu
+===========================================
+A fresh Docker Engine installation usually requires root privileges to run docker CLI commands. You need to prefix each command with sudo, which is inconvenient.
+
+
+Adding Docker Compose To Your Ubuntu Installation
+=================================================
+agupta@hl001:~$ sudo apt list --installed | grep 'docker\|compose'
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+docker-buildx-plugin/jammy,now 0.13.1-1~ubuntu.22.04~jammy amd64 [installed,automatic]
+docker-ce-cli/jammy,now 5:26.0.1-1~ubuntu.22.04~jammy amd64 [installed]
+docker-ce-rootless-extras/jammy,now 5:26.0.1-1~ubuntu.22.04~jammy amd64 [installed,automatic]
+docker-ce/jammy,now 5:26.0.1-1~ubuntu.22.04~jammy amd64 [installed]
+docker-compose-plugin/jammy,now 2.26.1-1~ubuntu.22.04~jammy amd64 [installed,automatic]
+agupta@hl001:~$
+
+
+
+dowload & install docker desktop (4.28.0) for windows 
+=======================================================
+tried installing on windows VM, but facing issue while setting up wsl, so installed it on Windows physical box.
+
+a) installed docker desktop  4.28.0 -reboot
+b) update to latest WSL 2 from MS 
+c) sign-in into docker hub
+d) starting docker engine
+e) installed wsl for ubuntu and kali linux from MS appstore and configured using docker settings - > resources -> wsl integration - enabled both.
+
