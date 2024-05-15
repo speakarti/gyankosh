@@ -1,0 +1,38 @@
+create a ubuntu 22.04 template using cloud image
+add ssh keys and userid and password through cloud.init to work
+
+https://www.youtube.com/watch?v=MJgIm03Jxdo
+https://cloud-images.ubuntu.com/minimal/releases/jammy/release/
+
+root@pve:~/ubuntu_2204_cludimage# qm set 900 --serial0 socket --vga serial0
+update VM 900: -serial0 socket -vga serial0
+root@pve:~/ubuntu_2204_cludimage#
+
+
+
+
+apt install qemu-guest-agent
+systemctl status qemu-guest-agent
+
+artia@ubuntu-799-2204:~$ systemctl status qemu-guest-agent
+● qemu-guest-agent.service - QEMU Guest Agent
+     Loaded: loaded (/lib/systemd/system/qemu-guest-agent.service; static)
+     Active: active (running) since Wed 2024-05-15 21:32:18 UTC; 1min 59s ago
+   Main PID: 259 (qemu-ga)
+      Tasks: 2 (limit: 2385)
+     Memory: 1.1M
+        CPU: 78ms
+     CGroup: /system.slice/qemu-guest-agent.service
+             └─259 /usr/sbin/qemu-ga
+
+May 15 21:32:18 ubuntu-799-2204 systemd[1]: Started QEMU Guest Agent.
+artia@ubuntu-799-2204:~$
+
+
+
+sudo apt list | grep 'cloud-init'
+artia@ubuntu-799-2204:~$ dpkg --get-selections | grep cloud-init
+sudo apt install cloud-init
+
+we will use ansible for basic installtions, 
+
