@@ -27,6 +27,7 @@ artia@ubuntu-799-2204:~$ systemctl status qemu-guest-agent
 
 May 15 21:32:18 ubuntu-799-2204 systemd[1]: Started QEMU Guest Agent.
 artia@ubuntu-799-2204:~$
+Qemu agent will be useful in add additional context menu like reboot, sleep etc. for server. to have better interactions between wind GUI and linux
 
 
 
@@ -35,4 +36,5 @@ artia@ubuntu-799-2204:~$ dpkg --get-selections | grep cloud-init
 sudo apt install cloud-init
 
 we will use ansible for basic installtions, 
+sudo apt install ansible -y
 
