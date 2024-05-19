@@ -1,5 +1,8 @@
-enable ubuntu machine to run virtual machines
+enable ubuntu machine to run virtual machines, using kvm, aqemu-kvm
 =============================================
+Achieved: a VM (ubuntu 23.x desktop) on ubuntu 22.04, using ISO
+Next: create using cloud image, learn image customization using libraries like libvirt-daemon-system virtinst libvirt-clients bridge-utils
+
 reference: https://www.linuxtechi.com/how-to-install-kvm-on-ubuntu-22-04/
 
 2) Check if Virtualization is enabled
@@ -90,7 +93,5 @@ Traceback (most recent call last):
     raise libvirtError('virConnectOpenAuth() failed')
 libvirt.libvirtError: Failed to connect socket to '/var/run/libvirt/libvirt-sock': Permission denied
 
-restart -> it will fix above issue
+Restart server -> it fixed above issue and opening 'Virtual Machine Manager' gives conected system. and I was able to create VM (ubuntu desktop 23.x) usign ISO 
 
-
-Try to Create VM from ISO and from images.
