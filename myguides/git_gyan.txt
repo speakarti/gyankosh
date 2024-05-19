@@ -1,6 +1,8 @@
-guide to install, setup and learn git
+Guide to install, setup and learn git
+Achieved: remotely connect and commit in git repo (public) using ssh key
+Next: remotely connect and commit in git repo (private) using ssh key
+===========================================================================
 
-install git on windows and ubuntu
 git --version
 git -h
 git status
@@ -27,7 +29,6 @@ reset /revert
 restore
 branch
 rebase / merge
-
 
 
 SSH keypair setup for GitHub - remote repository
@@ -78,6 +79,10 @@ git status
 git commit -a -m 'my cooment'
 git push -u origin master
 git push
+
+
+
+
 ======================================================================
 SSH keypair setup for GitHub  - for Windows 10x64 - virtual vm
 ================================================================
@@ -109,7 +114,7 @@ copy previously created private key (cat ~/.ssh/id_ed25519) into
 vi ~/.ssh/id_ed25519
 
 artia@windows10x64 MINGW64 ~/gyankosh_git_repo (main)
-$ ssh -t git@github.com
+$ ssh -T git@github.com
 PTY allocation request failed on channel 0
 
 ================================================================
