@@ -74,7 +74,7 @@ push changes
 #git remote set-url origin git@github.com:speakarti/gyankosh.git
 
 git push -u origin master
-
+git push
 ======================================================================
 SSH keypair setup for GitHub  - for Windows 10x64 - virtual vm
 ================================================================
