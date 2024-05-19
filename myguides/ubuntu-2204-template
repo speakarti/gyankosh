@@ -1,19 +1,44 @@
-create a ubuntu 22.04 template using cloud image
-add ssh keys and userid and password through cloud.init to work
+Proxmox: Create a ubuntu 22.04 template using cloud image, for creating ubuntu machines in few seconds.
+     add ssh keys, to enable passwordless login
+     and configure default userid and password through cloud.init
+========================================================================================
+References: 
 
 https://www.youtube.com/watch?v=MJgIm03Jxdo
 https://cloud-images.ubuntu.com/minimal/releases/jammy/release/
+========================================================================================
+
+
+Got to proxmox gui -> 192.168.1.xxx:8006
+Create new VM -> vm id =900, name =ubuntu-2204-template, Dont use any media (as we are going to use clud image), select QEMU agent (it wil work if installed) to enable it, delete scsi0 disk as we will create and add it later, selct sockets/cores, memory 1024, continue with vmbr0, 
+select this 900 VM (Proxmon GUI)-> go to Hardware Tab -> add cloudinit drive - > select local-lvm.
+                              go to cloud-init tab - > set userid=artia, password=xxxx, ssh key= public key, IPconfig (network) =DHCP
+
+go to pve terminal / console
+====================================
+download cloud image, .img file
+root@pve: mkdir ubuntu_2204_cludimage
+root@pve: cd ubuntu_2204_cludimage
+root@pve:~/ubuntu_2204_cludimage# wget https://cloud-images.ubuntu.com/minimal/releases/jammy/release/ubuntu-22.04-minimal-cloudimg-amd64.img
+
 
 root@pve:~/ubuntu_2204_cludimage# qm set 900 --serial0 socket --vga serial0
 update VM 900: -serial0 socket -vga serial0
 root@pve:~/ubuntu_2204_cludimage#
 
+root@pve:~/ubuntu_2204_cludimage# mv ubuntu-22.04-minimal-cloudimg-amd64.img ubuntu-22.04.qcow2
+root@pve:~/ubuntu_2204_cludimage# qemu-img resize ubuntu-22.04.qcow2 32G
+root@pve:~/ubuntu_2204_cludimage# qm importdisk 900 ubuntu-22.04.qcow2 local-lvm
 
+goto Proxmox GUI -> select ubuntu-2204-template -> goto Hardware -> Unused Disk 0-> Edit -> Add. This will start showing in Hard Disk (scsi0).
+goto Proxmox GUI -> select ubuntu-2204-template -> goto options -> boot order -> select newly added disk and move it to 2nd in order. select 'start at boot'
+goto Proxmox GUI -> select ubuntu-2204-template -> convert to template
 
+goto Proxmox GUI -> select ubuntu-2204-template -> clone template -> 799, full clone, let machine build 
 
-apt install qemu-guest-agent
-systemctl status qemu-guest-agent
-
+login into newly created machine using userid/password or ssh given in cloud-int
+---------------------------------------------------------------------------
+artia@ubuntu-799-2204:~$ apt install qemu-guest-agent
 artia@ubuntu-799-2204:~$ systemctl status qemu-guest-agent
 ● qemu-guest-agent.service - QEMU Guest Agent
      Loaded: loaded (/lib/systemd/system/qemu-guest-agent.service; static)
@@ -29,8 +54,7 @@ May 15 21:32:18 ubuntu-799-2204 systemd[1]: Started QEMU Guest Agent.
 artia@ubuntu-799-2204:~$
 Qemu agent will be useful in add additional context menu like reboot, sleep etc. for server. to have better interactions between wind GUI and linux
 
-
-
+you will notice cloud-init is already installed, and you can see config in /etc/cloud-init
 sudo apt list | grep 'cloud-init'
 artia@ubuntu-799-2204:~$ dpkg --get-selections | grep cloud-init
 sudo apt install cloud-init
