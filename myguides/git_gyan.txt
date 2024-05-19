@@ -5,16 +5,32 @@ git --version
 git -h
 git status
 git log
+git show
+git log -3
 
+# create a new repository
 git init
-git clone https://github.com/speakarti/gyankosh.git
+
+#clone a repo
+git clone https://github.com/speakarti/gyankosh.git git_gyankosh
+
+#work on existing repository
+#goto folder containing git repo, having .git folder and use 'git pull'
+cd git_gyankosh
+git pull
+
+common commands
+===============
+checkout
+switch
+reset /revert
+restore
+branch
+rebase / merge
 
 
 
-
-
-
-SSH keypair setup for GitHub 
+SSH keypair setup for GitHub - remote repository
 ======================================================
 
 https://gist.github.com/xirixiz/b6b0c6f4917ce17a90e00f9b60566278
@@ -43,8 +59,12 @@ test ssh keys connection frm local server having provate key
 #ssh -T git@github.com
 Hi speakarti! You've successfully authenticated, but GitHub does not provide shell access.
 
-
+Push changes to remote repo
+================================
 move to local repository (where above cloned repository is available)
+git remote
+git remote add origin git@github.com:speakarti/gyankosh.git
+
 #git remote -v
 agupta@hl001:~/gyankosh$ git remote -v
 origin  https://github.com/speakarti/gyankosh.git (fetch)
@@ -53,7 +73,7 @@ origin  https://github.com/speakarti/gyankosh.git (push)
 push changes
 #git remote set-url origin git@github.com:speakarti/gyankosh.git
 
-
+git push -u origin master
 
 ======================================================================
 SSH keypair setup for GitHub  - for Windows 10x64 - virtual vm
