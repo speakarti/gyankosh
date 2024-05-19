@@ -1,0 +1,65 @@
+Install node.js 20.13.1 (LTS)
+
+https://nodejs.org/en/download/package-manager
+
+# installs nvm (Node Version Manager)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+above will install nvm and configure .bashrc
+#source .bashrc
+
+# download and install Node.js
+nvm install 20
+
+# verifies the right Node.js version is in the environment
+node -v # should print `v20.13.1`
+
+# verifies the right NPM version is in the environment
+npm -v # should print `10.5.2`
+
+
+
+
+
+
+agupta@hl001:~/nodejs_tutotial$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 16555  100 16555    0     0  81189      0 --:--:-- --:--:-- --:--:-- 81551
+=> Downloading nvm from git to '/home/agupta/.nvm'
+=> Cloning into '/home/agupta/.nvm'...
+remote: Enumerating objects: 365, done.
+remote: Counting objects: 100% (365/365), done.
+remote: Compressing objects: 100% (313/313), done.
+remote: Total 365 (delta 43), reused 165 (delta 26), pack-reused 0
+Receiving objects: 100% (365/365), 365.08 KiB | 2.48 MiB/s, done.
+Resolving deltas: 100% (43/43), done.
+* (HEAD detached at FETCH_HEAD)
+  masterls
+=> Compressing and cleaning up git repository
+
+=> Appending nvm source string to /home/agupta/.bashrc
+=> Appending bash_completion source string to /home/agupta/.bashrc
+=> Close and reopen your terminal to start using nvm or run the following to use it now:
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+agupta@hl001:~$ nvm install 20
+Downloading and installing node v20.13.1...
+Downloading https://nodejs.org/dist/v20.13.1/node-v20.13.1-linux-x64.tar.xz...
+############################################################################################ 100.0%
+Computing checksum with sha256sum
+Checksums matched!
+Now using node v20.13.1 (npm v10.5.2)
+Creating default alias: default -> 20 (-> v20.13.1)
+agupta@hl001:~$ 
+
+
+agupta@hl001:~$ node -v
+v20.13.1
+agupta@hl001:~$ npm -v
+10.5.2
+agupta@hl001:~$ 
