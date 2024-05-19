@@ -73,6 +73,9 @@ origin  https://github.com/speakarti/gyankosh.git (push)
 push changes
 #git remote set-url origin git@github.com:speakarti/gyankosh.git
 
+
+git status
+git commit -a -m 'my cooment'
 git push -u origin master
 git push
 ======================================================================
