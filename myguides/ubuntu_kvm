@@ -1,0 +1,91 @@
+enable ubuntu machine to run virtual machines
+=============================================
+reference: https://www.linuxtechi.com/how-to-install-kvm-on-ubuntu-22-04/
+
+2) Check if Virtualization is enabled
+agupta@hl001:~$ egrep -c '(vmx|svm)' /proc/cpuinfo
+8
+
+2a) In addition, you can verify if KVM virtualization is enabled by running the following command:
+$ kvm-ok
+
+agupta@hl001:~$ kvm-ok
+Command 'kvm-ok' not found, but can be installed with:
+sudo apt install cpu-checker
+agupta@hl001:~$ sudo apt install -y cpu-checker
+
+agupta@hl001:~$ kvm-ok
+INFO: /dev/kvm exists
+KVM acceleration can be used
+
+
+3) Install KVM on Ubuntu 22.04
+
+Next, run the command below to install KVM and additional virtualization packages on Ubuntu 22.04.
+
+$ sudo apt install -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils
+
+Let us break down the packages that we are installing:
+
+    qemu-kvm  – An opensource emulator and virtualization package that provides hardware emulation.
+    virt-manager – A Qt-based graphical interface for managing virtual machines via the libvirt daemon.
+    libvirt-daemon-system – A package that provides configuration files required to run the libvirt daemon.
+    virtinst – A  set of command-line utilities for provisioning and modifying virtual machines.
+    libvirt-clients – A set of client-side libraries and APIs for managing and controlling virtual machines & hypervisors from the command line.
+    bridge-utils – A set of tools for creating and managing bridge devices.
+
+4)
+agupta@hl001:~$ sudo systemctl enable --now libvirtd
+agupta@hl001:~$ sudo systemctl start libvirtd
+agupta@hl001:~$ sudo systemctl statuslibvirtd
+Unknown command verb statuslibvirtd.
+agupta@hl001:~$ sudo systemctl status libvirtd
+● libvirtd.service - Virtualization daemon
+     Loaded: loaded (/lib/systemd/system/libvirtd.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2024-05-19 02:17:03 CDT; 3min 46s ago
+TriggeredBy: ● libvirtd.socket
+             ● libvirtd-ro.socket
+             ● libvirtd-admin.socket
+       Docs: man:libvirtd(8)
+             https://libvirt.org
+   Main PID: 8022 (libvirtd)
+      Tasks: 21 (limit: 32768)
+     Memory: 10.0M
+        CPU: 837ms
+     CGroup: /system.slice/libvirtd.service
+             ├─8022 /usr/sbin/libvirtd
+             ├─8141 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
+             └─8142 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
+
+
+5) 
+$ sudo usermod -aG kvm $USER
+$ sudo usermod -aG libvirt $USER
+
+
+skipped stop to create network bridge, lets first try with a virtual bridge named virbr0, which is created automatically when KVM is installed but it is used for testing purposes.
+
+$ ip addr show 
+ virbr0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+    link/ether 52:54:00:9e:0c:ba brd ff:ff:ff:ff:ff:ff
+    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
+       valid_lft forever preferred_lft forever
+
+
+
+
+Open Virtual Machine Manager - GUI tool - getting below error. lets relog session
+Unable to connect to libvirt qemu:///system.
+
+Verify that the 'libvirtd' daemon is running.
+
+Libvirt URI is: qemu:///system
+
+Traceback (most recent call last):
+  File "/usr/share/virt-manager/virtManager/connection.py", line 923, in _do_open
+    self._backend.open(cb, data)
+  File "/usr/share/virt-manager/virtinst/connection.py", line 153, in open
+    conn = libvirt.openAuth(self._open_uri,
+  File "/usr/lib/python3/dist-packages/libvirt.py", line 148, in openAuth
+    raise libvirtError('virConnectOpenAuth() failed')
+libvirt.libvirtError: Failed to connect socket to '/var/run/libvirt/libvirt-sock': Permission denied
