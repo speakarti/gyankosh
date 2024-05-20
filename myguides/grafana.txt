@@ -37,7 +37,8 @@ sudo systemctl status grafana-server
 
 $ sudo ss -tulpn (you will find grafana listening on port 3000)
 tcp   LISTEN  0       4096                               *:3000              *:*     users:(("grafana",pid=2135,fd=10))  
-Open <IP>:3000 in browser in LAN, you will see dashboard
+
+Open <IP>:3000 in browser in LAN, you will see dashboard, login as admin/admin and change password
 
 
 
