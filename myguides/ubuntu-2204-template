@@ -36,7 +36,7 @@ goto Proxmox GUI -> select ubuntu-2204-template -> convert to template
 
 goto Proxmox GUI -> select ubuntu-2204-template -> clone template -> 799, full clone, let machine build 
 
-login into newly created machine using userid/password or ssh given in cloud-int
+login into newly created machine using console userid/password (sometimes proxmox stuck at console, press 'enter' to get into it.)
 ---------------------------------------------------------------------------
 artia@ubuntu-799-2204:~$ apt install qemu-guest-agent
 artia@ubuntu-799-2204:~$ systemctl status qemu-guest-agent
@@ -50,9 +50,14 @@ artia@ubuntu-799-2204:~$ systemctl status qemu-guest-agent
      CGroup: /system.slice/qemu-guest-agent.service
              └─259 /usr/sbin/qemu-ga
 
-May 15 21:32:18 ubuntu-799-2204 systemd[1]: Started QEMU Guest Agent.
-artia@ubuntu-799-2204:~$
-Qemu agent will be useful in add additional context menu like reboot, sleep etc. for server. to have better interactions between wind GUI and linux
+sudo reboot -h now
+
+
+May 15 21:32:18 ubuntu-799-2204 systemd[1]: Started QEMU Guest Agent will be start, check status. 
+artia@ubuntu-799-2204:~$ Qemu agent will be useful in add additional context menu like reboot, sleep etc. for server. to have better interactions between wind GUI and linux
+Also system will show IP address at this time to be connected using ssh keys, pass in cloud-init.
+
+use ssh given in cloud-int, to connect
 
 you will notice cloud-init is already installed, and you can see config in /etc/cloud-init
 sudo apt list | grep 'cloud-init'
