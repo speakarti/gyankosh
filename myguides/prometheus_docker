@@ -183,3 +183,10 @@ portainer_data
 
 
 Removed version line from compose and re-triggered whole 
+
+
+artia@ubuntu-797-2204:~/docker-compose/portainer$ docker compose down
+[+] Running 2/2
+ ✔ Container portainer-portainer-1  Removed                                                                         0.2s 
+ ✔ Network portainer_default        Removed                                                                         0.1s 
+artia@ubuntu-797-2204:~/docker-compose/portainer$
