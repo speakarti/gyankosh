@@ -133,3 +133,23 @@ WARN[0000] /home/artia/docker-compose/portainer/docker-compose.yml: `version` is
  ✔ Volume "portainer_data"          Created                                                                         0.0s 
  ✔ Container portainer-portainer-1  Started                                                                         0.4s 
 artia@ubuntu-797-2204:~/docker-compose/portainer$ 
+
+
+
+artia@ubuntu-797-2204:~/docker-compose/portainer$ docker ps -a
+CONTAINER ID   IMAGE                           COMMAND        CREATED         STATUS         PORTS                                                           NAMES
+0ba2c5f9f09e   portainer/portainer-ce:latest   "/portainer"   3 minutes ago   Up 2 minutes   8000/tcp, 9000/tcp, 0.0.0.0:9443->9443/tcp, :::9443->9443/tcp   portainer-portainer-1
+artia@ubuntu-797-2204:~/docker-compose/portainer$ docker images 
+REPOSITORY               TAG       IMAGE ID       CREATED       SIZE
+portainer/portainer-ce   latest    a3f85c245ec3   4 weeks ago   293MB
+artia@ubuntu-797-2204:~/docker-compose/portainer$ docker volume list
+DRIVER    VOLUME NAME
+local     portainer_data
+artia@ubuntu-797-2204:~/docker-compose/portainer$ docker volume inspect
+"docker volume inspect" requires at least 1 argument.
+See 'docker volume inspect --help'.
+
+Usage:  docker volume inspect [OPTIONS] VOLUME [VOLUME...]
+
+Display detailed information on one or more volumes
+artia@ubuntu-797-2204:~/docker-compose/portainer$ 
