@@ -142,3 +142,21 @@ tcp   LISTEN  0       4096                               *:9090              *:*
 tcp   LISTEN  0       4096                               *:3000              *:*     users:(("grafana",pid=2135,fd=10))     
 
 Now open browser with localhost:9100
+
+
+
+
+sudo vi /etc/prometheus/prometheus.yml
+
+ # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "Node_Exporter"
+    scrape_interval: 15s
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ["<IP of the host>:9100"]
+
+
+sudo systemctl restart prometheus
