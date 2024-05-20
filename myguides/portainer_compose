@@ -90,7 +90,8 @@ Using docker compose to create portainer (including volume, network, containers)
 better to use docker-compose.yml
 create docker-compose.yml (download from git repo)
 
-docker compose up -d (from working directory)
+docker compose up -d (from working directory it wil take .yml file, -d is for detached mode, and -f is for filename to be mentioned explicitly) OR
+docker compose -f docker-compose.yml up -d
 
 
 docker ps -a (list all containers)
