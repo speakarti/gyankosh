@@ -1,0 +1,204 @@
+https://www.youtube.com/watch?v=9TJx7QTrTyo
+https://docs.docker.com/samples/portainer/
+https://earthly.dev/blog/portainer-for-docker-container-management/
+
+Install docker
+==================
+sudo apt install ca-certificates curl gnupg lsb-release
+
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \
+&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null \
+&& sudo apt update
+
+sudo apt install docker-ce docker-ce-cli containerd.io
+
+
+eaither use sudo for every command or add user in docker group
+$ sudo groupadd docker (group already exists, installation might have added this)
+$ sudo usermod -aG docker $USER
+
+#test docker installation
+docker run hello-world
+
+
+Installing Docker Compose
+=========================
+sudo apt install docker-compose-plugin (this is also installed)
+
+$ docker compose version
+Docker Compose version v2.27.0
+
+
+Deploying Portainer (https://docs.portainer.io/start/install/server/docker/linux)
+=========================
+By default, Portainer Server will expose the UI over port 9443 and expose a TCP tunnel server over port 8000 / 9000. The latter is optional and is only required if you plan to use the Edge compute features with Edge agents.
+
+Portainer has a few dependencies that must be supplied when you start your container:
+    • It requires a volume to store persistent data. 
+    • Your host’s Docker socket should be mounted into the container so that Portainer can access and interact with the Docker daemon. 
+    • You need to bind a port to the container so you can access the web UI. 
+
+artia@ubuntu-797-2204:~$ docker volume create portainer_data
+portainer_data
+
+artia@ubuntu-797-2204:/home$ sudo docker volume inspect portainer_data
+[
+    {
+        "CreatedAt": "2024-05-20T07:49:20Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/portainer_data/_data",
+        "Name": "portainer_data",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+
+
+artia@ubuntu-797-2204:~$ docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ee:latest
+Unable to find image 'portainer/portainer-ee:latest' locally
+latest: Pulling from portainer/portainer-ee
+57654d40e0a5: Pull complete 
+1f476acfabd6: Pull complete 
+5171176db7f2: Pull complete 
+52e9438966a5: Pull complete 
+43d4775415ac: Pull complete 
+6041398a62fa: Pull complete 
+cdd64a36267b: Pull complete 
+c54ba916b7c2: Pull complete 
+3a1947d87b20: Pull complete 
+d6c53df12334: Pull complete 
+4f4fb700ef54: Pull complete 
+Digest: sha256:0aa305da72738d9f90a209bf74bdc74172004690fa298f52d5f92dd065f26aea
+Status: Downloaded newer image for portainer/portainer-ee:latest
+4f14386f4addd1b651da9cf1d308a84906428b1c5e7c0b877faa09f13fc57f8b
+artia@ubuntu-797-2204:~$ 
+
+artia@ubuntu-797-2204:~$ docker ps
+CONTAINER ID   IMAGE                           COMMAND        CREATED         STATUS         PORTS                                                                                            NAMES
+4f14386f4add   portainer/portainer-ee:latest   "/portainer"   2 minutes ago   Up 2 minutes   0.0.0.0:8000->8000/tcp, :::8000->8000/tcp, 0.0.0.0:9443->9443/tcp, :::9443->9443/tcp, 9000/tcp   portainer
+
+$ docker stop 4f14386f4add
+
+
+
+
+
+
+Using docker compose to create portainer (including volume, network, containers) 
+==========================================
+better to use docker-compose.yml
+create docker-compose.yml (download from git repo)
+
+docker compose up -d (from working directory it wil take .yml file, -d is for detached mode, and -f is for filename to be mentioned explicitly) OR
+docker compose -f docker-compose.yml up -d
+
+
+docker ps -a (list all containers)
+docker ps (list active containers)
+docker stop <containers>
+docker rm <containers>
+docker list images
+docker rmi <images>
+docker images
+docker volume --help
+
+
+
+artia@ubuntu-797-2204:~/git_gyankosh/docker-compose/portainer$ docker compose up -d
+[+] Running 12/12
+ ✔ portainer Pulled                                                                                                                                           6.4s 
+   ✔ 57654d40e0a5 Pull complete                                                                                                                               0.4s 
+   ✔ 1f476acfabd6 Pull complete                                                                                                                               0.5s 
+   ✔ 5171176db7f2 Pull complete                                                                                                                               2.4s 
+   ✔ 52e9438966a5 Pull complete                                                                                                                               3.1s 
+   ✔ 43d4775415ac Pull complete                                                                                                                               3.6s 
+   ✔ c1cad9f5200f Pull complete                                                                                                                               4.1s 
+   ✔ a5e2b359b78b Pull complete                                                                                                                               4.1s 
+   ✔ eb172612bcbb Pull complete                                                                                                                               4.6s 
+   ✔ 6be7b2acffb5 Pull complete                                                                                                                               4.9s 
+   ✔ 391dff0fb880 Pull complete                                                                                                                               5.0s 
+   ✔ 4f4fb700ef54 Pull complete                                                                                                                               5.0s 
+[+] Running 3/3
+ ✔ Network portainer_default        Created                                                                                                                   0.2s 
+ ✔ Volume "portainer_data"          Created                                                                                                                   0.0s 
+ ✔ Container portainer-portainer-1  Started                                                                                                                   0.6s 
+
+
+
+
+artia@ubuntu-797-2204:~/docker-compose/portainer$ docker ps -a
+CONTAINER ID   IMAGE                           COMMAND        CREATED         STATUS         PORTS                                                           NAMES
+0ba2c5f9f09e   portainer/portainer-ce:latest   "/portainer"   3 minutes ago   Up 2 minutes   8000/tcp, 9000/tcp, 0.0.0.0:9443->9443/tcp, :::9443->9443/tcp   portainer-portainer-1
+artia@ubuntu-797-2204:~/docker-compose/portainer$ docker images 
+REPOSITORY               TAG       IMAGE ID       CREATED       SIZE
+portainer/portainer-ce   latest    a3f85c245ec3   4 weeks ago   293MB
+artia@ubuntu-797-2204:~/docker-compose/portainer$ docker volume list
+DRIVER    VOLUME NAME
+local     portainer_data
+
+artia@ubuntu-797-2204:~/git_gyankosh$ docker volume ls
+DRIVER    VOLUME NAME
+local     portainer_data
+
+artia@ubuntu-797-2204:~/git_gyankosh$ docker volume inspect portainer_data
+[
+    {
+        "CreatedAt": "2024-05-20T08:21:45Z",
+        "Driver": "local",
+        "Labels": {
+            "com.docker.compose.project": "portainer",
+            "com.docker.compose.version": "2.27.0",
+            "com.docker.compose.volume": "data"
+        },
+        "Mountpoint": "/var/lib/docker/volumes/portainer_data/_data",
+        "Name": "portainer_data",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+
+
+# open curl localhost:9000 or curl localhost:9443 to see portainer.
+
+
+$ docker compose down
+[+] Running 2/2
+ ✔ Container portainer-portainer-1  Removed                                                                         0.2s 
+ ✔ Network portainer_default        Removed                                                                         0.1s 
+$
+
+$ docker system prune --all (this will remove all except volume)
+
+
+install git and checking portainer docker-copose.xml
+
+
+
+
+
+
+
+useful comands
+============
+https://www.cloudbees.com/blog/docker-how-to-stop-and-remove-all-containers-at-once
+
+docker ps -aq | xargs docker stop | xargs docker rm
+docker ps -aq | xargs docker rm -f
+Stop all the containers
+
+docker stop $(docker ps -a -q)
+
+Remove all the containers
+
+docker rm $(docker ps -a -q)
+
+docker container prune
+docker image prune
+docker volume prune
+docker network prune
+docker system prune
+
+docker system prune -f ; docker volume prune -f ;docker rm -f -v $(docker ps -q -a)
+
+docker kill $(docker ps -q)
