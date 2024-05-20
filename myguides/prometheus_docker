@@ -153,3 +153,33 @@ Usage:  docker volume inspect [OPTIONS] VOLUME [VOLUME...]
 
 Display detailed information on one or more volumes
 artia@ubuntu-797-2204:~/docker-compose/portainer$ 
+
+
+
+
+
+rtia@ubuntu-797-2204:~/docker-compose/portainer$ docker stop 0ba2c5f9f09e
+0ba2c5f9f09e
+artia@ubuntu-797-2204:~/docker-compose/portainer$ docker rm 0ba2c5f9f09e
+0ba2c5f9f09e
+artia@ubuntu-797-2204:~/docker-compose/portainer$ docker rmi portainer/portainer-ce
+Untagged: portainer/portainer-ce:latest
+Untagged: portainer/portainer-ce@sha256:4a1ceadd7f7898d9190ee0a6d22234c4323aefd80e796e84f5e57127f74370f1
+Deleted: sha256:a3f85c245ec38eacdd9b749659c351a1d2601a08fa784c9c4b7200b83c64eb0c
+Deleted: sha256:9a96e2ecf14c3af65eee08094703eb458626b7d4073ccfa76f148fdcb04d387d
+Deleted: sha256:fe612a410d0a614655f3778910f75767c88af34358afedcf3138b44502e06bf7
+Deleted: sha256:3a730c3fc027f6b86c0730db4fa23882439835848eba5713c88e050fe1cb602b
+Deleted: sha256:bb09e6037218061c2dad7d3565418140bb1532377dc9d52ae7d4b761b7d328ba
+Deleted: sha256:42334f43ea02958c921ef5cde8a6fe6a55b0ef0b1cc71527543b0fb56e5daf94
+Deleted: sha256:3f1c0740cd8c18b8f287e7986a8b0a00319b81a1f240f4ef03db56940bce5094
+Deleted: sha256:31e6b50a71157e1e7b1cca755bf5f5027f5b5c3f965602d919b8df3e18ff36eb
+Deleted: sha256:353fe6c37214c7f2af1a653ed1fce5e61bf477822776c79b2a1ad6fd33a356b4
+Deleted: sha256:da4231cddfd7ba4ce7609a73f309a60199d17c9a0d09b8009a0e4f0560189bad
+Deleted: sha256:0c202f78a17c177c4553565154e935dbc7ba86b887794f47e8323c638e8a897e
+Deleted: sha256:3b1234fcd95b225bc54c3d477f026e24fa4fe8e8b320ea4f0d61e26c065c5343
+artia@ubuntu-797-2204:~/docker-compose/portainer$ docker volume rm portainer_data
+portainer_data
+
+
+
+Removed version line from compose and re-triggered whole 
