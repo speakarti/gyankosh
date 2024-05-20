@@ -111,3 +111,25 @@ docker stop <containers>
 docker rm <containers>
 docker list images
 docker rmi <images>
+
+
+
+artia@ubuntu-797-2204:~/docker-compose/portainer$ docker compose up -d
+WARN[0000] /home/artia/docker-compose/portainer/docker-compose.yml: `version` is obsolete 
+[+] Running 12/12
+ ✔ portainer Pulled                                                                                                 5.3s 
+   ✔ 57654d40e0a5 Pull complete                                                                                     0.3s 
+   ✔ 1f476acfabd6 Pull complete                                                                                     0.4s 
+   ✔ 5171176db7f2 Pull complete                                                                                     2.0s 
+   ✔ 52e9438966a5 Pull complete                                                                                     2.6s 
+   ✔ 43d4775415ac Pull complete                                                                                     3.1s 
+   ✔ c1cad9f5200f Pull complete                                                                                     3.6s 
+   ✔ a5e2b359b78b Pull complete                                                                                     3.6s 
+   ✔ eb172612bcbb Pull complete                                                                                     4.1s 
+   ✔ 6be7b2acffb5 Pull complete                                                                                     4.4s 
+   ✔ 391dff0fb880 Pull complete                                                                                     4.5s 
+   ✔ 4f4fb700ef54 Pull complete                                                                                     4.5s 
+[+] Running 2/2
+ ✔ Volume "portainer_data"          Created                                                                         0.0s 
+ ✔ Container portainer-portainer-1  Started                                                                         0.4s 
+artia@ubuntu-797-2204:~/docker-compose/portainer$ 
