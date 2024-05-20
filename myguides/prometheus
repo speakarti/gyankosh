@@ -1,5 +1,5 @@
-#Install and configure Premetheus, Node Explorer, and Grafana
-#==============================================================
+#Install and configure Premetheus, Node Explorer, and Grafana (node 799)
+#============================================================================
 #Reference: https://www.youtube.com/watch?v=0HQo7ytydBI
 
 
@@ -160,3 +160,11 @@ sudo vi /etc/prometheus/prometheus.yml
 
 
 sudo systemctl restart prometheus
+
+
+sudo systemctl stop grafana
+sudo systemctl disable grafana
+sudo systemctl stop node_exporter
+sudo systemctl disable node_exporter
+sudo systemctl stop prometheus
+sudo systemctl disable prometheus
