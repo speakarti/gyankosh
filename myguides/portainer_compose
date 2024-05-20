@@ -31,7 +31,7 @@ Docker Compose version v2.27.0
 
 Deploying Portainer (https://docs.portainer.io/start/install/server/docker/linux)
 =========================
-By default, Portainer Server will expose the UI over port 9443 and expose a TCP tunnel server over port 8000. The latter is optional and is only required if you plan to use the Edge compute features with Edge agents.
+By default, Portainer Server will expose the UI over port 9443 and expose a TCP tunnel server over port 8000 / 9000. The latter is optional and is only required if you plan to use the Edge compute features with Edge agents.
 
 Portainer has a few dependencies that must be supplied when you start your container:
     • It requires a volume to store persistent data. 
@@ -91,6 +91,7 @@ docker compose up -d
 
 
 docker ps -a (list all containers)
+docker ps (list active containers)
 docker stop <containers>
 docker rm <containers>
 docker list images
@@ -197,3 +198,32 @@ artia@ubuntu-797-2204:~/docker-compose/portainer$
 
 install git and checking portainer docker-copose.xml
 
+
+
+
+
+
+
+useful comands
+============
+https://www.cloudbees.com/blog/docker-how-to-stop-and-remove-all-containers-at-once
+
+docker ps -aq | xargs docker stop | xargs docker rm
+docker ps -aq | xargs docker rm -f
+Stop all the containers
+
+docker stop $(docker ps -a -q)
+
+Remove all the containers
+
+docker rm $(docker ps -a -q)
+
+docker container prune
+docker image prune
+docker volume prune
+docker network prune
+docker system prune
+
+docker system prune -f ; docker volume prune -f ;docker rm -f -v $(docker ps -q -a)
+docker system prune --all
+docker kill $(docker ps -q)
