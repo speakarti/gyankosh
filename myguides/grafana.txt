@@ -1,0 +1,36 @@
+Install and configure grafana
+====================================
+Reference: https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/#install-from-apt-repository
+
+
+#lets install it on ubuntu 22.04, created using template on proxmox server
+sudo apt install -y apt-transport-https software-properties-common wget
+
+sudo mkdir -p /etc/apt/keyrings/
+wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
+
+echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+sudo apt update
+
+
+artia@ubuntu-799-2204:/var/lib/apt/lists$ sudo apt list | grep 'grafana-enterprise'
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+grafana-enterprise-nightly/stable 11.1.0-70924 amd64
+grafana-enterprise/stable 11.0.0 amd64
+
+sudo apt install grafana-enterprise
+
+sudo systemctl enable grafana-server
+sudo systemctl start grafana-server
+sudo systemctl status grafana-server
+
+● grafana-server.service - Grafana instance
+     Loaded: loaded (/lib/systemd/system/grafana-server.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2024-05-20 01:40:07 UTC; 3s ago
+       Docs: http://docs.grafana.org
+   Main PID: 2135 (grafana)
+      Tasks: 5 (limit: 2385)
+     Memory: 28.2M
+        CPU: 2.587s
+     CGroup: /system.slice/grafana-server.service
+             └─2135 /usr/share/grafana/bin/grafana server --config=/etc/grafana/grafana.ini --pidfile=/run/grafana/grafana-server.pid --packaging=deb cfg:default.paths.logs=/var/log/grafana cfg:default.paths.data=/var/lib/grafana cfg:default.paths.plugins=/var/lib/grafana/plugins cfg:default.paths.provisioning=/etc/grafana/provisioning
