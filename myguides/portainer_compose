@@ -90,11 +90,13 @@ cd docker-compose/portainer
 docker compose up -d
 
 
-docker ps -a
+docker ps -a (list all containers)
 docker stop <containers>
 docker rm <containers>
 docker list images
 docker rmi <images>
+docker images
+docker volume --help
 
 
 
@@ -129,14 +131,29 @@ portainer/portainer-ce   latest    a3f85c245ec3   4 weeks ago   293MB
 artia@ubuntu-797-2204:~/docker-compose/portainer$ docker volume list
 DRIVER    VOLUME NAME
 local     portainer_data
-artia@ubuntu-797-2204:~/docker-compose/portainer$ docker volume inspect
-"docker volume inspect" requires at least 1 argument.
-See 'docker volume inspect --help'.
 
-Usage:  docker volume inspect [OPTIONS] VOLUME [VOLUME...]
+artia@ubuntu-797-2204:~/git_gyankosh$ docker volume ls
+DRIVER    VOLUME NAME
+local     portainer_data
 
-Display detailed information on one or more volumes
-artia@ubuntu-797-2204:~/docker-compose/portainer$ 
+artia@ubuntu-797-2204:~/git_gyankosh$ docker volume inspect portainer_data
+[
+    {
+        "CreatedAt": "2024-05-20T08:21:45Z",
+        "Driver": "local",
+        "Labels": {
+            "com.docker.compose.project": "portainer",
+            "com.docker.compose.version": "2.27.0",
+            "com.docker.compose.volume": "data"
+        },
+        "Mountpoint": "/var/lib/docker/volumes/portainer_data/_data",
+        "Name": "portainer_data",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+
+
 
 
 open curl localhost:9000 or curl localhost:9443 to see portainer.
