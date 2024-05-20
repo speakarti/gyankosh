@@ -85,23 +85,7 @@ better to use docker-compose.yml
 
 Save the following file as docker-compose.yml in your working directory:
 
-mkdir -p docker-compose/portainer
-vi docker-compose.yml
-
-version: "3"
-services:
-  portainer:
-    image: portainer/portainer-ce:latest
-    ports:
-      - 9443:9443
-    volumes:
-      - data:/data
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
-volumes:
-  data:
-
-
+vi docker-compose/portainer/docker-compose.yml
 cd docker-compose/portainer
 docker compose up -d
 
@@ -192,3 +176,7 @@ artia@ubuntu-797-2204:~/docker-compose/portainer$ docker compose down
  ✔ Container portainer-portainer-1  Removed                                                                         0.2s 
  ✔ Network portainer_default        Removed                                                                         0.1s 
 artia@ubuntu-797-2204:~/docker-compose/portainer$
+
+
+install git and checking portainer docker-copose.xml
+
