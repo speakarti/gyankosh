@@ -47,8 +47,10 @@ following two files will be generated
 ~/.ssh/id_ed25519
 
 
-keep private key (id_ed25519) on local server and Copy public key to a remote server to connect, in this case its github, but use below command if we need to access other unix server
-$ ssh-copy-id -i ~/.ssh/id_rsa.pub artia@192.168.1.135/home/artia/.ssh/authorized_keys
+#Use private key (id_ed25519) on local server and Copy public key to a remote server to connect, in this case its github.
+#Use below command if we need to access/copy this private key file from another unix server
+$ scp -i ~/.ssh/ssh_rsa_hl001_privatekey_artia_opensshformat  ~/.ssh/id_ed25519 artia@192.168.1.169:/home/artia/.ssh/
+
 
 
 On github portal - go to main github account settings -> ssh and GPG keys ->  new ssh keys - > 
