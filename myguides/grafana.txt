@@ -34,3 +34,11 @@ sudo systemctl status grafana-server
         CPU: 2.587s
      CGroup: /system.slice/grafana-server.service
              └─2135 /usr/share/grafana/bin/grafana server --config=/etc/grafana/grafana.ini --pidfile=/run/grafana/grafana-server.pid --packaging=deb cfg:default.paths.logs=/var/log/grafana cfg:default.paths.data=/var/lib/grafana cfg:default.paths.plugins=/var/lib/grafana/plugins cfg:default.paths.provisioning=/etc/grafana/provisioning
+
+$ sudo ss -tulpn (you will find grafana listening on port 3000)
+tcp   LISTEN  0       4096                               *:3000              *:*     users:(("grafana",pid=2135,fd=10))  
+Open <IP>:3000 in browser in LAN, you will see dashboard
+
+
+
+check /etc/grafana/grafana.ini for detailed configs
