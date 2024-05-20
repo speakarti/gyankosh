@@ -1,1 +1,90 @@
-https://www.youtube.com/watch?v=0HQo7ytydBI
+#Install and configure Premetheus, Node Explorer, and Grafana
+#==============================================================
+#Reference: https://www.youtube.com/watch?v=0HQo7ytydBI
+
+
+#create a system user
+sudo useradd --no-create-home --shell /bin/false prometheus
+
+or
+sudo groupadd --system prometheus
+sudo useradd -s /sbin/nologin --system -g prometheus prometheus
+
+
+sudo mkdir /etc/prometheus
+sudo mkdir /var/lib/prometheus
+
+sudo chown prometheus:prometheus /var/lib/prometheus
+
+#download latest binaries from https://prometheus.io/download/
+cd /tmp/
+wget https://github.com/prometheus/prometheus/releases/download/v2.52.0/prometheus-2.52.0.linux-amd64.tar.gz
+tar -xvf prometheus-2.52.0.linux-amd64.tar.gz
+
+cd prometheus*/
+
+artia@ubuntu-799-2204:/tmp/prometheus-2.52.0.linux-amd64$ ls -la
+total 262516
+drwxr-xr-x  4 artia artia      4096 May  8 22:21 .
+drwxrwxrwt 13 root  root       4096 May 20 02:48 ..
+-rw-r--r--  1 artia artia     11357 May  8 22:11 LICENSE
+-rw-r--r--  1 artia artia      3773 May  8 22:11 NOTICE
+drwxr-xr-x  2 artia artia      4096 May  8 22:11 console_libraries
+drwxr-xr-x  2 artia artia      4096 May  8 22:11 consoles
+-rwxr-xr-x  1 artia artia 138438117 May  8 21:58 prometheus
+-rw-r--r--  1 artia artia       934 May  8 22:11 prometheus.yml
+-rwxr-xr-x  1 artia artia 130329948 May  8 21:58 promtool
+
+
+sudo mv prometheus /usr/local/bin
+sudo mv promtool /usr/local/bin
+sudo chown prometheus:prometheus /usr/local/bin/prometheus
+sudo chown prometheus:prometheus /usr/local/bin/promtool
+
+
+sudo mv consoles /etc/prometheus
+sudo mv console_libraries /etc/prometheus
+sudo mv prometheus.yml /etc/prometheus
+
+sudo chown prometheus:prometheus /etc/prometheus
+sudo chown -R prometheus:prometheus /etc/prometheus/consoles
+sudo chown -R prometheus:prometheus /etc/prometheus/console_libraries
+sudo chown -R prometheus:prometheus /var/lib/prometheus
+
+#The prometheus.yml file is the main Prometheus configuration file. It includes settings for targets to be monitored, data scraping frequency, data processing, and storage. 
+sudo cat /etc/prometheus/prometheus.yml
+
+
+# a systemd Create a prometheus.servicecreate 
+
+#sudo vi /etc/systemd/system/prometheus.service
+[Unit]
+Description=Prometheus
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Type=simple
+ExecStart=/usr/local/bin/prometheus \
+    --config.file /etc/prometheus/prometheus.yml \
+    --storage.tsdb.path /var/lib/prometheus/ \
+    --web.console.templates=/etc/prometheus/consoles \
+    --web.console.libraries=/etc/prometheus/console_libraries
+
+[Install]
+WantedBy=multi-user.target
+
+
+sudo systemctl daemon-reload
+
+sudo systemctl enable prometheus
+sudo systemctl start prometheus
+sudo systemctl status prometheus
+
+Prometheus runs on port 9090 by default so you need to allow port 9090 on your firewall,
+
+
+open in browser 
+localhost:9090
