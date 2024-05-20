@@ -81,13 +81,16 @@ CONTAINER ID   IMAGE                           COMMAND        CREATED         ST
 $ docker stop 4f14386f4add
 
 
+
+
+
+
+Using docker compose to create portainer (including volume, network, containers) 
+==========================================
 better to use docker-compose.yml
+create docker-compose.yml (download from git repo)
 
-Save the following file as docker-compose.yml in your working directory:
-
-vi docker-compose/portainer/docker-compose.yml
-cd docker-compose/portainer
-docker compose up -d
+docker compose up -d (from working directory)
 
 
 docker ps -a (list all containers)
@@ -101,25 +104,25 @@ docker volume --help
 
 
 
-artia@ubuntu-797-2204:~/docker-compose/portainer$ docker compose up -d
-WARN[0000] /home/artia/docker-compose/portainer/docker-compose.yml: `version` is obsolete 
+artia@ubuntu-797-2204:~/git_gyankosh/docker-compose/portainer$ docker compose up -d
 [+] Running 12/12
- ✔ portainer Pulled                                                                                                 5.3s 
-   ✔ 57654d40e0a5 Pull complete                                                                                     0.3s 
-   ✔ 1f476acfabd6 Pull complete                                                                                     0.4s 
-   ✔ 5171176db7f2 Pull complete                                                                                     2.0s 
-   ✔ 52e9438966a5 Pull complete                                                                                     2.6s 
-   ✔ 43d4775415ac Pull complete                                                                                     3.1s 
-   ✔ c1cad9f5200f Pull complete                                                                                     3.6s 
-   ✔ a5e2b359b78b Pull complete                                                                                     3.6s 
-   ✔ eb172612bcbb Pull complete                                                                                     4.1s 
-   ✔ 6be7b2acffb5 Pull complete                                                                                     4.4s 
-   ✔ 391dff0fb880 Pull complete                                                                                     4.5s 
-   ✔ 4f4fb700ef54 Pull complete                                                                                     4.5s 
-[+] Running 2/2
- ✔ Volume "portainer_data"          Created                                                                         0.0s 
- ✔ Container portainer-portainer-1  Started                                                                         0.4s 
-artia@ubuntu-797-2204:~/docker-compose/portainer$ 
+ ✔ portainer Pulled                                                                                                                                           6.4s 
+   ✔ 57654d40e0a5 Pull complete                                                                                                                               0.4s 
+   ✔ 1f476acfabd6 Pull complete                                                                                                                               0.5s 
+   ✔ 5171176db7f2 Pull complete                                                                                                                               2.4s 
+   ✔ 52e9438966a5 Pull complete                                                                                                                               3.1s 
+   ✔ 43d4775415ac Pull complete                                                                                                                               3.6s 
+   ✔ c1cad9f5200f Pull complete                                                                                                                               4.1s 
+   ✔ a5e2b359b78b Pull complete                                                                                                                               4.1s 
+   ✔ eb172612bcbb Pull complete                                                                                                                               4.6s 
+   ✔ 6be7b2acffb5 Pull complete                                                                                                                               4.9s 
+   ✔ 391dff0fb880 Pull complete                                                                                                                               5.0s 
+   ✔ 4f4fb700ef54 Pull complete                                                                                                                               5.0s 
+[+] Running 3/3
+ ✔ Network portainer_default        Created                                                                                                                   0.2s 
+ ✔ Volume "portainer_data"          Created                                                                                                                   0.0s 
+ ✔ Container portainer-portainer-1  Started                                                                                                                   0.6s 
+
 
 
 
@@ -155,45 +158,16 @@ artia@ubuntu-797-2204:~/git_gyankosh$ docker volume inspect portainer_data
 ]
 
 
+# open curl localhost:9000 or curl localhost:9443 to see portainer.
 
 
-open curl localhost:9000 or curl localhost:9443 to see portainer.
-
-
-
-
-rtia@ubuntu-797-2204:~/docker-compose/portainer$ docker stop 0ba2c5f9f09e
-0ba2c5f9f09e
-artia@ubuntu-797-2204:~/docker-compose/portainer$ docker rm 0ba2c5f9f09e
-0ba2c5f9f09e
-artia@ubuntu-797-2204:~/docker-compose/portainer$ docker rmi portainer/portainer-ce
-Untagged: portainer/portainer-ce:latest
-Untagged: portainer/portainer-ce@sha256:4a1ceadd7f7898d9190ee0a6d22234c4323aefd80e796e84f5e57127f74370f1
-Deleted: sha256:a3f85c245ec38eacdd9b749659c351a1d2601a08fa784c9c4b7200b83c64eb0c
-Deleted: sha256:9a96e2ecf14c3af65eee08094703eb458626b7d4073ccfa76f148fdcb04d387d
-Deleted: sha256:fe612a410d0a614655f3778910f75767c88af34358afedcf3138b44502e06bf7
-Deleted: sha256:3a730c3fc027f6b86c0730db4fa23882439835848eba5713c88e050fe1cb602b
-Deleted: sha256:bb09e6037218061c2dad7d3565418140bb1532377dc9d52ae7d4b761b7d328ba
-Deleted: sha256:42334f43ea02958c921ef5cde8a6fe6a55b0ef0b1cc71527543b0fb56e5daf94
-Deleted: sha256:3f1c0740cd8c18b8f287e7986a8b0a00319b81a1f240f4ef03db56940bce5094
-Deleted: sha256:31e6b50a71157e1e7b1cca755bf5f5027f5b5c3f965602d919b8df3e18ff36eb
-Deleted: sha256:353fe6c37214c7f2af1a653ed1fce5e61bf477822776c79b2a1ad6fd33a356b4
-Deleted: sha256:da4231cddfd7ba4ce7609a73f309a60199d17c9a0d09b8009a0e4f0560189bad
-Deleted: sha256:0c202f78a17c177c4553565154e935dbc7ba86b887794f47e8323c638e8a897e
-Deleted: sha256:3b1234fcd95b225bc54c3d477f026e24fa4fe8e8b320ea4f0d61e26c065c5343
-artia@ubuntu-797-2204:~/docker-compose/portainer$ docker volume rm portainer_data
-portainer_data
-
-
-
-Removed version line from compose and re-triggered whole 
-
-
-artia@ubuntu-797-2204:~/docker-compose/portainer$ docker compose down
+$ docker compose down
 [+] Running 2/2
  ✔ Container portainer-portainer-1  Removed                                                                         0.2s 
  ✔ Network portainer_default        Removed                                                                         0.1s 
-artia@ubuntu-797-2204:~/docker-compose/portainer$
+$
+
+$ docker system prune --all (this will remove all except volume)
 
 
 install git and checking portainer docker-copose.xml
@@ -225,5 +199,5 @@ docker network prune
 docker system prune
 
 docker system prune -f ; docker volume prune -f ;docker rm -f -v $(docker ps -q -a)
-docker system prune --all
+
 docker kill $(docker ps -q)
