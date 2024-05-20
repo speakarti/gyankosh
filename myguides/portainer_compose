@@ -155,6 +155,8 @@ Display detailed information on one or more volumes
 artia@ubuntu-797-2204:~/docker-compose/portainer$ 
 
 
+open curl localhost:9000 or curl localhost:9443 to see portainer.
+
 
 
 
