@@ -162,8 +162,11 @@ sudo vi /etc/prometheus/prometheus.yml
 sudo systemctl restart prometheus
 
 
-sudo systemctl stop grafana
-sudo systemctl disable grafana
+
+Shut down all services if server is not being used
+==================================================
+sudo systemctl stop grafana-server
+sudo systemctl disable grafana-server
 sudo systemctl stop node_exporter
 sudo systemctl disable node_exporter
 sudo systemctl stop prometheus
