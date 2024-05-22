@@ -355,3 +355,53 @@ c) sign-in into docker hub
 d) starting docker engine
 e) installed wsl for ubuntu and kali linux from MS appstore and configured using docker settings - > resources -> wsl integration - enabled both.
 
+
+
+
+useful comands
+============
+https://www.cloudbees.com/blog/docker-how-to-stop-and-remove-all-containers-at-once
+
+docker ps -aq | xargs docker stop | xargs docker rm
+docker ps -aq | xargs docker rm -f
+Stop all the containers
+
+docker stop $(docker ps -a -q)
+
+Remove all the containers
+docker rm $(docker ps -a -q)
+
+docker container prune
+docker image prune
+docker volume prune
+docker network prune
+docker system prune
+
+docker system prune -f ; docker volume prune -f ;docker rm -f -v $(docker ps -q -a)
+
+docker kill $(docker ps -q)
+
+docker compose -f docker-compose.yml up -d
+docker compose down
+
+
+Volume: for each container, volume gets created in /var/lib/docker/volumes/ inhost folder. you can get more details about any volume by running 'docker inspect <volume>'
+===========
+docker volume ls
+docker volume --help
+docker volume prune
+docker volume rm
+
+
+
+docker network ls
+
+most powerful command to get any information about these objects in json format, will be helpful in making own portainer kind of portal.
+docker inspect --help (https://docs.docker.com/reference/cli/docker/inspect/) - low level informatino for objects, provide name or ID, if same name/id for many objects then use type
+--type container|image|node|network|secret|service|volume|task|plugin
+
+docker inspect --size mycontainer
+
+
+
+
