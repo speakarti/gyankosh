@@ -25,13 +25,13 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=grafana
     volumes:
       - ./grafana:/etc/grafana/provisioning/datasources
+  # https://github.com/prometheus/node_exporter
   node_exporter:
     image: quay.io/prometheus/node-exporter:latest
     container_name: node_exporter
-    ports:
-      - 9100:9100
-    networks:
-      - custom-bridge-network      
+    #ports:
+    #  - 9100:9100
+    network_mode: host    
     command: "--path.rootfs=/host"
     pid: host
     restart: unless-stopped
