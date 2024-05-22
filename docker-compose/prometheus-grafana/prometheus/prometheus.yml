@@ -27,4 +27,4 @@ scrape_configs:
   scheme: http
   static_configs:
   - targets:
-    - ubuntu-797-2204:9100
+    - 192.168.1.169:9100
