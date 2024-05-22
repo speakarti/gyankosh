@@ -27,4 +27,4 @@ scrape_configs:
   scheme: http
   static_configs:
   - targets:
-    - 192.168.1.169:9100
+    - localhost:9100
