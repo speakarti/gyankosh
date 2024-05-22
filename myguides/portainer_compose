@@ -173,32 +173,3 @@ $ docker system prune --all (this will remove all except volume)
 
 install git and checking portainer docker-copose.xml
 
-
-
-
-
-
-
-useful comands
-============
-https://www.cloudbees.com/blog/docker-how-to-stop-and-remove-all-containers-at-once
-
-docker ps -aq | xargs docker stop | xargs docker rm
-docker ps -aq | xargs docker rm -f
-Stop all the containers
-
-docker stop $(docker ps -a -q)
-
-Remove all the containers
-
-docker rm $(docker ps -a -q)
-
-docker container prune
-docker image prune
-docker volume prune
-docker network prune
-docker system prune
-
-docker system prune -f ; docker volume prune -f ;docker rm -f -v $(docker ps -q -a)
-
-docker kill $(docker ps -q)
