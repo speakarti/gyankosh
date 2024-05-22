@@ -382,7 +382,8 @@ docker system prune -f ; docker volume prune -f ;docker rm -f -v $(docker ps -q 
 docker kill $(docker ps -q)
 
 docker compose -f docker-compose.yml up -d
-docker compose down
+docker compose down (this removes containers, netwroks etc, but preserves database.
+docker compose down --volumes (this removes containers, netwroks etc, including database.
 
 
 Volume: for each container, volume gets created in /var/lib/docker/volumes/ inhost folder. you can get more details about any volume by running 'docker inspect <volume>'
