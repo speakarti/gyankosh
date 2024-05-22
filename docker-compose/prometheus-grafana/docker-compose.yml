@@ -6,6 +6,8 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
       - 9090:9090
+    networks:
+      - custom-bridge-network
     restart: unless-stopped
     volumes:
       - ./prometheus:/etc/prometheus
@@ -15,6 +17,8 @@ services:
     container_name: grafana
     ports:
       - 3000:3000
+    networks:
+      - custom-bridge-network      
     restart: unless-stopped
     environment:
       - GF_SECURITY_ADMIN_USER=admin
@@ -25,11 +29,20 @@ services:
     image: quay.io/prometheus/node-exporter:latest
     container_name: node_exporter
     ports:
-      - 9100:9100    
+      - 9100:9100
+    networks:
+      - custom-bridge-network      
     command: "--path.rootfs=/host"
     pid: host
     restart: unless-stopped
     volumes:
       - /:/host:ro,rslave
+networks:
+  custom-bridge-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "10.0.0.0/19"
+          gateway: "10.0.0.1"
 volumes:
   prom_data:
