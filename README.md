@@ -1,5 +1,8 @@
 # gyankosh
 
-a Repository crated by Arti Aggarwal to setup a Red Hat® Enterprise Linux 9.0 (Red Hat Developer) systems from scratch
+a Repository crated by Arti Aggarwal to setup a homelab for practice various tools and technologies.
 
-Detailed steps to reproduce a working system, and Red Hat Developer cheat sheets
+This repository contains 
+1) Detailed steps to reproduce a working system, 
+2) Cheat sheets
+3) Docker Compose files for creating containers
