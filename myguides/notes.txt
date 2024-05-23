@@ -1,1 +1,143 @@
 Elastic Cluster Monitoring : https://www.youtube.com/watch?v=3ilTrM7tTWs
+
+
+docker notes:
+docker will redirect its stdin to the remote process, and the remote process’s stdout and stderr to your terminal.
+$ docker container run --rm ubuntu:22.04 /bin/false
+$ echo $?
+1
+$ docker container run --rm ubuntu:22.04 /bin/true
+$ echo $?
+0
+$ docker container run --rm ubuntu:22.04 /bin/cat /etc/passwd
+
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+…
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+_apt:x:100:65534::/nonexistent:/usr/sbin/nologin
+
+$ docker container run --rm ubuntu:22.04 /bin/cat /etc/passwd | wc -l
+
+19
+
+
+
+Docker These volumes are not bind-mounted; instead, they are special data containers that provide a useful method for persisting data.
+
+
+docker container logs -f nginx-test
+The default settings for dockerd do not currently enable log rotation. You’ll want to make sure you specify the --log-opt max-size and --log-opt max-file settings via the command line or the daemon.json configuration file if you are running in production
+
+plugin: Currently supported are the json-file we described earlier, as well as syslog, fluentd, journald, gelf, awslogs, splunk, gcplogs, local, and logentries, which are used for sending logs to various popular logging frameworks and services.
+
+The supported option that currently is the simplest for running Docker at scale is sending your container logs to syslog directly from Docker. You can specify this on the Docker command line with the --log-driver=syslog option or set it as the default in the daemon.json file for all containers.
+
+The daemon.json file is the configuration for the dockerd server. It can usually be found in the /etc/docker/ directory on the server
+Many newer Linux distributions are based on the systemd init system and therefore use journald for logging by default, which is different from syslog.
+
+You can log directly to a remote syslog-compatible server from a single container by setting the log option syslog-address similar to this: --log-opt syslog-address=udp://192.168.42.42:123.
+
+
+One final caveat to be aware of regarding most of the logging plug-ins: they are blocking by default, which means that logging back-pressure can cause issues with your application. You can change this behavior by setting --log-opt mode=non-blocking and then setting the maximum buffer size for logs to something like --log-opt max-buffer-size=4m. Once these are set, the application will no longer block when that buffer fills up. Instead, the oldest loglines in memory will be dropped. Again, reliability needs to be weighed here against your business’s need to receive all the logs.
+
+Docker supports container health checks and some basic reporting capabilities via docker container stats and docker system events
+feature of Docker that exports container metrics to the Prometheus monitoring system.
+
+
+docker container run --rm -d --name stress \
+    docker.io/spkane/train-os:latest \
+    stress -v --cpu 2 --io 1 --vm 2 --vm-bytes 128M --timeout 60s
+
+$ docker container stats stress
+CONTAINER ID NAME   CPU %   MEM USAGE/LIMIT   MEM % NET I/O   BLOCK I/O PIDS
+1a9f52f0855f stress 476.50% 36.09MiB/7.773GiB 0.45% 1.05kB/0B 0B/0B     6
+You can use the --no-stream option to get a single-point-in-time set of statistics that will not update and will return you back to the command line after the command completes.
+
+ Docker APIs.
+
+The example in “stats API endpoint” is a good intro to calling the API directly.
+
+$ docker container run --rm -d --name stress \
+    docker.io/spkane/train-os:latest \
+    stress -v --cpu 2 --io 1 --vm 2 --vm-bytes 128M --timeout 60s
+
+$ curl --no-buffer -XGET --unix-socket /var/run/docker.sock \
+    http://docker/containers/stress/stats
+$ curl -s -XGET --unix-socket /var/run/docker.sock \
+    http://docker/containers/stress/stats | head -n 1 | jq
+
+
+Health checks are a build-time configuration item and are created with a HEALTHCHECK definition in the Dockerfile.
+Health checks are a build-time configuration item and are created with a HEALTHCHECK definition in the Dockerfile. This directive tells the Docker daemon what command it can run inside the container to ensure the container is in a healthy state. As long as the command exits with a code of zero (0), Docker will consider the container to be healthy. Any other exit code will indicate to Docker that the container is not in a healthy state, at which point appropriate action can be taken by a scheduler or monitoring system.
+
+$ git clone https://github.com/spkane/rocketchat-hubot-demo.git \
+    --config core.autocrlf=input
+$ cd rocketchat-hubot-demo/mongodb/docker
+
+So, in our Dockerfile we are only adding a single script that can health-check our container, and defining a health-check command that runs that script.
+
+As with most systems, you can configure a lot of details about your health checks, including how often Docker checks the health (--health-interval), how many failures are required to cause the container to be marked unhealthy (--health-retries), and more. You can even disable the health check completely (--no-healthcheck) if needed.
+
+
+$ docker system events
+
+As with the Docker statistics, you can access the Docker system events via curl using a command like curl --no-buffer -XGET --unix-socket /var/run/docker.sock http://docker/events.
+
+There are a few specific event types that you should go out of your way to monitor:
+
+container oom
+Appears when a container runs out of memory
+
+container exec_create
+container exec_start
+container exec_die
+Appear when someone has used docker container exec to enter a container, which could signal a security incident
+
+
+$ docker container run \
+  --volume=/:/rootfs:ro \
+  --volume=/var/run:/var/run:ro \
+  --volume=/sys:/sys:ro \
+  --volume=/var/lib/docker/:/var/lib/docker:ro \
+  --volume=/dev/disk/:/dev/disk:ro \
+  --publish=8080:8080 \
+  --detach=true \
+  --name=cadvisor \
+  --privileged \
+  --rm \
+  --device=/dev/kmsg \
+  gcr.io/cadvisor/cadvisor:latest
+
+
+On Red Hat Enterprise Linux (RHEL)-based systems, you may need to add the following line to the docker container run command shown here: --volume=/cgroup:/cgroup \.
+Once you have done this, you will be able to navigate to your Docker host on port 8080 to see the cAdvisor web interface (e.g., http://172.17.42.10:8080/) and the various detailed charts it has for the host and individual containers (see Figure 6-1).
+
+curl http://172.17.42.10:8080/api/v2.1/machine/
+
+The Prometheus monitoring system
+
+
+Debugging
+docker container top
+ps axlfww
+
+Common debugging tools like strace work as expected
+$ sudo lsof -p 22983
+
+It’s possible to run the GNU debugger (gdb) and other process inspection tools in the same manner as long as you’re root and have proper permissions to do so.
+
+netstat -anp
+docker image history
+inspect container, filesystem
+
+$ docker container run --rm -d --name nginx-fs nginx:latest
+1272b950202db25ee030703515f482e9ed576f8e64c926e4e535ba11f7536cc4
+
+$ docker container diff nginx-fs
+
+Further detailed inspection requires exploring the container with docker container export, docker container exec, or nsenter and the like, to see exactly what is in the filesystem. But docker container diff gives you a good place to start.
+
+control groups (cgroups), namespaces, Secure Computing Mode (seccomp), and SELinux or AppArmor,
+
+cgroups provide for resource limits, namespaces allow for processes to use identically named resources and isolate them from one another’s view of the system, Secure Computing Mode limits which system calls a process can use, and SELinux or AppArmor provides additional strong security isolation for processes. So, to start, what do cgroups and namespaces do for you?
