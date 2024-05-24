@@ -1,3 +1,5 @@
+TODO -> try sample containers from https://github.com/docker/awesome-compose 
+
 https://docs.docker.com/manuals/
 
 Install docker on ubuntu 22.04 
