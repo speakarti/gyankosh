@@ -1,35 +1,26 @@
 enable ubuntu machine to run virtual machines, using kvm, aqemu-kvm
-=============================================
-Achieved: a VM (ubuntu 23.x desktop) on ubuntu 22.04, using ISO
+===================================================================
+Achieved: created a VM (ubuntu 23.x desktop) on ubuntu 22.04, using ISO
 Next: create using cloud image, learn image customization using libraries like libvirt-daemon-system virtinst libvirt-clients bridge-utils
-
 reference: https://www.linuxtechi.com/how-to-install-kvm-on-ubuntu-22-04/
 
-2) Check if Virtualization is enabled
-agupta@hl001:~$ egrep -c '(vmx|svm)' /proc/cpuinfo
+
+1) Check if Virtualization is enabled
+$ egrep -c '(vmx|svm)' /proc/cpuinfo
 8
 
-2a) In addition, you can verify if KVM virtualization is enabled by running the following command:
+2) In addition, you can verify if KVM virtualization is enabled by running the following command:
 $ kvm-ok
-
-agupta@hl001:~$ kvm-ok
 Command 'kvm-ok' not found, but can be installed with:
 sudo apt install cpu-checker
-agupta@hl001:~$ sudo apt install -y cpu-checker
 
-agupta@hl001:~$ kvm-ok
+$ sudo apt install -y cpu-checker
+$ kvm-ok
 INFO: /dev/kvm exists
 KVM acceleration can be used
 
-
-3) Install KVM on Ubuntu 22.04
-
-Next, run the command below to install KVM and additional virtualization packages on Ubuntu 22.04.
-
-$ sudo apt install -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils
-
-Let us break down the packages that we are installing:
-
+3) Install KVM on Ubuntu 22.04 
+Next, run the command below to install KVM and additional virtualization packages on Ubuntu 22.04. details of packages that we are installing:
     qemu-kvm  – An opensource emulator and virtualization package that provides hardware emulation.
     virt-manager – A Qt-based graphical interface for managing virtual machines via the libvirt daemon.
     libvirt-daemon-system – A package that provides configuration files required to run the libvirt daemon.
@@ -37,12 +28,14 @@ Let us break down the packages that we are installing:
     libvirt-clients – A set of client-side libraries and APIs for managing and controlling virtual machines & hypervisors from the command line.
     bridge-utils – A set of tools for creating and managing bridge devices.
 
-4)
-agupta@hl001:~$ sudo systemctl enable --now libvirtd
-agupta@hl001:~$ sudo systemctl start libvirtd
-agupta@hl001:~$ sudo systemctl statuslibvirtd
-Unknown command verb statuslibvirtd.
-agupta@hl001:~$ sudo systemctl status libvirtd
+$ sudo apt install -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils
+
+
+4) enable and start libvirtd
+
+$ sudo systemctl enable --now libvirtd
+$ sudo systemctl start libvirtd
+$ sudo systemctl status libvirtd
 ● libvirtd.service - Virtualization daemon
      Loaded: loaded (/lib/systemd/system/libvirtd.service; enabled; vendor preset: enabled)
      Active: active (running) since Sun 2024-05-19 02:17:03 CDT; 3min 46s ago
@@ -61,11 +54,11 @@ TriggeredBy: ● libvirtd.socket
              └─8142 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
 
 
-5) 
+5) add current user to kvm and libvirt group 
 $ sudo usermod -aG kvm $USER
 $ sudo usermod -aG libvirt $USER
 
-
+5a) Network bridge
 skipped stop to create network bridge, lets first try with a virtual bridge named virbr0, which is created automatically when KVM is installed but it is used for testing purposes.
 
 $ ip addr show 
@@ -74,12 +67,9 @@ $ ip addr show
     inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
        valid_lft forever preferred_lft forever
 
+6) Open Virtual Machine Manager - GUI tool (virt-manager)
 
-
-
-Open Virtual Machine Manager - GUI tool - getting below error. lets relog session
-Unable to connect to libvirt qemu:///system.
-
+- getting below error. Unable to connect to libvirt qemu:///system.
 Verify that the 'libvirtd' daemon is running.
 
 Libvirt URI is: qemu:///system
@@ -93,5 +83,6 @@ Traceback (most recent call last):
     raise libvirtError('virConnectOpenAuth() failed')
 libvirt.libvirtError: Failed to connect socket to '/var/run/libvirt/libvirt-sock': Permission denied
 
-Restart server -> it fixed above issue and opening 'Virtual Machine Manager' gives conected system. and I was able to create VM (ubuntu desktop 23.x) usign ISO 
+6a) Restart server -> it fixed above issue and opening 'Virtual Machine Manager' gives conected system. 
+7) create VM (ubuntu desktop 23.x) using ISO
 
