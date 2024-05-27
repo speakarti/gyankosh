@@ -5,7 +5,11 @@ Next: create using cloud image, learn image customization using libraries like l
 reference: https://www.linuxtechi.com/how-to-install-kvm-on-ubuntu-22-04/
 reference : https://documentation.suse.com/sles/12-SP5/html/SLES-all/cha-libvirt-managing.html
 
-Tools: virsh, virt-install, virt-top, kvm-stat, virt-manager, virt-viewer
+Tools: libvirtd, virtlogd, virsh, virt-install, virt-top, kvm-stat, virt-manager, virt-viewer, virt-xml-validate, virt-df, https://www.libvirt.org/
+https://gitlab.com/libvirt/libvirt-python
+https://libvirt.org/kbase/index.html
+https://libvirt.org/docs.html
+https://libvirt.org/apps.html
 ===================================================================
 
 1) Check if Virtualization is enabled
