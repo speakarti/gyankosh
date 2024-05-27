@@ -90,6 +90,13 @@ libvirt.libvirtError: Failed to connect socket to '/var/run/libvirt/libvirt-sock
 6a) Restart server -> it fixed above issue and opening 'Virtual Machine Manager' gives conected system. 
 7) create VM (ubuntu desktop 23.x) using ISO
 
+7a) Image gets stored as a qcow2 file
+agupta@hl001:/var/lib/libvirt$ sudo ls -l /var/lib/libvirt/images/
+total 7445336
+drwx--x--x 2 root root        4096 May 19 02:41 pool
+-rw------- 1 root root 26847870976 May 26 19:30 ubuntu24.04.qcow2
+
+
 8) Most management tasks, such as starting or stopping a VM Guest, can either be done using the graphical application Virtual Machine Manager or on the command line using virsh
 virsh, and virt-viewer (virsh help list or man 1 virsh. )
 
