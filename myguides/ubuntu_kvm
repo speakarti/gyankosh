@@ -11,7 +11,12 @@ https://libvirt.org/kbase/index.html
 https://libvirt.org/docs.html
 https://libvirt.org/apps.html
 ===================================================================
-
+STOP ALL : once work is done
+virsh list --all
+virsh shutdown ubuntu24.04
+sudo systemctl stop libvirtd 
+sudo systemctl disable libvirtd 
+===================================================================
 1) Check if Virtualization is enabled
 $ egrep -c '(vmx|svm)' /proc/cpuinfo
 8
