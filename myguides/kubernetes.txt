@@ -61,3 +61,4 @@ dpkg -i <>
 mysql  Ver 8.0.36-0ubuntu0.22.04.1 for Linux on x86_64 ((Ubuntu))
 
 
+8) while using flask-mysqldb, an issue envcountered (https://medium.com/@hangyulson1004/steps-to-integrate-mysql-with-flask-on-a-ubuntu-server-covers-subprocess-exited-with-error-a9a731f683b9)
