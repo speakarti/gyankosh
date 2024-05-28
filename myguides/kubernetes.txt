@@ -41,4 +41,17 @@ agupta@hl001:/tmp$ minikube start
 🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 
 
-4) 
+4) agupta@hl001:/tmp$ kubectl get po -A
+NAMESPACE     NAME                               READY   STATUS    RESTARTS      AGE
+kube-system   coredns-7db6d8ff4d-vb9cp           1/1     Running   0             11m
+kube-system   etcd-minikube                      1/1     Running   0             12m
+kube-system   kube-apiserver-minikube            1/1     Running   0             11m
+kube-system   kube-controller-manager-minikube   1/1     Running   2 (11m ago)   12m
+kube-system   kube-proxy-rzzdn                   1/1     Running   0             11m
+kube-system   kube-scheduler-minikube            1/1     Running   0             11m
+kube-system   storage-provisioner                1/1     Running   0             11m
+agupta@hl001:/tmp$ 
+
+
+5) Install k9s from https://github.com/derailed/k9s/releases, by directly downloading .deb 
+dpkg -i <>
