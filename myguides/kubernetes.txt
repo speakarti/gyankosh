@@ -55,3 +55,6 @@ agupta@hl001:/tmp$
 
 5) Install k9s from https://github.com/derailed/k9s/releases, by directly downloading .deb 
 dpkg -i <>
+
+6) python3 --version
+7) mysql
