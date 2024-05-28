@@ -1,0 +1,54 @@
+Install MySQL on Ubuntu 22.04 (https://medium.com/@dikkumburage/how-to-install-mysql-on-ubuntu-22-04-d022cd4f4153)
+
+$ sudo apt install mysql-server
+(venv) agupta@hl001:~/system_design/python/src/auth$ mysql --version
+mysql  Ver 8.0.36-0ubuntu0.22.04.1 for Linux on x86_64 ((Ubuntu))
+
+
+venv) agupta@hl001:~/system_design/python/src/auth$ sudo systemctl status mysql
+● mysql.service - MySQL Community Server
+     Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2024-05-28 00:30:10 CDT; 1min 16s ago
+    Process: 15135 ExecStartPre=/usr/share/mysql/mysql-systemd-start pre (code=exited, status=0/SUCCESS)
+   Main PID: 15144 (mysqld)
+     Status: "Server is operational"
+      Tasks: 37 (limit: 18979)
+     Memory: 365.6M
+        CPU: 2.408s
+     CGroup: /system.slice/mysql.service
+             └─15144 /usr/sbin/mysqld
+
+May 28 00:30:04 hl001 systemd[1]: Starting MySQL Community Server...
+May 28 00:30:10 hl001 systemd[1]: Started MySQL Community Server.
+
+
+sudo mysql (open mysql console)
+show databases;
+
+set password as below
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+exit
+
+(venv) agupta@hl001:~/system_design/python/src/auth$ sudo mysql
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+
+mysql -u root -ppassword
+show databases;
+
+create database NYC_Crimes;
+
+Exception during reset or similar
+Traceback (most recent call last):
+  File "/home/artia/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 697, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Got a packet bigger than 'max_allowed_packet' bytes
+
+The above exception was the direct cause of the following exception:
+
+
+mysql> set global net_buffer_length=1000000;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> set global max_allowed_packet=1000000000;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
