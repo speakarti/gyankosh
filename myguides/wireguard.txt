@@ -1,0 +1,46 @@
+wireguard server
+======================
+https://citizix.com/how-to-set-up-wireguard-on-ubuntu-22-04/
+
+sudo apt update && sudo apt upgrade -y
+sudo apt install wireguard
+
+The wg and wg-quick command-line tools allow you to configure and manage the WireGuard interfaces.
+
+generate private and public keys 
+==================================
+wg genkey | sudo tee /etc/wireguard/server_private.key | wg pubkey | sudo tee /etc/wireguard/server_public.key
+
+
+$ sudo ufw status
+Status: inactive
+
+Configure Tunnel Device
+===========================
+sudo vim /etc/wireguard/wg0.conf
+
+$ sudo sysctl -p
+net.ipv4.ip_forward = 1
+net.ipv6.conf.all.forwarding = 1
+
+$ sudo cat /etc/wireguard/server_private.key
+
+
+$ sudo vi /etc/wireguard/wg0.conf
+$ sudo chmod -R 600 /etc/wireguard/
+$ sudo chmod 600 /etc/wireguard/{server_private.key,wg0.conf}
+$ sudo wg-quick up wg0
+[#] ip link add wg0 type wireguard
+[#] wg setconf wg0 /dev/fd/63
+[#] ip -4 address add 10.70.0.1/24 dev wg0
+[#] ip link set mtu 1420 up dev wg0
+[#] iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o enp2s0 -j MASQUERADE
+
+
+$ sudo systemctl enable wg-quick@wg0
+Created symlink /etc/systemd/system/multi-user.target.wants/wg-quick@wg0.service → /lib/systemd/system/wg-quick@.service.
+
+$ sudo systemctl start wg-quick@wg0
+++Job for wg-quick@wg0.service failed because the control process exited with error code.
+See "systemctl status wg-quick@wg0.service" and "journalctl -xeu wg-quick@wg0.service" for details.
+
