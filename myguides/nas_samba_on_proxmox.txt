@@ -1,0 +1,53 @@
+reference : https://www.youtube.com/watch?v=AP61_ETd2GE
+==========================================================
+
+set up nas_samba_on_proxmox
+insert storage drive (capflash, a usb drive)
+pve > disks -> check flashdrive is listed (/dev/sdc)
+pve > disks -> ZFS -> create ZFS -> select /dev/sdc (pls note this will appear in list only if disk has no partitions, delete (if any using fdisk/parted)
+name it as zppol
+
+download debian-12-standard template, create a container using this with disk as Zdisk.
+
+creatign contaier takes 10 minues and start up also takes good time, so wait.
+
+install sudo, curl, docker
+
+apt install curl, sudo
+
+useradd artia
+usedmod -aG sudo artia
+usermod -p password artia
+
+install docker 
+curl -sSL https://get.docker.com | sh
+
+usedmod -aG docker artia
+
+optional part - access to data even if container offilie
+
+sudo mkdir /share
+chmod 777 /share
+
+use samba container
+
+sudo docker run --restart unless-stopped --name samba -p 139:139 -p 445:445 -v /share:/share -d dperson/samba -u "artia:password" -s "public;/share;yes;no;yes" 
+
+docker ps
+
+ip -a
+
+check its ip
+
+
+smb://<ip>/
+
+
+
+
+
+
+
+
+
+
