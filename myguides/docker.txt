@@ -7,14 +7,14 @@ Install docker on ubuntu 22.04
 
 1. Installing Docker Using the apt Repository
 =============================================
-agupta@hl001:~$ sudo apt list | grep docker.io
+$ sudo apt list | grep docker.io
 docker.io/jammy-updates 24.0.5-0ubuntu1~22.04.1 amd64
 
 pros: easy to install
 cons: stale version in apt repository (ubuntu repos)
 
 
-agupta@hl001:~$ sudo apt show docker.io/jammy-updates
+$ sudo apt show docker.io/jammy-updates
 Package: docker.io
 Version: 24.0.5-0ubuntu1~22.04.1
 Built-Using: glibc (= 2.35-0ubuntu3.3), golang-1.20 (= 1.20.3-1ubuntu0.1~22.04)
@@ -62,7 +62,7 @@ Remove any existing Docker packages
 sudo apt remove docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc
 sudo apt install ca-certificates curl gnupg lsb-release
 
-agupta@hl001:~$ sudo apt show ca-certificates -a
+$ sudo apt show ca-certificates -a
 Package: ca-certificates
 Version: 20230311ubuntu0.22.04.1
 Priority: important
@@ -91,7 +91,7 @@ Description: Common CA certificates
 
 
 
-agupta@hl001:~$ sudo apt show curl -a
+$ sudo apt show curl -a
 Package: curl
 Version: 7.81.0-1ubuntu1.16
 Priority: optional
@@ -195,7 +195,7 @@ sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg - read ascii file and convert
 add into ubuntu apt repositories
 deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu jammy stable
 
-agupta@hl001:~$ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \
+$ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \
 && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null \
 && sudo apt update
 Get:1 https://download.docker.com/linux/ubuntu jammy InRelease [48.8 kB]
