@@ -1,0 +1,79 @@
+#script to get list of packages, verion, category for mandiant flare VM.
+
+find . -type f -name chocolateyinstall.ps1 | xargs awk -F", " '/\$toolName =/ || /\$category =/{print FILENAME, $1, $2, $3, $4, $5, $6}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'
+
+find . -type f -name *.vm.nuspec | xargs awk '/<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'
+
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'
+
+good working
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'
+
+working and remove ./packages
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///'
+
+
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\/.*\([^ ]\)/    /'
+
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\(.*.vm\)[^ ]* \(.*\)/\1 aaa \2/g'
+
+
+
+find . -regex '.*\.\(vm.nuspec\|ps1\)' -print
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print
+
+
+
+find . -type f -name chocolateyinstall.ps1 
+awk '/\$toolName =/{print}' ./packages/x64dbg.vm/tools/chocolateyinstall.ps1 
+
+find . -type f -name chocolateyinstall.ps1 | xargs awk '/\$toolName =/{print}'
+
+awk '/\$toolName = || \$category = /{print}' ./packages/x64dbg.vm/tools/chocolateyinstall.ps1 
+
+awk '/\$toolName =/ || /\$category =/{print}' ./packages/x64dbg.vm/tools/chocolateyinstall.
+
+find . -type f -name chocolateyinstall.ps1 | xargs awk '/\$toolName =/ || /\$category =/{print}'
+
+find . -type f -name chocolateyinstall.ps1 | xargs awk '/\$toolName =/ || /\$category =/{print}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'
+
+find . -type f -name chocolateyinstall.ps1 | xargs awk '/\$toolName =/ || /\$category =/{print}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | tr '\n' ' '
+
+find . -type f -name chocolateyinstall.ps1 | xargs awk '/\$toolName =/ || /\$category =/{print}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | awk '{print}' ORS='" '
+
+find . -type f -name chocolateyinstall.ps1 | xargs awk '/\$toolName =/ || /\$category =/BEGIN{print ARGV[1]}{print}END{}'
+
+
+find . -type f -name chocolateyinstall.ps1 | xargs awk '/\$toolName =/ || /\$category =/{print FILENAME, $1, $2, $3, $4}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'
+
+find . -type f -name chocolateyinstall.ps1 | xargs awk -F", " '/\$toolName =/ || /\$category =/{for (i=0; i<=NF; i++) print $i}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'
+
+ ORS=", " 
+
+-v ORS=", "
+
+
+$toolName = 'SharpHound'
+$category = 'Reconnaissance'
+$toolName = 'SCLauncher64'
+$category = 'Shellcode'
+$category = 'Utilities'
+$toolName = 'SystemInformer'
+$category = 'Utilities'
+$toolName = 'VSCode'
+$category = 'Productivity Tools'
+$toolName = "pd"
+$category = "Memory"
+$category = 'Forensic'
+$toolName = $toolPath.Name -replace ([regex]::match($toolPath.Name, '(32|64)\.exe')), ''
+$toolName = 'SafetyKatz'
+$category = 'Credential Access'
+$toolName = '010Editor'
+$category = 'Hex Editors'
+$toolName = 'ghidra'
+
+
+
+find . -type f -name chocolateyinstall.ps1 | xargs awk '/\$toolName = \$toolPath.Name/{print FILENAME}'
+ages/yara.vm/tools/chocolateyinstall.ps1
+
