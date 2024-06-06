@@ -1,3 +1,5 @@
+https://flare-on.com/
+IDA Pro, capa, FLOSS, and CyberChef 
 finally working
 find . -type f -name chocolateyinstall.ps1 | xargs awk -F", " '/\$toolName =/ || /\$category =/{print FILENAME, $1, $2, $3, $4, $5, $6}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'
 
@@ -16,9 +18,16 @@ find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolNa
 
 find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6, $7, $7, $9}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\(.*.vm\)[^ ]* \(.*\)/\1 \2/g' | sed 's/\/.*.vm / /g'
 
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6, $7, $7, $9}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\(.*.vm\)[^ ]* \(.*\)/\1 \2/g' | sed 's/\/.*.vm / /g' | awk '{print $1}' | sort | uniq | wc -l
+
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6, $7, $7, $9}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\(.*.vm\)[^ ]* \(.*\)/\1 \2/g' | sed 's/\/.*.vm / /g' | awk '{print $1}' | sort | uniq | tr '\n' ' '
 
 
 
+
+
+
+cat myfile.txt | tr -d '\n' > oneline.txt
 
 
 
@@ -80,3 +89,43 @@ $toolName = 'ghidra'
 find . -type f -name chocolateyinstall.ps1 | xargs awk '/\$toolName = \$toolPath.Name/{print FILENAME}'
 ages/yara.vm/tools/chocolateyinstall.ps1
 
+
+
+
+
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6, $7, $7, $9}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\(.*.vm\)[^ ]* \(.*\)/\1 \2/g' | sed 's/\/.*.vm / /g' | awk -F',' 'NF>1{a[$1] = a[$1]","$2};END{for(i in a)print i""a[i]}' 
+
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6, $7, $7, $9}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\(.*.vm\)[^ ]* \(.*\)/\1 \2/g' | sed 's/\/.*.vm / /g' | sed 's/\$toolName = /<toolName>/g' | find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6, $7, $7, $9}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\(.*.vm\)[^ ]* \(.*\)/\1 \2/g' | sed 's/\/.*.vm / /g' | sed 's/\$category = /<category>/g' | sed 's/\$toolName = /<toolName>/g' | awk -F',' 'NF>1{a[$1] = a[$1]","$2};END{for(i in a)print i""a[i]}' 
+
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6, $7, $7, $9}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\(.*.vm\)[^ ]* \(.*\)/\1 \2/g' | sed 's/\/.*.vm / /g' | sed 's/\$toolName = /<toolName>/g' | find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6, $7, $7, $9}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\(.*.vm\)[^ ]* \(.*\)/\1 \2/g' | sed 's/\/.*.vm / /g' | sed 's/\$category = /<category>/g' | sed 's/\$toolName = /<toolName>/g' | sed 's/\.vm /.vm, /g' | sort >> packageslist.txt
+
+
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $0}' | sed 's/\$category = /<category>/g' | sed 's/\$toolName = /<toolName>/g' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\(.*.vm\)[^ ]* \(.*\)/\1 \2/g' | sed 's/\/.*.vm / /g' | sed 's/\$toolName = /<toolName>/g' | find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $1, $2, $3, $4, $5, $6, $7, $7, $9}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\(.*.vm\)[^ ]* \(.*\)/\1 \2/g' | sed 's/\/.*.vm / /g'  | sed 's/\.vm /.vm, /g' | sort >> packageslist.txt
+
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $0}' | sed 's/\$category = /<category>/g' | sed 's/\$toolName = /<toolName>/g' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' | sed 's/^.\/packages\///' | sed 's/\/.* </, </g' | sort | uniq
+
+while read line
+package=""
+do
+    test="${LINE}"
+    package_new= $(expr "${LINE}" : '\([^[:space:]]\+\)')
+    echo $test	
+    echo $package_new
+done < file.txt
+
+$ var="Welcome to Baeldung"
+$ first_word=$(expr "$var" : '\([^[:space:]]\+\)')  
+$ echo "$first_word"
+
+echo $test
+
+cat packageslist.txt | awk -F',' 'NF>1{a[$1] = a[$1]","$2};END{for(i in a)print i""a[i]}'
+
+artia@hl001:~/mandiant/git_flare_packages$ awk -F','{
+        if (!($1 in Val)) { Key[++i] = $1; }
+        Val[$1] = Val[$1] "," $2;
+    }
+    END{
+
+ 
+https://unix.stackexchange.com/questions/124205/join-multiple-lines-based-on-column1
