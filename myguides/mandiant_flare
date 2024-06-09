@@ -8,6 +8,8 @@ $ cat pull_mandiant_package_list.sh
 ### script to pull list of mandiant flare packges from mandiant git rep
 git clone https://github.com/mandiant/VM-Packages.git ${HOME}/mandiant/git_flare_packages
 
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $0}' | sed 's/\$category = /<category>/g' | sed 's/\$toolName = /<toolName>/g' | sed 's/\(.*.vm\/\)[^ ]* \(.*\)/\1 \2/g' | sort | uniq | sed 's/\.\/git_flare_packages\/packages\///g' | sed 's/  */ /g'
+
 
 https://flare-on.com/
 cd 
