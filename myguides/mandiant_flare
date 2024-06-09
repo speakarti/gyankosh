@@ -10,7 +10,7 @@ git clone https://github.com/mandiant/VM-Packages.git ${HOME}/mandiant/git_flare
 
 find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $0}' | sed 's/\$category = /<category>/g' | sed 's/\$toolName = /<toolName>/g' | sed 's/\(.*.vm\/\)[^ ]* \(.*\)/\1 \2/g' | sort | uniq | sed 's/\.\/git_flare_packages\/packages\///g' | sed 's/  */ /g'
 cat packageslist.txt | awk -F'.vm/ ' '{print $1,$2}'
-
+cat packageslist.txt | awk -F'.vm/ ' -v OFS='#' '{print $1,$2}' >> packageslist1.txt
 
 
 
