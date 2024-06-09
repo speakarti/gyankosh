@@ -8,13 +8,70 @@ $ cat pull_mandiant_package_list.sh
 ### script to pull list of mandiant flare packges from mandiant git rep
 git clone https://github.com/mandiant/VM-Packages.git ${HOME}/mandiant/git_flare_packages
 
-find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $0}' | sed 's/\$category = /<category>/g' | sed 's/\$toolName = /<toolName>/g' | sed 's/\(.*.vm\/\)[^ ]* \(.*\)/\1 \2/g' | sort | uniq | sed 's/\.\/git_flare_packages\/packages\///g' | sed 's/  */ /g'
+find . -regex '.*\(.\vm.nuspec\|.*uninstall.ps1\)' -print | xargs awk '/\$toolName =/ || /\$category =/ || /<id>/ || /<version>/ || /<description>/{print FILENAME, $0}' | sed 's/\$category = /<category>/g' | sed 's/\$toolName = /<toolName>/g' | sed 's/\(.*.vm\/\)[^ ]* \(.*\)/\1 \2/g' | sort | uniq | sed 's/\.\/git_flare_packages\/packages\///g' | sed 's/  */ /g' | sed 's/'\''//g' >> packageslist.txt
 cat packageslist.txt | awk -F'.vm/ ' '{print $1,$2}'
 cat packageslist.txt | awk -F'.vm/ ' -v OFS='#' '{print $1,$2}' >> packageslist1.txt
 
+list unique categories
+cat packageslist1.txt | awk -F'#' '{if($0 ~ /category/) {print $2}}' | sort | uniq| sed 's/<category>//g'
+Command & Control
+Credential Access
+Debuggers
+Delphi
+Disassemblers
+Documents
+dotNet
+Exploitation
+File Information
+Forensic
+Hex Editors
+InnoSetup
+Java & Android
+Javascript
+Lateral Movement
+"Memory"
+Memory
+Networking
+Packers
+Payload Development
+PE
+Privilege Escalation
+Productivity Tools
+Reconnaissance
+Registry
+Shellcode
+Utilities
+Visual Basic
+Web Application
+Wordlists
 
 
 
+List all packages for a given category
+cat packageslist1.txt | grep 'Networking'
+
+artia@hl001:~/mandiant$ cat packageslist1.txt | grep '<category>Networking' | awk -F'#' '{print $1}'
+fakenet-ng
+fiddler
+netcat
+networkminer
+nmap
+openvpn
+powercat
+putty
+streamdivert
+telnet
+windump
+wireshark
+
+
+TO DO = list packages 
+cat packageslist1.txt | awk -F'#' '{if($0 ~ /category/) {print $2}}' | sort | uniq| sed 's/<category>//g' | xargs -0 cat "{}"
+
+
+remove/replace single quote with nothing
+sed 's/'\''//g'
+sed 's/"\""//g'
 
 https://flare-on.com/
 cd 
