@@ -1,0 +1,1227 @@
+010editor#<category>'Hex Editors'
+010editor#<description>Professional text and hex editor with Binary Templates technology.</description>
+010editor#<id>010editor.vm</id>
+010editor#<toolName>'010Editor'
+010editor#<version>14.0.1</version>
+7zip-15-05#<category>'Productivity Tools'
+7zip-15-05#<description>7-Zip file archiver. This version is able to extract NSIS scripts.</description>
+7zip-15-05#<id>7zip-15-05.vm</id>
+7zip-15-05#<toolName>'7z'
+7zip-15-05#<version>15.05.0.20240507</version>
+7zip-nsis#<category>'Productivity Tools'
+7zip-nsis#<description>7-zip build with nsis script decompiling</description>
+7zip-nsis#<id>7zip-nsis.vm</id>
+7zip-nsis#<toolName>'7z'
+7zip-nsis#<version>23.01.0.20240507</version>
+7zip#<description>Metapackage for 7zip to ensure all packages use the same 7zip version.</description>
+7zip#<id>7zip.vm</id>
+7zip#<version>0.0.0.20240425</version>
+adconnectdump#<category>'Credential Access'
+adconnectdump#<description>This toolkit offers several ways to extract and decrypt stored Azure AD and Active Directory credentials from Azure AD Connect servers.</description>
+adconnectdump#<id>adconnectdump.vm</id>
+adconnectdump#<toolName>'ADConnectDump'
+adconnectdump#<version>0.0.0.20240412</version>
+aleapp#<category>'Forensic'
+aleapp#<description>Android Logs Events And Protobuf Parser.</description>
+aleapp#<id>aleapp.vm</id>
+aleapp#<toolName>'aleappGUI'
+aleapp#<version>3.2.2</version>
+amcacheparser#<category>'Forensic'
+amcacheparser#<description>Amcache.hve parser with lots of extra features. Handles locked files</description>
+amcacheparser#<id>amcacheparser.vm</id>
+amcacheparser#<toolName>'AmcacheParser'
+amcacheparser#<version>1.5.1.20240411</version>
+apimonitor#<category>'Utilities'
+apimonitor#<description>API Monitor lets you monitor and control API calls made by applications and services.</description>
+apimonitor#<id>apimonitor.vm</id>
+apimonitor#<version>2.13.0.20220224</version>
+apktool#<category>'Java & Android'
+apktool#<description>A tool for reverse engineering 3rd party, closed, binary Android apps.</description>
+apktool#<id>apktool.vm</id>
+apktool#<toolName>'apktool'
+apktool#<version>2.9.3</version>
+appcompatcacheparser#<category>'Forensic'
+appcompatcacheparser#<description>AppCompatCache aka ShimCache parser. Handles locked files</description>
+appcompatcacheparser#<id>appcompatcacheparser.vm</id>
+appcompatcacheparser#<toolName>'AppCompatCacheParser'
+appcompatcacheparser#<version>1.5.0.20240411</version>
+arsenalimagemounter#<category>'Forensic'
+arsenalimagemounter#<description>Mounts the contents of disk images as complete disks in Windows.</description>
+arsenalimagemounter#<id>arsenalimagemounter.vm</id>
+arsenalimagemounter#<toolName>'ArsenalImageMounter'
+arsenalimagemounter#<version>3.11.290</version>
+asreproast#<category>'Credential Access'
+asreproast#<description>Project that retrieves crackable hashes from KRB5 AS-REP responses for users without kerberoast preauthentication enabled.</description>
+asreproast#<id>asreproast.vm</id>
+asreproast#<toolName>'ASREPRoast'
+asreproast#<version>0.0.0.20240412</version>
+autopsy#<category>'Forensic'
+autopsy#<description>Autopsy is a graphical interface to The Sleuth Kit and other open source digital forensics tools.</description>
+autopsy#<id>autopsy.vm</id>
+autopsy#<toolName>'Autopsy'
+autopsy#<version>4.21.0</version>
+azurehound#<category>'Reconnaissance'
+azurehound#<description>AzureHound is the BloodHound data collector for Microsoft Azure.</description>
+azurehound#<id>azurehound.vm</id>
+azurehound#<toolName>'AzureHound'
+azurehound#<version>2.1.9</version>
+badassmacros#<category>'Payload Development'
+badassmacros#<description>Proof of Concept tool to generate malicious macros leveraging techniques like VBA Purging and Shellcode Obfuscation to evade AV engines.</description>
+badassmacros#<id>badassmacros.vm</id>
+badassmacros#<toolName>'BadAssMacros'
+badassmacros#<version>1.0</version>
+bindiff#<category>'File Information'
+bindiff#<description>A comparison tool for binary files that assists in quickly finding differences and similarities in disassembled code</description>
+bindiff#<id>bindiff.vm</id>
+bindiff#<toolName>'BinDiff'
+bindiff#<version>8.0.0.20240402</version>
+blobrunner64#<category>'Shellcode'
+blobrunner64#<description>BlobRunner is a simple tool to quickly debug shellcode extracted during malware analysis.</description>
+blobrunner64#<id>blobrunner64.vm</id>
+blobrunner64#<toolName>'blobrunner64'
+blobrunner64#<version>0.0.5.20240411</version>
+blobrunner#<category>'Shellcode'
+blobrunner#<description>BlobRunner is a simple tool to quickly debug shellcode extracted during malware analysis.</description>
+blobrunner#<id>blobrunner.vm</id>
+blobrunner#<toolName>'blobrunner'
+blobrunner#<version>0.0.5.20240411</version>
+bloodhound-custom-queries#<category>'Reconnaissance'
+bloodhound-custom-queries#<description>Custom Query list for the Bloodhound GUI based off my cheatsheet</description>
+bloodhound-custom-queries#<id>bloodhound-custom-queries.vm</id>
+bloodhound-custom-queries#<toolName>'BloodHound-Custom-Queries'
+bloodhound-custom-queries#<version>0.0.0.20240412</version>
+bloodhound#<category>'Reconnaissance'
+bloodhound#<description>BloodHound uses graph theory to reveal the hidden and often unintended relationships within an Active Directory environment.</description>
+bloodhound#<id>bloodhound.vm</id>
+bloodhound#<toolName>'BloodHound'
+bloodhound#<version>4.3.1.20240411</version>
+bstrings#<category>'Utilities'
+bstrings#<description>Find them strings yo. Built in regex patterns. Handles locked files</description>
+bstrings#<id>bstrings.vm</id>
+bstrings#<toolName>'bstrings'
+bstrings#<version>1.5.2.20240411</version>
+burp-free#<category>'Web Application'
+burp-free#<description>Burp Suite Community Edition is PortSwigger's free integrated platform for performing security testing of web applications.</description>
+burp-free#<id>burp-free.vm</id>
+burp-free#<toolName>'BurpSuiteCommunity'
+burp-free#<version>0.0.0.20240217</version>
+bytecodeviewer#<category>'Java & Android'
+bytecodeviewer#<description>A lightweight user-friendly Java/Android Bytecode Viewer, Decompiler and more.</description>
+bytecodeviewer#<id>bytecodeviewer.vm</id>
+bytecodeviewer#<toolName>'Bytecode Viewer'
+bytecodeviewer#<version>2.12</version>
+c3#<category>'Command & Control'
+c3#<description>C3 (Custom Command and Control) is a tool that allows Red Teams to rapidly develop and utilise esoteric command and control channels (C2). It's a framework that extends other red team tooling, such as the commercial Cobalt Strike (CS) product via ExternalC2.</description>
+c3#<id>c3.vm</id>
+c3#<toolName>'C3'
+c3#<version>0.0.0.20240412</version>
+capa#<category>'Utilities'
+capa#<description>capa detects capabilities in executable files. You run it against a PE file or shellcode and it tells you what it thinks the program can do.</description>
+capa#<id>capa.vm</id>
+capa#<toolName>'capa'
+capa#<version>7.0.1.20240411</version>
+certify#<category>'Exploitation'
+certify#<description>Certify is a C# tool to enumerate and abuse misconfigurations in Active Directory Certificate Services (AD CS).</description>
+certify#<id>certify.vm</id>
+certify#<toolName>'Certify'
+certify#<version>1.1.0.20240412</version>
+chainsaw#<category>'Forensic'
+chainsaw#<description>Chainsaw provides a powerful 'first-response' capability to quickly identify threats within Windows forensic artefacts such as Event Logs and the MFT file.</description>
+chainsaw#<id>chainsaw.vm</id>
+chainsaw#<toolName>'chainsaw'
+chainsaw#<version>2.9.0</version>
+cmder#<category>'Productivity Tools'
+cmder#<description>Metapackage for cmder</description>
+cmder#<id>cmder.vm</id>
+cmder#<version>1.3.24.20240217</version>
+codetrack#<category>'dotNet'
+codetrack#<description>A free .NET Performance Profile and Execution Analyzer</description>
+codetrack#<id>codetrack.vm</id>
+codetrack#<toolName>'CodeTrack'
+codetrack#<version>1.0.3.20230526</version>
+common#<description>Common libraries for VM-packages</description>
+common#<id>common.vm</id>
+common#<version>0.0.0.20240516</version>
+confuserex#<category>'Payload Development'
+confuserex#<description>ConfuserEx is a open-source protector for .NET applications. It is the successor of Confuser project.</description>
+confuserex#<id>confuserex.vm</id>
+confuserex#<toolName>'ConfuserEx'
+confuserex#<version>1.6.0.20230713</version>
+covenant#<category>'Command & Control'
+covenant#<description>Covenant is a .NET command and control framework that aims to highlight the attack surface of .NET, make the use of offensive .NET tradecraft easier, and serve as a collaborative command and control platform for red teamers.</description>
+covenant#<id>covenant.vm</id>
+covenant#<toolName>'Covenant'
+covenant#<version>0.0.0.20240412</version>
+credninja#<category>'Credential Access'
+credninja#<description>This tool will tell you if the credentials you dumped are valid on the domain, and if you have local administrator access to a host.</description>
+credninja#<id>credninja.vm</id>
+credninja#<toolName>'CredNinja'
+credninja#<version>2.3.0.20240412</version>
+cryptotester#<category>'Utilities'
+cryptotester#<description>Utility tool for performing cryptanalysis with a focus on ransomware cryptography</description>
+cryptotester#<id>cryptotester.vm</id>
+cryptotester#<toolName>'CryptoTester'
+cryptotester#<version>1.7.1.20240411</version>
+cutter#<category>'Disassemblers'
+cutter#<description>Cutter is a FOSS dissassembler/decompiler</description>
+cutter#<id>cutter.vm</id>
+cutter#<toolName>'Cutter'
+cutter#<version>2.3.4.20240411</version>
+cyberchef#<category>'Utilities'
+cyberchef#<description>The Cyber Swiss Army Knife - a web app for encryption, encoding, compression, data analysis, and more.</description>
+cyberchef#<id>cyberchef.vm</id>
+cyberchef#<toolName>'cyberchef'
+cyberchef#<version>10.18.6</version>
+cygwin#<category>'Productivity Tools'
+cygwin#<description>Wrapper for cygwin and useful cygwin packages</description>
+cygwin#<id>cygwin.vm</id>
+cygwin#<toolName>'cygwin'
+cygwin#<version>3.5.3</version>
+dcode#<category>'Forensic'
+dcode#<description>Utility for converting data found on desktop and mobile devices into human-readable timestamps.</description>
+dcode#<id>dcode.vm</id>
+dcode#<toolName>'DCode'
+dcode#<version>5.6.24123.20240507</version>
+de4dot-cex#<category>'dotNet'
+de4dot-cex#<description>A de4dot fork with full support for vanilla ConfuserEx</description>
+de4dot-cex#<id>de4dot-cex.vm</id>
+de4dot-cex#<toolName>'de4dot'
+de4dot-cex#<version>4.0.0.20240411</version>
+debloat#<description>Debloat and performance configurations for Windows OS</description>
+debloat#<id>debloat.vm</id>
+debloat#<version>0.0.0.20240327</version>
+dependencywalker#<category>'PE'
+dependencywalker#<description>Scans PE files and builds a hierarchical tree diagram of all dependent modules</description>
+dependencywalker#<id>dependencywalker.vm</id>
+dependencywalker#<toolName>'Dependency Walker'
+dependencywalker#<version>2.2.6000</version>
+dex2jar#<category>'Java & Android'
+dex2jar#<description>Tools to work with android .dex and java .class files.</description>
+dex2jar#<id>dex2jar.vm</id>
+dex2jar#<toolName>'d2j-dex2jar'
+dex2jar#<version>2.3.0.20240411</version>
+didier-stevens-beta#<category>'Documents'
+didier-stevens-beta#<description>Beta versions of Didier Stevens's software</description>
+didier-stevens-beta#<id>didier-stevens-beta.vm</id>
+didier-stevens-beta#<version>0.0.0.20240226</version>
+didier-stevens-suite#<category>'Documents'
+didier-stevens-suite#<description>Tools collection by Didier Stevens</description>
+didier-stevens-suite#<id>didier-stevens-suite.vm</id>
+didier-stevens-suite#<version>0.0.0.20240226</version>
+die#<category>'File Information'
+die#<description>Detect It Easy, or abbreviated "DIE" is a program for determining types of files.</description>
+die#<id>die.vm</id>
+die#<toolName>'die'
+die#<version>3.09</version>
+dll-to-exe#<category>'PE'
+dll-to-exe#<description>Converts a DLL into a ready-to-use EXE</description>
+dll-to-exe#<id>dll-to-exe.vm</id>
+dll-to-exe#<toolName>'dll_to_exe'
+dll-to-exe#<version>1.1</version>
+dnlib#<category>'dotNet'
+dnlib#<description>.NET module/assembly reader/writer library</description>
+dnlib#<id>dnlib.vm</id>
+dnlib#<toolName>'dnlib'
+dnlib#<version>4.0.0</version>
+dnspyex#<category>'dotNet'
+dnspyex#<description>dnSpyEx is a unofficial continuation of the dnSpy project which is a debugger and .NET assembly editor. You can use it to edit and debug assemblies even if you don't have any source code available.</description>
+dnspyex#<id>dnspyex.vm</id>
+dnspyex#<toolName>'dnSpy'
+dnspyex#<version>6.5.0.20240411</version>
+dokan#<category>'Utilities'
+dokan#<description>Dokan simplifies the creation of custom file systems on Windows without the complexity of developing kernel-level drivers, offering an accessible solution for file system development, similar to FUSE on Linux.</description>
+dokan#<id>dokan.vm</id>
+dokan#<toolName>'Dokan'
+dokan#<version>2.1.0</version>
+dotdumper#<category>'dotNet'
+dotdumper#<description>An automatic unpacker and logger for DotNet Framework targeting files</description>
+dotdumper#<id>dotdumper.vm</id>
+dotdumper#<toolName>'DotDumper'
+dotdumper#<version>1.1.0.20240411</version>
+dotnet-6#<description>Metapackage for .NET6 to ensure all packages use the same version.</description>
+dotnet-6#<id>dotnet-6.vm</id>
+dotnet-6#<version>0.0.0.20240507</version>
+dotnettojscript#<category>'Payload Development'
+dotnettojscript#<description>A tool to generate a JScript which bootstraps an arbitrary .NET Assembly and class.</description>
+dotnettojscript#<id>dotnettojscript.vm</id>
+dotnettojscript#<toolName>'DotNetToJScript'
+dotnettojscript#<version>0.0.0.20240412</version>
+dumpert#<category>'Credential Access'
+dumpert#<description>This tool demonstrates the use of direct System Calls and API unhooking and combines these techniques in a proof of concept code which can be used to create a LSASS memory dump using Cobalt Strike.</description>
+dumpert#<id>dumpert.vm</id>
+dumpert#<toolName>'Dumpert'
+dumpert#<version>0.0.0.20240412</version>
+egress-assess#<category>'Reconnaissance'
+egress-assess#<description>Egress-Assess is a tool used to test egress data detection capabilities.</description>
+egress-assess#<id>egress-assess.vm</id>
+egress-assess#<toolName>'Egress-Assess'
+egress-assess#<version>0.0.0.20240412</version>
+event-log-explorer#<category>'Forensic'
+event-log-explorer#<description>Software solution for viewing, analyzing and monitoring events recorded in Microsoft Windows event logs.</description>
+event-log-explorer#<id>event-log-explorer.vm</id>
+event-log-explorer#<toolName>'Event Log Explorer'
+event-log-explorer#<version>5.5.0.20240321</version>
+evilclippy#<category>'Payload Development'
+evilclippy#<description>A cross-platform assistant for creating malicious MS Office documents. Can hide VBA macros, stomp VBA code (via P-Code) and confuse macro analysis tools.</description>
+evilclippy#<id>evilclippy.vm</id>
+evilclippy#<toolName>'EvilClippy'
+evilclippy#<version>1.3.0.20240412</version>
+evtxecmd#<category>'Forensic'
+evtxecmd#<description>Event log (evtx) parser with standardized CSV, XML, and json output! Custom maps, locked file support, and more!</description>
+evtxecmd#<id>evtxecmd.vm</id>
+evtxecmd#<toolName>'EvtxECmd'
+evtxecmd#<version>1.5.0.20240411</version>
+exeinfope#<category>'File Information'
+exeinfope#<description>Displays metadata for a variety of file types and identifies many executable packers</description>
+exeinfope#<id>exeinfope.vm</id>
+exeinfope#<toolName>'exeinfope'
+exeinfope#<version>0.0.7.20240411</version>
+exiftool#<category>'File Information'
+exiftool#<description>A tool for reeding and writing file metadata</description>
+exiftool#<id>exiftool.vm</id>
+exiftool#<toolName>'exiftool'
+exiftool#<version>12.85.0</version>
+explorersuite#<category>'PE'
+explorersuite#<description>A suite of tools including CFF Explorer and a process viewer.</description>
+explorersuite#<id>explorersuite.vm</id>
+explorersuite#<version>0.0.0.20230925</version>
+extreme_dumper#<category>'dotNet'
+extreme_dumper#<description>.NET Assembly Dumper from memory of processes.</description>
+extreme_dumper#<id>extreme_dumper.vm</id>
+extreme_dumper#<toolName>'ExtremeDumper'
+extreme_dumper#<version>4.0.0.20240603</version>
+ezviewer#<category>'Documents'
+ezviewer#<description>Standalone, zero dependency viewer for .doc, .docx, .xls, .xlsx, .txt, .log, .rtf, .otd, .htm, .html, .mht, .csv, and .pdf. Any non-supported files are shown in a hex editor (with data interpreter!)</description>
+ezviewer#<id>ezviewer.vm</id>
+ezviewer#<toolName>'EZViewer'
+ezviewer#<version>2.0.0.20240411</version>
+fakenet-ng#<category>'Networking'
+fakenet-ng#<description>FakeNet-NG is a dynamic network analysis tool.</description>
+fakenet-ng#<id>fakenet-ng.vm</id>
+fakenet-ng#<toolName>'fakenet'
+fakenet-ng#<version>3.2.0.20240425</version>
+fiddler#<category>'Networking'
+fiddler#<description>Intercepts, decrypts, and analyzes HTTPS traffic</description>
+fiddler#<id>fiddler.vm</id>
+fiddler#<toolName>'fiddler'
+fiddler#<version>5.0.20243</version>
+file#<category>'File Information'
+file#<description>A Windows port of the Linux `file` utility for checking header magics</description>
+file#<id>file.vm</id>
+file#<toolName>'file'
+file#<version>0.0.0.20240411</version>
+floss#<category>'File Information'
+floss#<description>FLOSS uses advanced static analysis techniques to automatically deobfuscate strings from malware binaries. You can use it just like strings.exe to enhance basic static analysis of unknown binaries.</description>
+floss#<id>floss.vm</id>
+floss#<toolName>'FLOSS'
+floss#<version>3.1.0</version>
+ftk-imager#<category>'Forensic'
+ftk-imager#<description>The tool provides full disk imaging capabilities, mount images, preview data from forensic images, and seamlessly export files in common forensic formats, with an option for RAM capture.</description>
+ftk-imager#<id>ftk-imager.vm</id>
+ftk-imager#<toolName>'FTK Imager'
+ftk-imager#<version>4.7.1.20231207</version>
+fuzzdb#<category>'Wordlists'
+fuzzdb#<description>FuzzDB is the most comprehensive open dictionary of fault injection patterns, predictable resource locations, and regex for matching server responses.</description>
+fuzzdb#<id>fuzzdb.vm</id>
+fuzzdb#<toolName>'FuzzDB'
+fuzzdb#<version>0.0.0.20240412</version>
+gadgettojscript#<category>'Payload Development'
+gadgettojscript#<description>A tool for generating .NET serialized gadgets that can trigger .NET assembly load/execution when deserialized using BinaryFormatter from JS/VBS/VBA scripts.</description>
+gadgettojscript#<id>gadgettojscript.vm</id>
+gadgettojscript#<toolName>'GadgetToJScript'
+gadgettojscript#<version>2.0.0.20240412</version>
+garbageman#<category>'dotNet'
+garbageman#<description>A set of tools designed for .NET heap analysis.</description>
+garbageman#<id>garbageman.vm</id>
+garbageman#<toolName>'GarbageMan'
+garbageman#<version>0.2.4.20240411</version>
+getlapspasswords#<category>'Credential Access'
+getlapspasswords#<description>PowerShell function to pull the local admin passwords from LDAP, stored there by LAPS.</description>
+getlapspasswords#<id>getlapspasswords.vm</id>
+getlapspasswords#<toolName>'Get-LAPSPasswords'
+getlapspasswords#<version>0.0.0.20240125</version>
+ghidra#<category>'Disassemblers'
+ghidra#<description>A software reverse engineering (SRE) suite of tools developed by NSA's Research Directorate in support of the Cybersecurity mission.</description>
+ghidra#<id>ghidra.vm</id>
+ghidra#<toolName>'ghidra'
+ghidra#<version>11.0.3</version>
+gobuster#<category>'Reconnaissance'
+gobuster#<description>Directory/file and DNS busting tool written in Go</description>
+gobuster#<id>gobuster.vm</id>
+gobuster#<toolName>'GoBuster'
+gobuster#<version>3.6.0</version>
+googlechrome#<description>Chrome is a popular web browser.</description>
+googlechrome#<id>googlechrome.vm</id>
+googlechrome#<version>0.0.0.20240425</version>
+goresym#<category>'File Information'
+goresym#<description>Go symbol recovery tool</description>
+goresym#<id>goresym.vm</id>
+goresym#<toolName>'GoReSym'
+goresym#<version>2.7.4</version>
+gowitness#<category>'Reconnaissance'
+gowitness#<description>Website screenshot utility written in Golang, that uses Chrome Headless to generate screenshots of web interfaces using the command line, with a handy report viewer to process results.</description>
+gowitness#<id>gowitness.vm</id>
+gowitness#<toolName>'GoWitness'
+gowitness#<version>2.5.1.20240112</version>
+group3r#<category>'Reconnaissance'
+group3r#<description>Group3r is a tool for pentesters and red teamers to rapidly enumerate relevant settings in AD Group Policy, and to identify exploitable misconfigurations.</description>
+group3r#<id>group3r.vm</id>
+group3r#<toolName>'Group3r'
+group3r#<version>1.0.59</version>
+hashcat#<category>'Credential Access'
+hashcat#<description>Hashcat is a fast password recovery utility.</description>
+hashcat#<id>hashcat.vm</id>
+hashcat#<toolName>'hashcat'
+hashcat#<version>6.2.6.20240410</version>
+hasher#<category>'File Information'
+hasher#<description>Hash all the things</description>
+hasher#<id>hasher.vm</id>
+hasher#<toolName>'Hasher'
+hasher#<version>2.0.0.20240411</version>
+hashmyfiles#<category>'File Information'
+hashmyfiles#<description>HashMyFiles is small utility that allows you to calculate the MD5 and SHA1 hashes of one or more files in your system. You can easily copy the MD5/SHA1 hashes list into the clipboard, or save them into text/html/xml file.</description>
+hashmyfiles#<id>hashmyfiles.vm</id>
+hashmyfiles#<toolName>'hashmyfiles'
+hashmyfiles#<version>0.0.0.20240411</version>
+hayabusa#<category>'Forensic'
+hayabusa#<description>Windows event log fast forensics timeline generator and threat hunting tool</description>
+hayabusa#<id>hayabusa.vm</id>
+hayabusa#<toolName>'hayabusa'
+hayabusa#<version>2.15.0</version>
+hollowshunter#<category>'Memory'
+hollowshunter#<description>Scans all running processes. Recognizes and dumps a variety of potentially malicious implants (replaced/implanted PEs, shellcodes, hooks, in-memory patches).</description>
+hollowshunter#<id>hollowshunter.vm</id>
+hollowshunter#<toolName>'hollows_hunter'
+hollowshunter#<version>0.3.9.20240411</version>
+hxd#<category>'Hex Editors'
+hxd#<description>Freeware hex editor</description>
+hxd#<id>hxd.vm</id>
+hxd#<toolName>'HxD'
+hxd#<version>2.5.0.20230925</version>
+idafree#<category>'Disassemblers'
+idafree#<description>Free version of IDA, a powerful Interactive DisAssembler and debugger</description>
+idafree#<id>idafree.vm</id>
+idafree#<toolName>'idafree'
+idafree#<version>8.4.0.20240528</version>
+ida.plugin.capa#<description>capa explorer is an IDAPython plugin that integrates capa with IDA Pro.</description>
+ida.plugin.capa#<id>ida.plugin.capa.vm</id>
+ida.plugin.capa#<version>7.0.1.20240425</version>
+ida.plugin.comida#<description>IDA Plugin that help analyzing modules using COM.</description>
+ida.plugin.comida#<id>ida.plugin.comida.vm</id>
+ida.plugin.comida#<version>0.0.0.20240507</version>
+ida.plugin.dereferencing#<description>IDA Pro plugin that implements new registers and stack views.</description>
+ida.plugin.dereferencing#<id>ida.plugin.dereferencing.vm</id>
+ida.plugin.dereferencing#<version>0.0.0.20240430</version>
+ida.plugin.diaphora#<description>Diaphora is a program diffing IDA plugin.</description>
+ida.plugin.diaphora#<id>ida.plugin.diaphora.vm</id>
+ida.plugin.diaphora#<version>3.2.1</version>
+ida.plugin.flare#<description>IDA Pro plugins used by the FLARE team.</description>
+ida.plugin.flare#<id>ida.plugin.flare.vm</id>
+ida.plugin.flare#<version>0.0.0.20240513</version>
+ida.plugin.hashdb#<description>Malware string hash lookup plugin for IDA Pro</description>
+ida.plugin.hashdb#<id>ida.plugin.hashdb.vm</id>
+ida.plugin.hashdb#<version>1.9.0</version>
+ida.plugin.ifl#<description>Interactive Functions List IDA Pro plugin.</description>
+ida.plugin.ifl#<id>ida.plugin.ifl.vm</id>
+ida.plugin.ifl#<version>1.4.4</version>
+ida.plugin.lighthouse#<description>A powerful coverage explorer.</description>
+ida.plugin.lighthouse#<id>ida.plugin.lighthouse.vm</id>
+ida.plugin.lighthouse#<version>0.0.0.20240507</version>
+ida.plugin.sigmaker#<description>Signature Maker Plugin for IDA Pro 8.3.</description>
+ida.plugin.sigmaker#<id>ida.plugin.sigmaker.vm</id>
+ida.plugin.sigmaker#<version>1.0.2</version>
+idr#<category>'Delphi'
+idr#<description>Interactive Delphi Reconstructor</description>
+idr#<id>idr.vm</id>
+idr#<toolName>'idr'
+idr#<version>0.0.0.20230627</version>
+ifpstools#<category>'InnoSetup'
+ifpstools#<description>IFPSTools.NET: tools for working with RemObject PascalScript compiled bytecode files</description>
+ifpstools#<id>ifpstools.vm</id>
+ifpstools#<toolName>'ifpsdasm'
+ifpstools#<version>2.0.2.20240411</version>
+ilspy#<category>'dotNet'
+ilspy#<description>The open-source .NET assembly browser and decompiler.</description>
+ilspy#<id>ilspy.vm</id>
+ilspy#<toolName>'ILSpy'
+ilspy#<version>8.2.0</version>
+imhex#<category>'Hex Editors'
+imhex#<description>A Hex Editor for Reverse Engineers, Programmers and people who value their retinas when working at 3 AM.</description>
+imhex#<id>imhex.vm</id>
+imhex#<toolName>'ImHex'
+imhex#<version>1.33.2</version>
+innoextract#<category>'InnoSetup'
+innoextract#<description>A tool to extract Inno Setup installers.</description>
+innoextract#<id>innoextract.vm</id>
+innoextract#<toolName>'innoextract'
+innoextract#<version>1.9.0.20240411</version>
+innounp#<category>'InnoSetup'
+innounp#<description>Unpacker for Inno Setup installers.</description>
+innounp#<id>innounp.vm</id>
+innounp#<toolName>'innounp'
+innounp#<version>0.50.0.20230710</version>
+installer#<description>Generic installer for custom virtual machines.</description>
+installer#<id>installer.vm</id>
+installer#<version>0.0.0.20240402</version>
+internal-monologue#<category>'Credential Access'
+internal-monologue#<description>Internal Monologue Attack: Retrieving NTLM Hashes without Touching LSASS</description>
+internal-monologue#<id>internal-monologue.vm</id>
+internal-monologue#<toolName>'Internal-Monologue'
+internal-monologue#<version>0.0.0.20240412</version>
+inveigh#<category>'Credential Access'
+inveigh#<description>Inveigh is a cross-platform .NET IPv4/IPv6 machine-in-the-middle tool for penetration testers.</description>
+inveigh#<id>inveigh.vm</id>
+inveigh#<toolName>'Inveigh'
+inveigh#<version>2.0.10.20240411</version>
+invokedosfuscation#<category>'Payload Development'
+invokedosfuscation#<description>Invoke-DOSfuscation is a PowerShell v2.0+ compatible cmd.exe command obfuscation framework.</description>
+invokedosfuscation#<id>invokedosfuscation.vm</id>
+invokedosfuscation#<toolName>'Invoke-DOSfuscation'
+invokedosfuscation#<version>1.0.0.20240412</version>
+invokeobfuscation#<category>'Payload Development'
+invokeobfuscation#<description>Invoke-Obfuscation is a PowerShell v2.0+ compatible PowerShell command and script obfuscator.</description>
+invokeobfuscation#<id>invokeobfuscation.vm</id>
+invokeobfuscation#<toolName>'Invoke-Obfuscation'
+invokeobfuscation#<version>1.8.2.20240412</version>
+isd#<category>'InnoSetup'
+isd#<description>Inno Setup Decompiler</description>
+isd#<id>isd.vm</id>
+isd#<toolName>'Inno Setup Decompiler'
+isd#<version>1.5.0.20240217</version>
+jlecmd#<category>'Forensic'
+jlecmd#<description>Jump List parser</description>
+jlecmd#<id>jlecmd.vm</id>
+jlecmd#<toolName>'JLECmd'
+jlecmd#<version>1.5.0.20240411</version>
+js-deobfuscator#<category>'Javascript'
+js-deobfuscator#<description>Deobfuscator to remove common JS obfuscation techniques.</description>
+js-deobfuscator#<id>js-deobfuscator.vm</id>
+js-deobfuscator#<toolName>'js-deobfuscator'
+js-deobfuscator#<version>0.0.0.20240516</version>
+juicypotato#<category>'Privilege Escalation'
+juicypotato#<description>Local Privilege Escalation tool that abuses the SeImpersonatePrivilege to go from a Windows Service Account to NT AUTHORITY\SYSTEM</description>
+juicypotato#<id>juicypotato.vm</id>
+juicypotato#<toolName>'JuicyPotato'
+juicypotato#<version>0.1</version>
+jumplist_explorer#<category>'Forensic'
+jumplist_explorer#<description>GUI based Jump List viewer</description>
+jumplist_explorer#<id>jumplist_explorer.vm</id>
+jumplist_explorer#<toolName>'JumpListExplorer'
+jumplist_explorer#<version>2.0.0.20240411</version>
+keethief#<category>'Credential Access'
+keethief#<description>Allows for the extraction of KeePass 2.X key material from memory, as well as the backdooring and enumeration of the KeePass trigger system.</description>
+keethief#<id>keethief.vm</id>
+keethief#<toolName>'KeeThief'
+keethief#<version>0.0.0.20240412</version>
+kerbrute#<category>'Credential Access'
+kerbrute#<description>A tool to quickly bruteforce and enumerate valid Active Directory accounts through Kerberos Pre-Authentication</description>
+kerbrute#<id>kerbrute.vm</id>
+kerbrute#<toolName>'Kerbrute'
+kerbrute#<version>1.0.3</version>
+kernel-ost-viewer#<category>'Forensic'
+kernel-ost-viewer#<description>Facilitates efficient OST file recovery with features such as advanced message search, snapshot management and diverse file format saving.</description>
+kernel-ost-viewer#<id>kernel-ost-viewer.vm</id>
+kernel-ost-viewer#<toolName>'Kernel OST Viewer'
+kernel-ost-viewer#<version>21.1</version>
+kernel-outlook-pst-viewer#<category>'Forensic'
+kernel-outlook-pst-viewer#<description>Standalone platform for opening PST files without installing MS Outlook.</description>
+kernel-outlook-pst-viewer#<id>kernel-outlook-pst-viewer.vm</id>
+kernel-outlook-pst-viewer#<toolName>'Kernel Outlook PST Viewer'
+kernel-outlook-pst-viewer#<version>20.3</version>
+ldapnomnom#<category>'Reconnaissance'
+ldapnomnom#<description>Anonymously bruteforce Active Directory usernames from Domain Controllers by abusing LDAP Ping requests (cLDAP)</description>
+ldapnomnom#<id>ldapnomnom.vm</id>
+ldapnomnom#<toolName>'LDAPNomNom'
+ldapnomnom#<version>1.2.0</version>
+lecmd#<category>'Forensic'
+lecmd#<description>Parse lnk files</description>
+lecmd#<id>lecmd.vm</id>
+lecmd#<toolName>'LECmd'
+lecmd#<version>1.5.0.20240411</version>
+libraries.python3#<description>Metapackage to install common Python libraries</description>
+libraries.python3#<id>libraries.python3.vm</id>
+libraries.python3#<version>0.0.0.20240425</version>
+logfileparser#<category>'Forensic'
+logfileparser#<description>Decode and dump lots of transaction information from the $LogFile on NTFS.</description>
+logfileparser#<id>logfileparser.vm</id>
+logfileparser#<toolName>'LogFileParser64'
+logfileparser#<version>2.0.0.20240411</version>
+magika#<category>'File Information'
+magika#<description>Magika is an AI powered file type detection tool that uses deep learning to provide accurate detection.</description>
+magika#<id>magika.vm</id>
+magika#<toolName>'magika'
+magika#<version>0.5.1</version>
+mailsniper#<category>'Credential Access'
+mailsniper#<description>MailSniper is a penetration testing tool for searching through email in a Microsoft Exchange environment for specific terms and performing password spraying.</description>
+mailsniper#<id>mailsniper.vm</id>
+mailsniper#<toolName>'MailSniper'
+mailsniper#<version>0.0.0.20230712</version>
+malware-jail#<category>'Javascript'
+malware-jail#<description>Sandbox for semi-automatic Javascript malware analysis, deobfuscation and payload extraction.</description>
+malware-jail#<id>malware-jail.vm</id>
+malware-jail#<toolName>'malware-jail'
+malware-jail#<version>0.0.0.20240419</version>
+map#<category>'Utilities'
+map#<description>Handful of small utility type applications useful for analyzing malicious code.</description>
+map#<id>map.vm</id>
+map#<toolName>'Malcode Analyst Pack'
+map#<version>0.0.0.20240416</version>
+memprocfs#<category>'Forensic'
+memprocfs#<description>MemProcFS is an easy and convenient way of viewing physical memory as files in a virtual file system.</description>
+memprocfs#<id>memprocfs.vm</id>
+memprocfs#<toolName>'MemProcFS'
+memprocfs#<version>5.9.14</version>
+merlin#<category>'Command & Control'
+merlin#<description>Merlin is a cross-platform post-exploitation Command and Control server and agent written in Go.</description>
+merlin#<id>merlin.vm</id>
+merlin#<toolName>'Merlin'
+merlin#<version>2.1.3</version>
+metasploit#<category>'Command & Control'
+metasploit#<description>A computer security project that provides information about security vulnerabilities, aids in penetration testing, and IDS signature development.</description>
+metasploit#<id>metasploit.vm</id>
+metasploit#<toolName>'Metasploit'
+metasploit#<version>6.3.30.20230811</version>
+mfasweep#<category>'Reconnaissance'
+mfasweep#<description>MFASweep is a PowerShell script that attempts to log in to various Microsoft services using a provided set of credentials and will attempt to identify if MFA is enabled.</description>
+mfasweep#<id>mfasweep.vm</id>
+mfasweep#<toolName>'MFASweep'
+mfasweep#<version>0.0.0.20230710</version>
+mftecmd#<category>'Forensic'
+mftecmd#<description>$MFT, $Boot, $J, $SDS, $I30, and $LogFile (coming soon) parser. Handles locked files</description>
+mftecmd#<id>mftecmd.vm</id>
+mftecmd#<toolName>'MFTECmd'
+mftecmd#<version>1.2.2.20240411</version>
+mft_explorer#<category>'Forensic'
+mft_explorer#<description>Graphical $MFT viewer</description>
+mft_explorer#<id>mft_explorer.vm</id>
+mft_explorer#<toolName>'MFTExplorer'
+mft_explorer#<version>2.0.0.20240411</version>
+microburst#<category>'Exploitation'
+microburst#<description>MicroBurst includes functions and scripts that support Azure Services discovery, weak configuration auditing, and post exploitation actions such as credential dumping.</description>
+microburst#<id>microburst.vm</id>
+microburst#<toolName>'MicroBurst'
+microburst#<version>0.0.0.20240412</version>
+mimikatz#<category>'Credential Access'
+mimikatz#<description>Mimikatz is an open-source application that allows users to view and save authentication credentials such as Kerberos tickets</description>
+mimikatz#<id>mimikatz.vm</id>
+mimikatz#<version>2.2.0</version>
+minidump#<category>'Credential Access'
+minidump#<description>Alternative to procdump written in C# (perfect for execute-assembly) and C.</description>
+minidump#<id>minidump.vm</id>
+minidump#<toolName>'MiniDump'
+minidump#<version>0.0.0.20230711</version>
+nanodump#<category>'Credential Access'
+nanodump#<description>A Beacon Object File that creates a minidump of the LSASS process.</description>
+nanodump#<id>nanodump.vm</id>
+nanodump#<toolName>'NanoDump'
+nanodump#<version>0.0.0.20240412</version>
+nasm#<category>'Productivity Tools'
+nasm#<description>Netwide Assembler</description>
+nasm#<id>nasm.vm</id>
+nasm#<toolName>'nasm'
+nasm#<version>2.16.3</version>
+netcat#<category>'Networking'
+netcat#<description>Netcat is a networking utility for reading from and writing to network connections using TCP or UDP.</description>
+netcat#<id>netcat.vm</id>
+netcat#<toolName>'nc'
+netcat#<version>1.12.0</version>
+netgpppassword#<category>'Reconnaissance'
+netgpppassword#<description>.NET/C# implementation of Get-GPPPassword. Retrieves the plaintext password and other information for accounts pushed through Group Policy Preferences.</description>
+netgpppassword#<id>netgpppassword.vm</id>
+netgpppassword#<toolName>'Net-GPPPassword'
+netgpppassword#<version>1.0</version>
+net-reactor-slayer#<category>'dotNet'
+net-reactor-slayer#<description>NETReactorSlayer is an open source (GPLv3) deobfuscator and unpacker for Eziriz .NET Reactor.</description>
+net-reactor-slayer#<id>net-reactor-slayer.vm</id>
+net-reactor-slayer#<toolName>'NETReactorSlayer'
+net-reactor-slayer#<version>6.4.0.20230621</version>
+networkminer#<category>'Networking'
+networkminer#<description>NetworkMiner is an open source Network Forensic Analysis Tool for Windows, but also works in Linux or Mac OS X. NetworkMiner can be used as a passive network sniffer in order to detect operating systems, sessions, hostnames, open ports etc. without putting any traffic on the network. NetworkMiner can also parse PCAP files for off-line analysis and to reassemble transmitted files and certificates from PCAP files.</description>
+networkminer#<id>networkminer.vm</id>
+networkminer#<toolName>'NetworkMiner'
+networkminer#<version>2.9.0</version>
+nmap#<category>'Networking'
+nmap#<description>Port scanning utility and nc replacement with extended features</description>
+nmap#<id>nmap.vm</id>
+nmap#<toolName>'nmap'
+nmap#<version>7.93.20230418.20240102</version>
+nodejs#<description>Metapackage for Node.js to ensure all packages use the same Node.js version.</description>
+nodejs#<id>nodejs.vm</id>
+nodejs#<version>0.0.0.20240516</version>
+notepadplusplus#<category>'Productivity Tools'
+notepadplusplus#<description>Wrapper for Notepad++</description>
+notepadplusplus#<id>notepadplusplus.vm</id>
+notepadplusplus#<toolName>'notepad++'
+notepadplusplus#<version>8.6.7</version>
+notepadpp.plugin.compare#<description>ComparePlus plugin for Notepad++</description>
+notepadpp.plugin.compare#<id>notepadpp.plugin.compare.vm</id>
+notepadpp.plugin.compare#<version>2.0.2</version>
+notepadpp.plugin.jstool#<description>A JavaScript (JSON) tool for Notepad++ (formerly JSMinNpp)</description>
+notepadpp.plugin.jstool#<id>notepadpp.plugin.jstool.vm</id>
+notepadpp.plugin.jstool#<version>1.2312.0</version>
+notepadpp.plugin.xmltools#<description>XML Tools plugin for Notepad++</description>
+notepadpp.plugin.xmltools#<id>notepadpp.plugin.xmltools.vm</id>
+notepadpp.plugin.xmltools#<version>3.1.1.20231219</version>
+npcap#<description>Npcap is an architecture for packet capture and network analysis for Windows operating systems, consisting of a software library and a network driver.</description>
+npcap#<id>npcap.vm</id>
+npcap#<version>1.79</version>
+obfuscator-io-deobfuscator#<category>'Javascript'
+obfuscator-io-deobfuscator#<description>A deobfuscator for scripts obfuscated by Obfuscator.io</description>
+obfuscator-io-deobfuscator#<id>obfuscator-io-deobfuscator.vm</id>
+obfuscator-io-deobfuscator#<toolName>'obfuscator-io-deobfuscator'
+obfuscator-io-deobfuscator#<version>0.0.0.20240514</version>
+offvis#<category>'Documents'
+offvis#<description>The Microsoft Office Visualization Tool (OffVis) is a tool from Microsoft that helps understanding the Microsoft Office binary file format in order to deconstruct .doc-, .xls- and .ppt-based targeted attacks.</description>
+offvis#<id>offvis.vm</id>
+offvis#<toolName>'OffVis'
+offvis#<version>1.0.0.20240411</version>
+ollydbg2.plugin.ollydumpex#<description>This plugin is process memory dumper for OllyDbg2 and Immunity Debugger. OllyDumpEx = OllyDump + PE Dumper - obsoleted + useful features</description>
+ollydbg2.plugin.ollydumpex#<id>ollydbg2.plugin.ollydumpex.vm</id>
+ollydbg2.plugin.ollydumpex#<version>1.84</version>
+ollydbg2.plugin.scyllahide#<description>ScyllaHide is an advanced open-source x64/x86 user mode Anti-Anti-Debug library.</description>
+ollydbg2.plugin.scyllahide#<id>ollydbg2.plugin.scyllahide.vm</id>
+ollydbg2.plugin.scyllahide#<version>1.4</version>
+ollydbg2#<category>'Debuggers'
+ollydbg2#<description>OllyDbg2 is a 32-bit assembler level analysing debugger for Windows. Emphasis on binary code analysis makes it particularly useful in cases where source is unavailable.</description>
+ollydbg2#<id>ollydbg2.vm</id>
+ollydbg2#<toolName>'OllyDbg2'
+ollydbg2#<version>2.01.0.20230418</version>
+ollydbg.plugin.ollydumpex#<description>This plugin is process memory dumper for OllyDbg and Immunity Debugger. OllyDumpEx = OllyDump + PE Dumper - obsoleted + useful features</description>
+ollydbg.plugin.ollydumpex#<id>ollydbg.plugin.ollydumpex.vm</id>
+ollydbg.plugin.ollydumpex#<version>1.84</version>
+ollydbg.plugin.scyllahide#<description>ScyllaHide is an advanced open-source x64/x86 user mode Anti-Anti-Debug library.</description>
+ollydbg.plugin.scyllahide#<id>ollydbg.plugin.scyllahide.vm</id>
+ollydbg.plugin.scyllahide#<version>1.4</version>
+ollydbg#<category>'Debuggers'
+ollydbg#<description>OllyDbg is a 32-bit assembler level analysing debugger for Windows. Emphasis on binary code analysis makes it particularly useful in cases where source is unavailable.</description>
+ollydbg#<id>ollydbg.vm</id>
+ollydbg#<toolName>'OllyDbg'
+ollydbg#<version>1.10.0.20230418</version>
+onenoteanalyzer#<category>'Documents'
+onenoteanalyzer#<description>A C# based tool for analyzing malicious OneNote documents.</description>
+onenoteanalyzer#<id>onenoteanalyzer.vm</id>
+onenoteanalyzer#<toolName>'OneNoteAnalyzer'
+onenoteanalyzer#<version>0.0.0.20240226</version>
+openjdk#<description>Metapackage for OpenJDK to ensure all packages use the same OpenJDK version.</description>
+openjdk#<id>openjdk.vm</id>
+openjdk#<version>0.0.0.20240202</version>
+openvpn#<category>'Networking'
+openvpn#<description>OpenVPN is a full-featured open source SSL VPN solution that accommodates a wide range of configurations.</description>
+openvpn#<id>openvpn.vm</id>
+openvpn#<toolName>'OpenVPN'
+openvpn#<version>2.6.10.20240527</version>
+outflank-c2-tool-collection#<category>'Reconnaissance'
+outflank-c2-tool-collection#<description>Contains a collection of tools which integrate with Cobalt Strike (and possibly other C2 frameworks) through BOF and reflective DLL loading techniques.</description>
+outflank-c2-tool-collection#<id>outflank-c2-tool-collection.vm</id>
+outflank-c2-tool-collection#<toolName>'Outflank C2 Tool Collection'
+outflank-c2-tool-collection#<version>0.0.0.20240412</version>
+payloadsallthethings#<category>'Wordlists'
+payloadsallthethings#<description>A list of useful payloads and bypasses for Web Application Security.</description>
+payloadsallthethings#<id>payloadsallthethings.vm</id>
+payloadsallthethings#<toolName>'PayloadsAllTheThings'
+payloadsallthethings#<version>0.0.0.20240412</version>
+pdbresym#<category>'Utilities'
+pdbresym#<description>Download PDBs</description>
+pdbresym#<id>pdbresym.vm</id>
+pdbresym#<toolName>'PDBReSym'
+pdbresym#<version>1.3.4</version>
+pdbs.pdbresym#<description>Download PDBs</description>
+pdbs.pdbresym#<id>pdbs.pdbresym.vm</id>
+pdbs.pdbresym#<version>0.0.0.20240417</version>
+pdfstreamdumper#<category>'Documents'
+pdfstreamdumper#<description>PDFStreamDumper is a free, open source tool to analyze malicious PDF documents.</description>
+pdfstreamdumper#<id>pdfstreamdumper.vm</id>
+pdfstreamdumper#<toolName>'PDFStreamDumper'
+pdfstreamdumper#<version>0.9.634.20240226</version>
+peanatomist#<category>'PE'
+peanatomist#<description>PE Analysis tool providing detailed information</description>
+peanatomist#<id>peanatomist.vm</id>
+peanatomist#<toolName>'PEAnatomist'
+peanatomist#<version>0.2.11931.20240411</version>
+pebear#<category>'PE'
+pebear#<description>Delivers fast and flexible "first view" for malware analysts</description>
+pebear#<id>pebear.vm</id>
+pebear#<toolName>'PE-bear'
+pebear#<version>0.6.7.20240208</version>
+pecmd#<category>'Forensic'
+pecmd#<description>Prefetch parser</description>
+pecmd#<id>pecmd.vm</id>
+pecmd#<toolName>'PECmd'
+pecmd#<version>1.5.0.20240411</version>
+peid#<category>'PE'
+peid#<description>PEiD detects most common packers, cryptors and compilers for PE files.</description>
+peid#<id>peid.vm</id>
+peid#<toolName>'peid'
+peid#<version>0.95.0.20240411</version>
+pesieve#<category>'Memory'
+pesieve#<description>pe-sieve recognizes and dumps variety of implants within the scanned process.</description>
+pesieve#<id>pesieve.vm</id>
+pesieve#<toolName>'pe-sieve'
+pesieve#<version>0.3.9.20240305</version>
+pestudio#<category>'PE'
+pestudio#<description>The goal of pestudio is to spot artifacts of executable files in order to ease and accelerate Malware Initial Assessment.</description>
+pestudio#<id>pestudio.vm</id>
+pestudio#<toolName>'pestudio'
+pestudio#<version>9.58.0.20240411</version>
+petitpotam#<category>'Exploitation'
+petitpotam#<description>PoC tool to coerce Windows hosts to authenticate to other machines via MS-EFSRPC EfsRpcOpenFileRaw or other functions</description>
+petitpotam#<id>petitpotam.vm</id>
+petitpotam#<toolName>'PetitPotam'
+petitpotam#<version>0.0.0.20240412</version>
+pkg-unpacker#<category>'Packers'
+pkg-unpacker#<description>Unpacker for pkg applications.</description>
+pkg-unpacker#<id>pkg-unpacker.vm</id>
+pkg-unpacker#<toolName>'pkg-unpacker'
+pkg-unpacker#<version>1.0.0.20240419</version>
+pma-labs#<category>'Utilities'
+pma-labs#<description>Binaries for the book Practical Malware Analysis</description>
+pma-labs#<id>pma-labs.vm</id>
+pma-labs#<toolName>'PMA-labs'
+pma-labs#<version>0.0.0.20240411</version>
+powercat#<category>'Networking'
+powercat#<description>PowerShell implementation of netcat functionality</description>
+powercat#<id>powercat.vm</id>
+powercat#<toolName>'PowerCat'
+powercat#<version>0.0.0.20240217</version>
+powermad#<category>'Exploitation'
+powermad#<description>Powermad includes a set of functions for exploiting ms-DS-MachineAccountQuota without attaching an actual system to AD</description>
+powermad#<id>powermad.vm</id>
+powermad#<toolName>'PowerMad'
+powermad#<version>0.0.0.20240412</version>
+powersploit#<category>'Exploitation'
+powersploit#<description>PowerSploit is a collection of Microsoft PowerShell modules that can be used to aid penetration testers during all phases of an assessment.</description>
+powersploit#<id>powersploit.vm</id>
+powersploit#<toolName>'PowerSploit'
+powersploit#<version>0.0.0.20240412</version>
+powerupsql#<category>'Exploitation'
+powerupsql#<description>PowerUpSQL includes functions that support SQL Server discovery, weak configuration auditing, privilege escalation on scale, and post exploitation actions such as OS command execution.</description>
+powerupsql#<id>powerupsql.vm</id>
+powerupsql#<toolName>'PowerUpSQL'
+powerupsql#<version>0.0.0.20240412</version>
+powerzure#<category>'Exploitation'
+powerzure#<description>PowerZure is a PowerShell project created to assess and exploit resources within Microsoft’s cloud platform, Azure.</description>
+powerzure#<id>powerzure.vm</id>
+powerzure#<toolName>'PowerZure'
+powerzure#<version>0.0.0.20240412</version>
+procdot#<category>'Utilities'
+procdot#<description>Creates visual graphs from procmon output</description>
+procdot#<id>procdot.vm</id>
+procdot#<toolName>'procdot'
+procdot#<version>1.22.57</version>
+processdump#<category>"Memory"
+processdump#<description>Process Dump is a Windows reverse-engineering command-line tool to dump malware memory components back to disk for analysis.</description>
+processdump#<id>processdump.vm</id>
+processdump#<toolName>"pd"
+processdump#<version>2.1.1.20240217</version>
+psnotify#<category>'dotNet'
+psnotify#<description>A POC tool to fight .NET anti-dumping tricks.</description>
+psnotify#<id>psnotify.vm</id>
+psnotify#<toolName>'psnotify'
+psnotify#<version>0.2.4.20231020</version>
+putty#<category>'Networking'
+putty#<description>PuTTY is a free implementation of SSH and Telnet for Windows and Unix platforms, along with an xterm terminal emulator.</description>
+putty#<id>putty.vm</id>
+putty#<toolName>'PuTTY'
+putty#<version>0.81.0</version>
+python3#<description>Metapackage for Python 3 to ensure all packages use the same Python version.</description>
+python3#<id>python3.vm</id>
+python3#<version>0.0.0.20231019</version>
+rbcmd#<category>'Forensic'
+rbcmd#<description>Recycle Bin artifact (INFO2/$I) parser</description>
+rbcmd#<id>rbcmd.vm</id>
+rbcmd#<toolName>'RBCmd'
+rbcmd#<version>1.5.0.20240411</version>
+recentfilecacheparser#<category>'Forensic'
+recentfilecacheparser#<description>RecentFileCache parser</description>
+recentfilecacheparser#<id>recentfilecacheparser.vm</id>
+recentfilecacheparser#<toolName>'RecentFileCacheParser'
+recentfilecacheparser#<version>1.5.0.20240411</version>
+recmd#<category>'Forensic'
+recmd#<description>Powerful command line Registry tool searching, multi-hive support, plugins, and more</description>
+recmd#<id>recmd.vm</id>
+recmd#<toolName>'RECmd'
+recmd#<version>2.0.0.20240507</version>
+regcool#<category>'Registry'
+regcool#<description>In addition to all the features that you can find in RegEdit and RegEdt32, RegCool adds many powerful features that allow you to work faster and more efficiently with registry related tasks</description>
+regcool#<id>regcool.vm</id>
+regcool#<toolName>'RegCool'
+regcool#<version>0.0.0.20240411</version>
+reg_export#<category>'Registry'
+reg_export#<description>A CLI that exports the raw content of a registry value to a file</description>
+reg_export#<id>reg_export.vm</id>
+reg_export#<toolName>'reg_export'
+reg_export#<version>1.3.0.20240217</version>
+registry_explorer#<category>'Registry'
+registry_explorer#<description>Registry viewer with searching, multi-hive support, plugins, and more. Handles locked files</description>
+registry_explorer#<id>registry_explorer.vm</id>
+registry_explorer#<toolName>'RegistryExplorer'
+registry_explorer#<version>2.0.0.20240411</version>
+regshot#<category>'Registry'
+regshot#<description>Regshot is a small, free and open-source registry compare utility that allows you to quickly take a snapshot of your registry and then compare it with a second one - done after doing system changes or installing a new software product.</description>
+regshot#<id>regshot.vm</id>
+regshot#<toolName>'Regshot-x64-Unicode'
+regshot#<version>1.9.1.20240411</version>
+resourcehacker#<category>'Utilities'
+resourcehacker#<description>Resource Hacker is a resource editor for 32bit and 64bit Windows applications.</description>
+resourcehacker#<id>resourcehacker.vm</id>
+resourcehacker#<toolName>'Resource Hacker'
+resourcehacker#<version>0.0.0.20240423</version>
+rla#<category>'Forensic'
+rla#<description>Replay transaction logs and update Registry hives so they are no longer dirty. Useful when tools do not know how to handle transaction logs</description>
+rla#<id>rla.vm</id>
+rla#<toolName>'RLA'
+rla#<version>2.0.0.20240507</version>
+routesixtysink#<category>'Reconnaissance'
+routesixtysink#<description>Route Sixty-Sink is an open source tool that enables defenders and security researchers alike to quickly identify vulnerabilities in any .NET assembly using automated source-to-sink analysis.</description>
+routesixtysink#<id>routesixtysink.vm</id>
+routesixtysink#<toolName>'RouteSixtySink'
+routesixtysink#<version>0.0.0.20240412</version>
+rpcview#<category>'Utilities'
+rpcview#<description>RpcView is an open-source tool to explore and decompile all RPC functionalities present on a Microsoft system</description>
+rpcview#<id>rpcview.vm</id>
+rpcview#<toolName>'RpcView'
+rpcview#<version>0.3.1.20240411</version>
+rubeus#<category>'Credential Access'
+rubeus#<description>Rubeus is a C# toolset for raw Kerberos interaction and abuses.</description>
+rubeus#<id>rubeus.vm</id>
+rubeus#<toolName>'Rubeus'
+rubeus#<version>2.3.1.20240412</version>
+rundotnetdll#<category>'dotNet'
+rundotnetdll#<description>A simple utility to list all methods of a given .NET Assembly and to invoke them.</description>
+rundotnetdll#<id>rundotnetdll.vm</id>
+rundotnetdll#<toolName>'RunDotNetDll'
+rundotnetdll#<version>2.2.0.20240411</version>
+safetykatz#<category>'Credential Access'
+safetykatz#<description>SafetyKatz is a combination of slightly modified version of @gentilkiwi's Mimikatz project and @subtee's .NET PE Loader.</description>
+safetykatz#<id>safetykatz.vm</id>
+safetykatz#<toolName>'SafetyKatz'
+safetykatz#<version>0.0.0.20240412</version>
+sbecmd#<category>'Forensic'
+sbecmd#<description>ShellBags Explorer, command line edition, for exporting shellbag data</description>
+sbecmd#<id>sbecmd.vm</id>
+sbecmd#<toolName>'SBECmd'
+sbecmd#<version>2.0.0.20240411</version>
+scdbg#<category>'Shellcode'
+scdbg#<description>scdbg is an emulation based shellcode API logger and debugger</description>
+scdbg#<id>scdbg.vm</id>
+scdbg#<toolName>'scdbg'
+scdbg#<version>0.0.0.20240411</version>
+sclauncher64#<category>'Shellcode'
+sclauncher64#<description>A small program to load 64-bit shellcode and allow for execution or debugging. Can also output PE files from shellcode.</description>
+sclauncher64#<id>sclauncher64.vm</id>
+sclauncher64#<toolName>'SCLauncher64'
+sclauncher64#<version>0.0.5</version>
+sclauncher#<category>'Shellcode'
+sclauncher#<description>A small program to load 32-bit shellcode and allow for execution or debugging. Can also output PE files from shellcode.</description>
+sclauncher#<id>sclauncher.vm</id>
+sclauncher#<toolName>'SCLauncher'
+sclauncher#<version>0.0.5</version>
+sdb_explorer#<category>'Forensic'
+sdb_explorer#<description>Shim database GUI</description>
+sdb_explorer#<id>sdb_explorer.vm</id>
+sdb_explorer#<toolName>'SDBExplorer'
+sdb_explorer#<version>2.0.0.20240411</version>
+seatbelt#<category>'Reconnaissance'
+seatbelt#<description>Seatbelt is a C# project that performs a number of security oriented host-survey "safety checks" relevant from both offensive and defensive security perspectives.</description>
+seatbelt#<id>seatbelt.vm</id>
+seatbelt#<toolName>'SeatBelt'
+seatbelt#<version>1.2.0.20240412</version>
+seclists#<category>'Wordlists'
+seclists#<description>SecLists is the security tester's companion. It's a collection of multiple types of lists used during security assessments, collected in one place.</description>
+seclists#<id>seclists.vm</id>
+seclists#<toolName>'SecLists'
+seclists#<version>2024.1.0.20240412</version>
+setdllcharacteristics#<category>'PE'
+setdllcharacteristics#<description>A CLI tool for manipulating ASLR, DEP, and check signature flags of PE files</description>
+setdllcharacteristics#<id>setdllcharacteristics.vm</id>
+setdllcharacteristics#<toolName>'setdllcharacteristics'
+setdllcharacteristics#<version>0.0.1.20240411</version>
+sfextract#<category>'dotNet'
+sfextract#<description>command-line utility to extract files from single file bundles in .NET</description>
+sfextract#<id>sfextract.vm</id>
+sfextract#<toolName>'sfextract'
+sfextract#<version>2.1.0</version>
+sharpcliphistory#<category>'Credential Access'
+sharpcliphistory#<description>SharpClipHistory is a .NET 4.5 application written in C# that can be used to read the contents of a user's clipboard history in Windows 10 starting from the 1809 Build.</description>
+sharpcliphistory#<id>sharpcliphistory.vm</id>
+sharpcliphistory#<toolName>'SharpClipHistory'
+sharpcliphistory#<version>1.0</version>
+sharpdpapi#<category>'Exploitation'
+sharpdpapi#<description>SharpDPAPI is a C# port of some DPAPI functionality from @gentilkiwi's Mimikatz project.</description>
+sharpdpapi#<id>sharpdpapi.vm</id>
+sharpdpapi#<toolName>'SharpDPAPI'
+sharpdpapi#<version>1.11.3.20240412</version>
+sharpdump#<category>'Credential Access'
+sharpdump#<description>SharpDump is a C# port of PowerSploit's Out-Minidump.ps1 functionality.</description>
+sharpdump#<id>sharpdump.vm</id>
+sharpdump#<toolName>'SharpDump'
+sharpdump#<version>0.0.0.20240412</version>
+sharpexec#<category>'Lateral Movement'
+sharpexec#<description>SharpExec is an offensive security C# tool designed to aid with lateral movement.</description>
+sharpexec#<id>sharpexec.vm</id>
+sharpexec#<toolName>'SharpExec'
+sharpexec#<version>0.0.0.20240412</version>
+sharphound#<category>'Reconnaissance'
+sharphound#<description>SharpHound is an Active Directory ingester tool for BloodHound.</description>
+sharphound#<id>sharphound.vm</id>
+sharphound#<toolName>'SharpHound'
+sharphound#<version>2.4.1</version>
+sharplaps#<category>'Credential Access'
+sharplaps#<description>This executable is made to be executed within Cobalt Strike session using execute-assembly. It will retrieve the LAPS password from the Active Directory.</description>
+sharplaps#<id>sharplaps.vm</id>
+sharplaps#<toolName>'SharpLAPS'
+sharplaps#<version>1.1</version>
+sharpsecdump#<category>'Credential Access'
+sharpsecdump#<description>.Net port of the remote SAM + LSA Secrets dumping functionality of impacket's secretsdump.py</description>
+sharpsecdump#<id>sharpsecdump.vm</id>
+sharpsecdump#<toolName>'SharpSecDump'
+sharpsecdump#<version>0.0.0.20240412</version>
+sharpup#<category>'Exploitation'
+sharpup#<description>SharpUp is a C# port of various PowerUp functionality for auditing potential privilege escalation paths.</description>
+sharpup#<id>sharpup.vm</id>
+sharpup#<toolName>'SharpUp'
+sharpup#<version>0.0.0.20240412</version>
+sharpview#<category>'Reconnaissance'
+sharpview#<description>.NET port of PowerView used for information gathering within Active Directory</description>
+sharpview#<id>sharpview.vm</id>
+sharpview#<toolName>'SharpView'
+sharpview#<version>0.0.0.20240412</version>
+sharpwmi#<category>'Reconnaissance'
+sharpwmi#<description>SharpWMI is a C# implementation of various WMI functionality.</description>
+sharpwmi#<id>sharpwmi.vm</id>
+sharpwmi#<toolName>'SharpWMI'
+sharpwmi#<version>0.0.0.20240412</version>
+shellbags_explorer#<category>'Forensic'
+shellbags_explorer#<description>GUI for browsing shellbags data. Handles locked files</description>
+shellbags_explorer#<id>shellbags_explorer.vm</id>
+shellbags_explorer#<toolName>'ShellBagsExplorer'
+shellbags_explorer#<version>2.0.0.20240411</version>
+shellcode_launcher#<category>'Shellcode'
+shellcode_launcher#<description>Shellcode launcher utility</description>
+shellcode_launcher#<id>shellcode_launcher.vm</id>
+shellcode_launcher#<toolName>'shellcode_launcher'
+shellcode_launcher#<version>0.0.0.20240217</version>
+situational-awareness-bof#<category>'Reconnaissance'
+situational-awareness-bof#<description>Provides a set of basic situational awareness commands implemented in a Beacon Object File (BOF). This allows you to perform some checks on a host before you begin executing commands that may be more invasive.</description>
+situational-awareness-bof#<id>situational-awareness-bof.vm</id>
+situational-awareness-bof#<toolName>'Situational Awareness BOF'
+situational-awareness-bof#<version>0.0.0.20240412</version>
+sliver#<category>'Command & Control'
+sliver#<description>Sliver is an open source cross-platform adversary emulation/red team framework.</description>
+sliver#<id>sliver.vm</id>
+sliver#<toolName>'Sliver'
+sliver#<version>1.5.42</version>
+snaffler#<category>'Reconnaissance'
+snaffler#<description>Snaffler is a tool for enumerating accessible SMB shares in an Active Directory environment.</description>
+snaffler#<id>snaffler.vm</id>
+snaffler#<toolName>'Snaffler'
+snaffler#<version>1.0.150</version>
+spoolsample#<category>'Exploitation'
+spoolsample#<description>PoC tool to coerce Windows hosts authenticate to other machines via the MS-RPRN RPC interface.</description>
+spoolsample#<id>spoolsample.vm</id>
+spoolsample#<toolName>'SpoolSample'
+spoolsample#<version>0.0.0.20240412</version>
+sqlecmd#<category>'Forensic'
+sqlecmd#<description>Find and process SQLite files according to your needs with maps!</description>
+sqlecmd#<id>sqlecmd.vm</id>
+sqlecmd#<toolName>'SQLECmd'
+sqlecmd#<version>1.0.0.20240411</version>
+sqlitebrowser#<category>'Utilities'
+sqlitebrowser#<description>Open source tool to create, design, and edit database files compatible with SQLite.</description>
+sqlitebrowser#<id>sqlitebrowser.vm</id>
+sqlitebrowser#<toolName>'DB Browser for SQLite'
+sqlitebrowser#<version>3.12.2</version>
+sqlrecon#<category>'Exploitation'
+sqlrecon#<description>MSSQL toolkit for reconnaissance and post-exploitation</description>
+sqlrecon#<id>sqlrecon.vm</id>
+sqlrecon#<toolName>'SQLRecon'
+sqlrecon#<version>3.3</version>
+srumecmd#<category>'Forensic'
+srumecmd#<description>Process SRUDB.dat and (optionally) SOFTWARE hive for network, process, and energy info!</description>
+srumecmd#<id>srumecmd.vm</id>
+srumecmd#<toolName>'SrumECmd'
+srumecmd#<version>0.5.1.20240411</version>
+statistically-likely-usernames#<category>'Wordlists'
+statistically-likely-usernames#<description>This resource contains wordlists for creating statistically likely usernames for use in username-enumeration, simulated password-attacks and other security testing tasks.</description>
+statistically-likely-usernames#<id>statistically-likely-usernames.vm</id>
+statistically-likely-usernames#<toolName>'Statistically-Likely-Usernames'
+statistically-likely-usernames#<version>0.0.0.20240412</version>
+stracciatella#<category>'Payload Development'
+stracciatella#<description>Powershell runspace from within C# (aka SharpPick technique) with AMSI, ETW and Script Block Logging disabled.</description>
+stracciatella#<id>stracciatella.vm</id>
+stracciatella#<toolName>'Stracciatella'
+stracciatella#<version>0.7.0.20240412</version>
+streamdivert#<category>'Networking'
+streamdivert#<description>StreamDivert has the ability to relay all incoming SMB connections to port 445 to another server, or only relay specific incoming SMB connections from a specific set of source IP's to another server.</description>
+streamdivert#<id>streamdivert.vm</id>
+streamdivert#<toolName>'StreamDivert'
+streamdivert#<version>1.1.0.20240411</version>
+sumecmd#<category>'Forensic'
+sumecmd#<description>Process Microsoft User Access Logs found under "C:\Windows\System32\LogFiles\SUM"</description>
+sumecmd#<id>sumecmd.vm</id>
+sumecmd#<toolName>'SumECmd'
+sumecmd#<version>0.5.2.20240411</version>
+sysinternals#<category>'Utilities'
+sysinternals#<description>Sysinternals suite.</description>
+sysinternals#<id>sysinternals.vm</id>
+sysinternals#<toolName>'sysinternals'
+sysinternals#<version>0.0.0.20240306</version>
+systeminformer#<category>'Utilities'
+systeminformer#<description>A free, powerful, multi-purpose tool that helps you monitor system resources, debug software and detect malware.</description>
+systeminformer#<id>systeminformer.vm</id>
+systeminformer#<toolName>'SystemInformer'
+systeminformer#<version>3.0.7645</version>
+syswhispers2#<category>'Payload Development'
+syswhispers2#<description>SysWhispers helps with evasion by generating header/ASM files implants can use to make direct system calls.</description>
+syswhispers2#<id>syswhispers2.vm</id>
+syswhispers2#<toolName>'SysWhispers2'
+syswhispers2#<version>0.0.0.20240412</version>
+syswhispers3#<category>'Payload Development'
+syswhispers3#<description>SysWhispers helps with evasion by generating header/ASM files implants can use to make direct system calls.</description>
+syswhispers3#<id>syswhispers3.vm</id>
+syswhispers3#<toolName>'SysWhispers3'
+syswhispers3#<version>0.0.0.20240412</version>
+teamfiltration#<category>'Exploitation'
+teamfiltration#<description>TeamFiltration is a cross-platform framework for enumerating, spraying, exfiltrating, and backdooring O365 AAD accounts.</description>
+teamfiltration#<id>teamfiltration.vm</id>
+teamfiltration#<toolName>'TeamFiltration'
+teamfiltration#<version>3.5.0.20240411</version>
+telnet#<category>'Networking'
+telnet#<description>A network protocol used to virtually access a computer and to provide a two-way, collaborative and text-based communication channel between two machines</description>
+telnet#<id>telnet.vm</id>
+telnet#<toolName>'telnet'
+telnet#<version>0.0.0.20230317</version>
+testdisk#<category>'Forensic'
+testdisk#<description>A robust data recovery tool, TestDisk, specializes in restoring lost partitions across diverse filesystems and facilitates file undeletion within supported filesystems.</description>
+testdisk#<id>testdisk.vm</id>
+testdisk#<toolName>'TestDisk'
+testdisk#<version>7.2.0.20240516</version>
+timeline_explorer#<category>'Forensic'
+timeline_explorer#<description>View CSV and Excel files, filter, group, sort, etc. with ease</description>
+timeline_explorer#<id>timeline_explorer.vm</id>
+timeline_explorer#<toolName>'TimelineExplorer'
+timeline_explorer#<version>2.0.0.20240507</version>
+tor-browser#<category>'Productivity Tools'
+tor-browser#<description>The Tor software protects you by bouncing your communications around a distributed network of relays run by volunteers all around the world.</description>
+tor-browser#<id>tor-browser.vm</id>
+tor-browser#<toolName>'Tor Browser'
+tor-browser#<version>13.0.15</version>
+total-registry#<category>'Registry'
+total-registry#<description>Replacement for the Windows built-in Regedit.exe tool with improved features.</description>
+total-registry#<id>total-registry.vm</id>
+total-registry#<toolName>'TotalReg'
+total-registry#<version>0.9.7.20240228</version>
+trustedsec-remote-ops-bof#<category>'Reconnaissance'
+trustedsec-remote-ops-bof#<description>Addition to Situational Awareness BOFs intended for single task Windows primitives such as creating a task, stopping a service, etc.</description>
+trustedsec-remote-ops-bof#<id>trustedsec-remote-ops-bof.vm</id>
+trustedsec-remote-ops-bof#<toolName>'Remote Operations BOF'
+trustedsec-remote-ops-bof#<version>0.0.0.20240531</version>
+unhook-bof#<category>'Payload Development'
+unhook-bof#<description>This is a Beacon Object File to refresh DLLs and remove their hooks. The code is from Cylance's Universal Unhooking research.</description>
+unhook-bof#<id>unhook-bof.vm</id>
+unhook-bof#<toolName>'Unhook BOF'
+unhook-bof#<version>0.0.0.20240412</version>
+uniextract2#<category>'Packers'
+uniextract2#<description>Universal Extractor 2 is an unofficial updated and extended version of the original UniExtract by Jared Breland.</description>
+uniextract2#<id>uniextract2.vm</id>
+uniextract2#<toolName>'UniExtract'
+uniextract2#<version>2.0.0.20240411</version>
+upx#<category>'Packers'
+upx#<description>UPX is a free, secure, portable, extendable, high-performance executable packer for several executable formats.</description>
+upx#<id>upx.vm</id>
+upx#<toolName>'upx'
+upx#<version>4.2.4</version>
+vbdec#<category>'Visual Basic'
+vbdec#<description>VBDec works as a VB6 disassembler, PCode debugger, structure viewer for all vb6 executables, and can generate IDA scripts to integrate structures and named function offsets.</description>
+vbdec#<id>vbdec.vm</id>
+vbdec#<toolName>'vbdec'
+vbdec#<version>1.0.917.20240217</version>
+vcbuildtools#<category>'Productivity Tools'
+vcbuildtools#<description>Metapackage that requires the dependencies below:
+vcbuildtools#<id>vcbuildtools.vm</id>
+vcbuildtools#<version>0.0.0.20240217</version>
+vcredist140#<description>Metapackage for Python 3 to ensure all packages use the same Python version.</description>
+vcredist140#<id>vcredist140.vm</id>
+vcredist140#<version>0.0.0.20231019</version>
+visualstudio#<category>'Productivity Tools'
+visualstudio#<description>IDE.</description>
+visualstudio#<id>visualstudio.vm</id>
+visualstudio#<toolName>'VisualStudio'
+visualstudio#<version>17.6.1.20240217</version>
+vnc-viewer#<category>'Utilities'
+vnc-viewer#<description>Tool for connecting to and interacting with VNC servers.</description>
+vnc-viewer#<id>vnc-viewer.vm</id>
+vnc-viewer#<toolName>'VNC-Viewer'
+vnc-viewer#<version>7.7.0</version>
+vscmount#<category>'Forensic'
+vscmount#<description>Mount all VSCs on a drive letter to a given mount point</description>
+vscmount#<id>vscmount.vm</id>
+vscmount#<toolName>'VSCMount'
+vscmount#<version>1.5.0.20240411</version>
+vscode#<category>'Productivity Tools'
+vscode#<description>VSCode is a modern, open-source code editor.</description>
+vscode#<id>vscode.vm</id>
+vscode#<toolName>'VSCode'
+vscode#<version>1.89.1</version>
+whisker#<category>'Exploitation'
+whisker#<description>Whisker is a C# tool for taking over Active Directory user and computer accounts by manipulating their msDS-KeyCredentialLink attribute, effectively adding "Shadow Credentials" to the target account.</description>
+whisker#<id>whisker.vm</id>
+whisker#<toolName>'Whisker'
+whisker#<version>0.0.0.20240412</version>
+windbg#<category>'Debuggers'
+windbg#<description>WinDbg is a debugger that can be used to analyze crash dumps, debug live user-mode and kernel-mode code, and examine CPU registers and memory.</description>
+windbg#<id>windbg.vm</id>
+windbg#<toolName>'WinDbg'
+windbg#<version>0.0.0</version>
+windows-terminal#<category>'Productivity Tools'
+windows-terminal#<description>Windows Terminal is a new, modern, feature-rich, productive terminal application for command-line users.</description>
+windows-terminal#<id>windows-terminal.vm</id>
+windows-terminal#<toolName>'Windows Terminal'
+windows-terminal#<version>1.19.10573.20240402</version>
+windump#<category>'Networking'
+windump#<description>Windows version of tcpdump, the command line network analyzer for UNIX</description>
+windump#<id>windump.vm</id>
+windump#<toolName>'WinDump'
+windump#<version>0.3</version>
+winscp#<category>'Utilities'
+winscp#<description>WinSCP is an open source free SFTP client, SCP client, FTPS client and FTP client for Windows. Its main function is file transfer between a local and a remote computer.</description>
+winscp#<id>winscp.vm</id>
+winscp#<toolName>'WinSCP'
+winscp#<version>6.3.3</version>
+wireshark#<category>'Networking'
+wireshark#<description>Wireshark lets you capture and interactively browse the traffic running on a computer network.</description>
+wireshark#<id>wireshark.vm</id>
+wireshark#<toolName>'Wireshark'
+wireshark#<version>4.2.5</version>
+wmimplant#<category>'Command & Control'
+wmimplant#<description>WMImplant is a PowerShell based tool that leverages WMI to both perform actions against targeted machines, but also as the C2 channel for issuing commands and receiving results.</description>
+wmimplant#<id>wmimplant.vm</id>
+wmimplant#<toolName>'WMImplant'
+wmimplant#<version>0.0.0.20240125</version>
+wxtcmd#<category>'Forensic'
+wxtcmd#<description>Windows 10 Timeline database parser</description>
+wxtcmd#<id>wxtcmd.vm</id>
+wxtcmd#<toolName>'WxTCmd'
+wxtcmd#<version>1.0.0.20240411</version>
+x64dbg.plugin.dbgchild#<description>DbgChild is an x64dbg plugin to automatically attach to spawned child processes.</description>
+x64dbg.plugin.dbgchild#<id>x64dbg.plugin.dbgchild.vm</id>
+x64dbg.plugin.dbgchild#<version>10</version>
+x64dbg.plugin.ollydumpex#<description>This plugin is process memory dumper for OllyDbg and Immunity Debugger. OllyDumpEx = OllyDump + PE Dumper - obsoleted + useful features</description>
+x64dbg.plugin.ollydumpex#<id>x64dbg.plugin.ollydumpex.vm</id>
+x64dbg.plugin.ollydumpex#<version>1.84</version>
+x64dbg.plugin.scyllahide#<description>ScyllaHide is an advanced open-source x64/x86 user mode Anti-Anti-Debug library.</description>
+x64dbg.plugin.scyllahide#<id>x64dbg.plugin.scyllahide.vm</id>
+x64dbg.plugin.scyllahide#<version>1.4</version>
+x64dbg.plugin.x64dbgpy#<description>Automating x64dbg using Python.</description>
+x64dbg.plugin.x64dbgpy#<id>x64dbg.plugin.x64dbgpy.vm</id>
+x64dbg.plugin.x64dbgpy#<version>1.0.59.20240124</version>
+x64dbg#<category>'Debuggers'
+x64dbg#<description>An open-source x64/x32 debugger for Windows.</description>
+x64dbg#<id>x64dbg.vm</id>
+x64dbg#<toolName>'x64dbg'
+x64dbg#<version>2024.04.11</version>
+yara#<category>'Forensic'
+yara#<description>The pattern matching swiss knife</description>
+yara#<id>yara.vm</id>
+yara#<toolName>$toolPath.Name -replace ([regex]::match($toolPath.Name, '(32|64)\.exe')), ''
+yara#<version>4.5.1</version>
