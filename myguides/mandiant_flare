@@ -1,4 +1,17 @@
+shell script to pull list of tools and their metadat fro mandiant flare VM
+===========================================================================
+$ git clone https://github.com/mandiant/VM-Packages.git git_flare_packages
+$ vi pull_mandiant_package_list.sh
+
+$ cat pull_mandiant_package_list.sh
+#!/bin/bash
+### script to pull list of mandiant flare packges from mandiant git rep
+git clone https://github.com/mandiant/VM-Packages.git ${HOME}/mandiant/git_flare_packages
+
+
 https://flare-on.com/
+cd 
+
 IDA Pro, capa, FLOSS, and CyberChef 
 finally working
 find . -type f -name chocolateyinstall.ps1 | xargs awk -F", " '/\$toolName =/ || /\$category =/{print FILENAME, $1, $2, $3, $4, $5, $6}' | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//'
