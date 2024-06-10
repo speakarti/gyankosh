@@ -56,6 +56,7 @@ sudo apt-get update
 sudo apt-get install -y kubeadm kubectl kubelet
 
 create a template of node instance
+$ sudo cloud-init clean
 $ sudo rm -rf  /var/lib/cloud/instances
 $ sudo truncate -s 0 /etc/machine-id
 $ sudo rm /var/lib/dbus/machine-id
