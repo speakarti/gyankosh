@@ -1,7 +1,13 @@
-enable ubuntu machine to run virtual machines, using kvm, aqemu-kvm
+Enable ubuntu machine to run virtual machines, using kvm, aqemu-kvm
 ===================================================================
-Achieved: created a VM (ubuntu 23.x desktop) on ubuntu 22.04, using ISO
+Achieved: 
+1. created a VM (ubuntu 23.x desktop) on ubuntu 22.04, using ISO. process involves manual GUI based steps
+
+In progress- create a VM (ubuntu 23.x desktop) on ubuntu 22.04, using an image (img or qcow)
+
 Next: create using cloud image, learn image customization using libraries like libvirt-daemon-system virtinst libvirt-clients bridge-utils
+Goal: create custom images using a base image
+
 reference: https://www.linuxtechi.com/how-to-install-kvm-on-ubuntu-22-04/
 reference : https://documentation.suse.com/sles/12-SP5/html/SLES-all/cha-libvirt-managing.html
 
@@ -79,7 +85,9 @@ $ ip addr show
     inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
        valid_lft forever preferred_lft forever
 
-6) Open Virtual Machine Manager - GUI tool (virt-manager), using shortcut in GUI or at command line 
+
+6) Create a base VM from an ISO image
+6a) Open Virtual Machine Manager - GUI tool (virt-manager), using shortcut in GUI or at command line 
 $ virt-manager
 
 - getting below error. Unable to connect to libvirt qemu:///system.
@@ -96,10 +104,10 @@ Traceback (most recent call last):
     raise libvirtError('virConnectOpenAuth() failed')
 libvirt.libvirtError: Failed to connect socket to '/var/run/libvirt/libvirt-sock': Permission denied
 
-6a) Restart server -> it fixed above issue and opening 'Virtual Machine Manager' gives conected system.
-7) create VM (ubuntu desktop 23.x) using ISO image downloaded from ubuntu portal)
+6b) Restart server -> it fixed above issue and opening 'Virtual Machine Manager' gives conected system.
+6c) create VM (ubuntu desktop 23.x) using ISO image downloaded from ubuntu portal)
 
-7a) Image gets stored as a qcow2 file
+7a) Images for VM created with virt-manager gets stored as a qcow2 file
 $ sudo ls -l /var/lib/libvirt/images/
 total 7445336
 drwx--x--x 2 root root        4096 May 19 02:41 pool
