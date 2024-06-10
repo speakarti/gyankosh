@@ -15,3 +15,33 @@ sudo apt install qemu-guest-agent
 sudo reboot -h now (service qemu-guest-agent gets started post reboot, this is required to get IP address on Proxmox, we can check status by sudo systemctl status qemu-guest-agent)
 
 note down IP address and connect from external ssh for better control (like mobaxterm with ssh keys already added in template through cloud-init). 
+
+setup ssh keys logs fot all hosts.
+
+setup static IP (as per above video) - i am skipping
+
+install containerd
+sudo apt install containerd (it will install runc and containerd)
+sudo systemctl status containerd
+
+sudo mkdir /etc/containerd
+containerd config default | sudo tee /etc/containerd/config.toml
+
+sudo vi /etc/containerd/config.toml
+search section runc.options and change SystemdCgroup = true
+
+disable swap, as k8s doesn work well
+use free to check (sudo cat /etc/fstab) 
+
+sudo vi /etc/sysctl.conf
+uncomment line 
+net.ipv4.ip_forward=1
+
+# to support bridging in cluster
+sudo vi /etc/modules-load.d/k8s.conf
+cat /etc/modules-load.d/k8s.conf
+br_netfilter
+
+reboot
+
+
