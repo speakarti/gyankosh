@@ -86,7 +86,7 @@ $ ip addr show
        valid_lft forever preferred_lft forever
 
 
-6) Create a base VM from an ISO image
+6) Create a base VM from an ISO image, using GUI tool (virt-manager)
 6a) Open Virtual Machine Manager - GUI tool (virt-manager), using shortcut in GUI or at command line 
 $ virt-manager
 
@@ -107,11 +107,17 @@ libvirt.libvirtError: Failed to connect socket to '/var/run/libvirt/libvirt-sock
 6b) Restart server -> it fixed above issue and opening 'Virtual Machine Manager' gives conected system.
 6c) create VM (ubuntu desktop 23.x) using ISO image downloaded from ubuntu portal)
 
-7a) Images for VM created with virt-manager gets stored as a qcow2 file
+6d) Images for VM created with virt-manager gets stored as a qcow2 file
 $ sudo ls -l /var/lib/libvirt/images/
 total 7445336
 drwx--x--x 2 root root        4096 May 19 02:41 pool
 -rw------- 1 root root 26847870976 May 26 19:30 ubuntu24.04.qcow2
+
+7) Create a base VM from an ISO image, using cli virt-install
+virt-install \
+--name kvmtest --memory 2048 --vcpus 2 \
+--cdrom /home/username/Downloads/rhel9.iso,bus=virtio \
+--os-variant=rhel9.0
 
 
 8) Most management tasks, such as starting or stopping a VM Guest, can either be done using the graphical application Virtual Machine Manager or on the command line using virsh
@@ -151,8 +157,7 @@ $ virsh autostart --disable ubuntu24.04 (Turn off automatic start)
 
 
 
-agupta@hl001:~$ virsh --help
-
+$ virsh --help
 virsh [options]... [<command_string>]
 virsh [options]... <command> [args...]
 
@@ -486,7 +491,7 @@ agupta@hl001:~$
 
 
 
-agupta@hl001:~$ virt-install --help
+$ virt-install --help
 usage: virt-install --name NAME --memory MB STORAGE INSTALL [options]
 
 Create a new virtual machine from specified install media.
@@ -672,7 +677,7 @@ Miscellaneous Options:
 
 Use '--option=?' or '--option help' to see available suboptions
 See man page for examples and full option syntax.
-agupta@hl001:~$ 
+$ 
 
 
 
