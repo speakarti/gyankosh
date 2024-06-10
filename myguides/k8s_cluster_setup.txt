@@ -1,1 +1,17 @@
+Create a Kubernetes Cluster using Proxmox Virtual Environment
+References: https://www.youtube.com/watch?v=U1VzcjCB_sY
+#######################################################
 
+
+clone VM ubuntu22.08
+850 k8s-controller - Full Clone - start at boot =yes, QEMU Guest Agent  = Enabled
+851-k8s-node - Full Clone
+
+start machines
+login using cloud-init credetials.
+
+sudo apt update && sudo apt upgarde -y
+sudo apt install qemu-guest-agent
+sudo reboot -h now (service qemu-guest-agent gets started post reboot, this is required to get IP address on Proxmox, we can check status by sudo systemctl status qemu-guest-agent)
+
+note down IP address and connect from external ssh for better control (like mobaxterm with ssh keys already added in template through cloud-init). 
