@@ -16,7 +16,7 @@ select this 900 VM (Proxmon GUI)-> go to Hardware Tab -> add cloudinit drive - >
 
 go to pve terminal / console
 ====================================
-download cloud image, .img file
+download cloud image, .img file (QCow2 UEFI/GPT Bootable disk image)
 root@pve: mkdir ubuntu_2204_cludimage
 root@pve: cd ubuntu_2204_cludimage
 root@pve:~/ubuntu_2204_cludimage# wget https://cloud-images.ubuntu.com/minimal/releases/jammy/release/ubuntu-22.04-minimal-cloudimg-amd64.img
