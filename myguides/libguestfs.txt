@@ -1,1 +1,40 @@
+VM management (Open source virtualization collaboration)
+https://gist.github.com/si458/98aa940837784e9ef9bff9e24a7a8bfd
+======================
+KVM, QEMU, libvirt, ibguestfs, 
+https://virt-tools.org/
+https://libguestfs.org/
+https://github.com/libguestfs/libguestfs
+https://www.mankier.com/package/guestfs-tools
+https://manpages.ubuntu.com/manpages/noble/man1/virt-customize.1.html
 
+virt-customize - Customize a virtual machine
+
+Use cases:
+create many VMs from a template, cloud image, unique machine-id, ssh keys, 
+
+
+manuall os installation / cloud-init / systemd-firstboot.service / libguestfs
+
+
+Install these tools
+==================
+sudo yum install libguestfs-tools      # Fedora/RHEL/CentOS
+sudo apt-get install libguestfs-tools  # Debian/Ubuntu
+guestfish --ro -i -a disk.img
+virt-inspector
+
+virt-manager - red hat not managing it, replaced with cockpit-machine (cockpit) using same libvirt
+
+sudo apt install cockpit
+and open <localhost>:9090 (doesn't display Virtual Machines tab)
+sudo apt install cockpit-machines ( it will install all libvirtd, libvirt-guests, virtlockd, virtlogd and related libaries to enavle kvm virtualization)
+
+
+qemu system-x86_64 boot.bin (to boot from an empty boot.bin having one 55 AA)
+
+
+virt-install -> virt-sysprep -> virt-sparsify -> xz
+
+see also: 
+guestfs, guestfish, virt-builder, virt-clone, virt-rescue, virt-resize, virt-sparsify, virt-sysprep, virsh, lvcreate(8), qemu-img, scrub, virt-edit, virt-sysprep, virt-resize, virt-spartsify
