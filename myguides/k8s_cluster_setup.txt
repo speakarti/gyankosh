@@ -1,5 +1,7 @@
 Create a Kubernetes Cluster using Proxmox Virtual Environment
 References: https://www.youtube.com/watch?v=U1VzcjCB_sY
+https://www.learnlinux.tv/how-to-build-an-awesome-kubernetes-cluster-using-proxmox-virtual-environment/
+https://www.youtube.com/watch?v=JoHUi9KvnOA&t=6966s
 #######################################################
 
 
@@ -67,3 +69,245 @@ $ cat /etc/machine-id
 $ sudo poweroff
 proxmox -> make a template of 851 and clone 852, 853, 854 (full clone and k8s-node-1)
 
+
+sudo kubeadm init --control-plane-endpoint=192.168.1.246 --node-name k8s-controller1 --pod-network-cidr=10.244.0.0/16
+
+artia@k8s-controller1:~$ sudo kubeadm init --control-plane-endpoint=192.168.1.246 --node-name k8s-controller1 --pod-network-cidr=10.244.0.0/16
+I0612 01:51:25.129771     602 version.go:256] remote version is much newer: v1.30.1; falling back to: stable-1.28
+[init] Using Kubernetes version: v1.28.11
+[preflight] Running pre-flight checks
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+W0612 01:51:46.437227     602 checks.go:835] detected that the sandbox image "registry.k8s.io/pause:3.8" of the container runtime is inconsistent with that used by kubeadm. It is recommended that using "registry.k8s.io/pause:3.9" as the CRI sandbox image.
+[certs] Using certificateDir folder "/etc/kubernetes/pki"
+[certs] Generating "ca" certificate and key
+[certs] Generating "apiserver" certificate and key
+[certs] apiserver serving cert is signed for DNS names [k8s-controller1 kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 192.168.1.246]
+[certs] Generating "apiserver-kubelet-client" certificate and key
+[certs] Generating "front-proxy-ca" certificate and key
+[certs] Generating "front-proxy-client" certificate and key
+[certs] Generating "etcd/ca" certificate and key
+[certs] Generating "etcd/server" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [k8s-controller1 localhost] and IPs [192.168.1.246 127.0.0.1 ::1]
+[certs] Generating "etcd/peer" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [k8s-controller1 localhost] and IPs [192.168.1.246 127.0.0.1 ::1]
+[certs] Generating "etcd/healthcheck-client" certificate and key
+[certs] Generating "apiserver-etcd-client" certificate and key
+[certs] Generating "sa" key and public key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+[apiclient] All control plane components are healthy after 10.505078 seconds
+[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+[upload-certs] Skipping phase. Please see --upload-certs
+[mark-control-plane] Marking the node k8s-controller1 as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+[mark-control-plane] Marking the node k8s-controller1 as control-plane by adding the taints [node-role.kubernetes.io/control-plane:NoSchedule]
+[bootstrap-token] Using token: wq8pk1.pxa82qcs0zjav4nw
+[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+You can now join any number of control-plane nodes by copying certificate authorities
+and service account keys on each node and then running the following as root:
+
+  kubeadm join 192.168.1.246:6443 --token wq8pk1.pxa82qcs0zjav4nw \
+        --discovery-token-ca-cert-hash sha256:d53ff32a9ecb30532d786cc6ff3ab6ceed6ef5101d6ddd3f8829aaf41aee74c4 \
+        --control-plane
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.1.246:6443 --token wq8pk1.pxa82qcs0zjav4nw \
+        --discovery-token-ca-cert-hash sha256:d53ff32a9ecb30532d786cc6ff3ab6ceed6ef5101d6ddd3f8829aaf41aee74c4
+artia@k8s-controller1:~$
+
+
+
+artia@k8s-controller1:~$ mkdir -p $HOME/.kube
+artia@k8s-controller1:~$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+artia@k8s-controller1:~$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+artia@k8s-controller1:~$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                      READY   STATUS    RESTARTS   AGE
+kube-system   coredns-5dd5756b68-fp7th                  0/1     Pending   0          8m8s
+kube-system   coredns-5dd5756b68-lbl2v                  0/1     Pending   0          8m8s
+kube-system   etcd-k8s-controller1                      1/1     Running   0          8m22s
+kube-system   kube-apiserver-k8s-controller1            1/1     Running   0          8m22s
+kube-system   kube-controller-manager-k8s-controller1   1/1     Running   0          8m22s
+kube-system   kube-proxy-tc8zk                          1/1     Running   0          8m9s
+kube-system   kube-scheduler-k8s-controller1            1/1     Running   0          8m22s
+
+
+
+kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
+
+
+artia@k8s-controller1:~$ kubectl get pods --all-namespaces
+NAMESPACE      NAME                                      READY   STATUS    RESTARTS   AGE
+kube-flannel   kube-flannel-ds-crmh8                     1/1     Running   0          9s
+kube-system    coredns-5dd5756b68-fp7th                  0/1     Pending   0          10m
+kube-system    coredns-5dd5756b68-lbl2v                  0/1     Pending   0          10m
+kube-system    etcd-k8s-controller1                      1/1     Running   0          10m
+kube-system    kube-apiserver-k8s-controller1            1/1     Running   0          10m
+kube-system    kube-controller-manager-k8s-controller1   1/1     Running   0          10m
+kube-system    kube-proxy-tc8zk                          1/1     Running   0          10m
+kube-system    kube-scheduler-k8s-controller1            1/1     Running   0          10m
+artia@k8s-controller1:~$ kubectl get pods --all-namespaces
+NAMESPACE      NAME                                      READY   STATUS              RESTARTS   AGE
+kube-flannel   kube-flannel-ds-crmh8                     1/1     Running             0          14s
+kube-system    coredns-5dd5756b68-fp7th                  0/1     ContainerCreating   0          10m
+kube-system    coredns-5dd5756b68-lbl2v                  0/1     ContainerCreating   0          10m
+kube-system    etcd-k8s-controller1                      1/1     Running             0          10m
+kube-system    kube-apiserver-k8s-controller1            1/1     Running             0          10m
+kube-system    kube-controller-manager-k8s-controller1   1/1     Running             0          10m
+kube-system    kube-proxy-tc8zk                          1/1     Running             0          10m
+kube-system    kube-scheduler-k8s-controller1            1/1     Running             0          10m
+artia@k8s-controller1:~$ kubectl get pods --all-namespaces
+NAMESPACE      NAME                                      READY   STATUS    RESTARTS   AGE
+kube-flannel   kube-flannel-ds-crmh8                     1/1     Running   0          20s
+kube-system    coredns-5dd5756b68-fp7th                  1/1     Running   0          10m
+kube-system    coredns-5dd5756b68-lbl2v                  1/1     Running   0          10m
+kube-system    etcd-k8s-controller1                      1/1     Running   0          10m
+kube-system    kube-apiserver-k8s-controller1            1/1     Running   0          10m
+kube-system    kube-controller-manager-k8s-controller1   1/1     Running   0          10m
+kube-system    kube-proxy-tc8zk                          1/1     Running   0          10m
+kube-system    kube-scheduler-k8s-controller1            1/1     Running   0          10m
+
+artia@k8s-controller1:~$ kubectl get nodes
+NAME              STATUS   ROLES           AGE   VERSION
+k8s-controller1   Ready    control-plane   11m   v1.28.11
+
+
+run below command on k8s-controller to get latest join command
+kubeadm token created --print-join-command
+
+
+run below join command on each node
+sudo kubeadm join 192.168.1.246:6443 --token 75y8li.h0lu6b8ijcoiot4g --discovery-token-ca-cert-hash sha256:d53ff32a9ecb30532d786cc6ff3ab6ceed6ef5101d6ddd3f8829aaf41aee74c4
+
+artia@k8s-node-1:~$ sudo kubeadm join 192.168.1.246:6443 --token 75y8li.h0lu6b8ijcoiot4g --discovery-token-ca-cert-hash sha256:d53ff32a9ecb30532d786cc6ff3ab6ceed6ef5101d6ddd3f8829aaf41aee74c4
+[preflight] Running pre-flight checks
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+
+
+
+artia@k8s-controller1:~$ kubectl get nodes
+NAME              STATUS   ROLES           AGE     VERSION
+k8s-controller1   Ready    control-plane   20m     v1.28.11
+k8s-node-1        Ready    <none>          2m18s   v1.28.10
+k8s-node-2        Ready    <none>          41s     v1.28.10
+k8s-node-3        Ready    <none>          18s     v1.28.10
+artia@k8s-controller1:~$
+
+
+
+kubectl get pods
+kubectl get deploy
+
+
+artia@k8s-controller1:~$ kubectl get all
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   35m
+
+
+artia@k8s-controller1:~$ kubectl get all -A
+NAMESPACE      NAME                                          READY   STATUS    RESTARTS   AGE
+kube-flannel   pod/kube-flannel-ds-6hq7z                     1/1     Running   0          17m
+kube-flannel   pod/kube-flannel-ds-c5mn8                     1/1     Running   0          16m
+kube-flannel   pod/kube-flannel-ds-crmh8                     1/1     Running   0          26m
+kube-flannel   pod/kube-flannel-ds-zslls                     1/1     Running   0          18m
+kube-system    pod/coredns-5dd5756b68-fp7th                  1/1     Running   0          36m
+kube-system    pod/coredns-5dd5756b68-lbl2v                  1/1     Running   0          36m
+kube-system    pod/etcd-k8s-controller1                      1/1     Running   0          36m
+kube-system    pod/kube-apiserver-k8s-controller1            1/1     Running   0          36m
+kube-system    pod/kube-controller-manager-k8s-controller1   1/1     Running   0          36m
+kube-system    pod/kube-proxy-59mrj                          1/1     Running   0          17m
+kube-system    pod/kube-proxy-ktrhq                          1/1     Running   0          18m
+kube-system    pod/kube-proxy-tc8zk                          1/1     Running   0          36m
+kube-system    pod/kube-proxy-z9wh7                          1/1     Running   0          16m
+kube-system    pod/kube-scheduler-k8s-controller1            1/1     Running   0          36m
+
+NAMESPACE     NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                  AGE
+default       service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP                  37m
+kube-system   service/kube-dns     ClusterIP   10.96.0.10   <none>        53/UDP,53/TCP,9153/TCP   36m
+
+NAMESPACE      NAME                             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+kube-flannel   daemonset.apps/kube-flannel-ds   4         4         4       4            4           <none>                   26m
+kube-system    daemonset.apps/kube-proxy        4         4         4       4            4           kubernetes.io/os=linux   36m
+
+NAMESPACE     NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   deployment.apps/coredns   2/2     2            2           36m
+
+NAMESPACE     NAME                                 DESIRED   CURRENT   READY   AGE
+kube-system   replicaset.apps/coredns-5dd5756b68   2         2         2       36m
+artia@k8s-controller1:~$
+
+
+
+Create the file pod.yml with the following contents:
+
+apiVersion: v1
+kind: Pod
+metadata:
+Chapter 18 25
+ 
+name: nginx-example
+  labels:
+    app: nginx
+spec:
+  containers:
+    - name: nginx
+      image: linuxserver/nginx
+      ports:
+        - containerPort: 80
+          name: "nginx-http"
+Apply the file with the following command:
+
+kubectl apply -f pod.yml
+You can check the status of this deployment with the following command:
+
+kubectl get pods -o wide
