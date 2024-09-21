@@ -5,8 +5,9 @@ https://www.youtube.com/watch?v=JoHUi9KvnOA&t=6966s
 #######################################################
 
 
-clone VM ubuntu22.08
-850 k8s-controller - Full Clone - start at boot =yes, QEMU Guest Agent  = Enabled
+use an ubuntu machine as base for controller as well as nodes, so clone VM ubuntu22.08
+--------------------------------------------------------
+850 k8s-controller - Full Clone - start at boot =yes, QEMU Guest Agent  = Enabled (this is useful for setting up Quemu agents)
 851-k8s-node - Full Clone
 
 start machines
@@ -19,10 +20,10 @@ sudo reboot -h now (service qemu-guest-agent gets started post reboot, this is r
 note down IP address and connect from external ssh for better control (like mobaxterm with ssh keys already added in template through cloud-init). 
 
 setup ssh keys logs fot all hosts.
-
 setup static IP (as per above video) - i am skipping
 
-install containerd
+install containerd (need to cross check if below steps are for both node and controller)
+-----------------------
 sudo apt install containerd (it will install runc and containerd)
 sudo systemctl status containerd
 
@@ -46,7 +47,8 @@ br_netfilter
 
 reboot
 
-
+Install kubernetes (and pre-requisites)
+-------------------
 
 sudo apt-get install -y apt-transport-https ca-certificates curl
 
@@ -58,6 +60,7 @@ sudo apt-get update
 sudo apt-get install -y kubeadm kubectl kubelet
 
 create a template of node instance
+---------------------------------
 $ sudo cloud-init clean
 $ sudo rm -rf  /var/lib/cloud/instances
 $ sudo truncate -s 0 /etc/machine-id
