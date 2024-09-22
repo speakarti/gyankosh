@@ -1,0 +1,31 @@
+install hashicorp terraform as per instructions in below article
+https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+
+validate installation
+-------------
+terraform -help
+terraform -help plan
+
+After installtion, next we can test terraform with docker, awscli, proxmox, etc. let's install these one by one
+
+
+test with docker enginer
+------------------------
+
+
+  
+install aws cli
+------------------
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+sudo apt list | grep awscli
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+artia@dell001:~$ which aws
+/usr/local/bin/aws
+artia@dell001:~$ aws --version
+aws-cli/2.17.56 Python/3.12.6 Linux/6.8.0-45-generic exe/x86_64.ubuntu.24
+
+Terraform installs providers from the Terraform Registry by default. In this example configuration, the aws provider's source is defined as hashicorp/aws, which is shorthand for registry.terraform.io/hashicorp/aws.
