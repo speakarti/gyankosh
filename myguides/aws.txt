@@ -1,2 +1,33 @@
 
 Amazon VPC : https://www.youtube.com/watch?v=g2JOHLHh4rI
+
+
+install aws cli
+-------------------
+https://www.youtube.com/watch?v=dqY8Qe6I7IM
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+https://docs.aws.amazon.com/cli/latest/reference/
+https://docs.aws.amazon.com/cli/
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+artia@dell001:~/Downloads$ aws --version
+aws-cli/2.17.56 Python/3.12.6 Linux/6.8.0-45-generic exe/x86_64.ubuntu.24
+
+
+#setup aws login credentials and use IAM user and access key and secret key created in aws console (IAM -> users -> create user -> give admin access -> create accesskey)
+$ aws configure
+Access key ID 
+Secret Access key
+region us-east-1
+format json
+
+
+$ aws iam list-users
+$ aws s3 ls
+
+
+lifecycle: terraform init, plan, apply, destroy
+tfstate
