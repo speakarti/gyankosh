@@ -27,6 +27,10 @@ format json
 
 $ aws iam list-users
 $ aws s3 ls
+$ aws list-projects
+
+
+aws sdk : https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
 
 
 lifecycle: terraform init, plan, apply, destroy
