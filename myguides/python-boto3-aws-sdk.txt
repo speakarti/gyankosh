@@ -1,0 +1,7 @@
+sudo apt install python3-pip
+pip install boto3 # for aws sdk (https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html)
+Before using Boto3, you need to set up authentication credentials for your AWS account using either the IAM Console or the AWS CLI
+
+$ aws configure 
+OR
+~/.aws/credentials
