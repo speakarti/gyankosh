@@ -50,3 +50,6 @@ Before using Boto3, you need to set up authentication credentials for your AWS a
 $ aws configure 
 OR
 ~/.aws/credentials
+
+
+https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2.html
