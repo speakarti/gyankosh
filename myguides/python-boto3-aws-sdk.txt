@@ -31,17 +31,18 @@ $ sudo apt install python3-pip
 $ sudo apt install python3.12-venv (python3-pip-whl python3-setuptools-whl python3.12-venv were installed)
 
 
-create project folder and go inside folder and call 'code' and then in terminal execute 
-mkdir aws_sdk_boto3
-cd aws_sdk_boto3
-code
-terminal -> python3 -m venv env (it will create an env folder inside project folder)
-source env/bin/activate
+on termical create project folder and go inside folder and call 'code .' and then in terminal execute 
+$ mkdir aws_sdk_boto3
+$ cd aws_sdk_boto3
+$ code .
+
+In Code -> new terminal -> $ python3 -m venv env (use system/ global python3 to create a new virtual environment,  it will create an env folder inside project folder)
+source env/bin/activate (in code at bottom it will ask for seting this env as default)
+
+create requirements.txt file, save.
+add boto3
+Terminal $ pip install -r requirements.txt (make sure to use pip3 under env folder)
 pip3 install boto3 (type pip and double tab to see all pip packages)
-
-terminal -> python3 -m venv env
-pip install -r requirements.txt
-
 
 pip install boto3 # for aws sdk (https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html)
 Before using Boto3, you need to set up authentication credentials for your AWS account using either the IAM Console or the AWS CLI
