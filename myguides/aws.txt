@@ -1,6 +1,7 @@
 
 Amazon VPC : https://www.youtube.com/watch?v=g2JOHLHh4rI
 learn aws cli, api, sdk (python boto3)
+https://www.bluematador.com/learn/aws-cli-cheatsheet
 
 install aws cli
 -------------------
