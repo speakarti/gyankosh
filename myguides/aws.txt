@@ -20,10 +20,7 @@ aws-cli/2.17.56 Python/3.12.6 Linux/6.8.0-45-generic exe/x86_64.ubuntu.24
 
 #setup aws login credentials and use IAM user and access key and secret key created in aws console (IAM -> users -> create user -> give admin access -> create accesskey)
 $ aws configure
-Access key ID 
-Secret Access key
-region us-east-1
-format json
+enter Access key ID, Secret Access key,  region us-east-1, and format as json. this will create a folder .aws in home dir and will save above data in files config and credentials. This will used by aws cli and aws api and python boto3 module to connecti with aws accounts.
 
 
 $ aws iam list-users
