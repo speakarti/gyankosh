@@ -1,5 +1,6 @@
 install hashicorp terraform as per instructions in below article
 https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+https://www.itwonderlab.com/terraform-aws-ansible/
 
 validate installation
 -------------
