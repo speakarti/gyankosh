@@ -1,3 +1,5 @@
+https://aws.amazon.com/getting-started/hands-on/?getting-started-all.sort-by=item.additionalFields.content-latest-publish-date&getting-started-all.sort-order=desc&awsf.getting-started-category=*all
+
 
 Amazon VPC : https://www.youtube.com/watch?v=g2JOHLHh4rI
 learn aws cli, api, sdk (python boto3)
