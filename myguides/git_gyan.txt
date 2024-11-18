@@ -137,3 +137,26 @@ PTY allocation request failed on channel 0
 
 ================================================================
 
+
+
+
+================================================================
+Bitbucket setup 
+================================================================
+login onto bitbucket and create a new repository named gyankosh
+
+from linux box
+ssh-keygen -t ed25519 -C "speakarti@gmail.com"
+id_ed25519_bitbucket
+it created two keys (#Use private key (id_ed25519) on local server and Copy public key to a remote server to connect, in this case its bitbucket.)
+copy .pub key in (https://bitbucket.org/mail2artia/gyankosh/admin/access-keys/)
+
+
+clone http
+git clone https://speakarti@bitbucket.org/mail2artia/gyankosh.git gitbucket_gyakosh
+
+Clone over SSH (workspace is mail2artia, project name is devops1 and repo name is gyankosh)
+git clone git@bitbucket.org:mail2artia/gyankosh.git OR
+git clone git@bitbucket.org:mail2artia/gyankosh.git gyankosh_bitbucket
+
+
