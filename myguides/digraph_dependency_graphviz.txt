@@ -1,0 +1,22 @@
+tool named "dot" which is tool part of package 'graphviz' which can be installed on ubuntu using 'sudo apt install graphviz'
+input file 'arnav_btech_courses.txt' contains 
+
+digraph G {    
+    DegreeBS -> calculus2_1224;
+    DegreeBS -> EE1322;
+    DegreeBS -> CPE2073;
+    Calculus2_1224 -> EGR2313 ;
+ Calculus2_1224 -> EGR3423 ;
+EE2513->EE3563;
+  EE1322->EE2423;
+EE1322->EE2513;
+EE2513->2583;
+}
+
+echo 'digraph { a -> b }' | dot -Tsvg > output.svg
+cat arnav_btech_courses.txt | dot -Tsvg > output.svg
+
+it creates .svg file (Scalable Vector Graphics) which can be read using 'image viewer' in ubuntu. or can converted to png using other tools.
+
+
+  ref: https://github.com/pydot/pydot
