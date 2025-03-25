@@ -1,6 +1,7 @@
 Proxmox: Create a ubuntu 22.04 template using cloud image, for creating ubuntu machines in few seconds.
      add ssh keys, to enable passwordless login
      and configure default userid and password through cloud.init
+
 ========================================================================================
 References: 
 https://www.youtube.com/watch?v=MJgIm03Jxdo
@@ -29,14 +30,30 @@ download cloud image, .img file (QCow2 UEFI/GPT Bootable disk image) on pve term
 
 
 goto Proxmox GUI -> select ubuntu-2204-template -> goto Hardware -> Unused Disk 0-> Edit -> Add. This will start showing in Hard Disk (scsi0).
-goto Proxmox GUI -> select ubuntu-2204-template -> goto options -> boot order -> select newly added disk and move it to 2nd in order. select 'start at boot'
+goto Proxmox GUI -> select ubuntu-2204-template -> goto options -> boot order -> select newly added disk and move it to 2nd in order. select 'start at boot' as 'Yes'
 goto Proxmox GUI -> select ubuntu-2204-template -> convert to template
 
-goto Proxmox GUI -> select ubuntu-2204-template -> clone template -> 799, full clone, let machine build 
 
 
-login into newly created machine using console userid/password (sometimes proxmox stuck at console, press 'enter' to get into it.) and install qemu-guest-agent
+
+## Create a new VM from Template
+goto Proxmox GUI -> select 900 (ubuntu-2204-template) -> 'clone' -> 799 as VM ID, Mode as 'Full Flone', let machine build
+
+Review details in newly created VM be going through below VMs, you will notice IP is not allocated / shown up in display.
+Cloud-Init -> you will see user is already created, with given user id and password. and also ssh public key (to login into this)
+Summary ->  IPs - Guest Agent not running
+Console -> Start Now -> login into newly created machine using console userid/password (sometimes proxmox stuck at console, press 'enter' to get into it.) 
+Observe commands on screen you will notice cloud-init is already installed, configuring your server Also and you can see config in /etc/cloud-init
+sudo apt list | grep 'cloud-init'
+ls ~/.ssh (to see ssh file)
+ip addr (to get IP)
+sudo reboot now
+sudo apt update -y && sudo apt upgrade -y
+$ dpkg --get-selections | grep cloud-init
+sudo apt install cloud-init
+
 ---------------------------------------------------------------------------
+install qemu-guest-agent
 $ apt install qemu-guest-agent
 $ systemctl status qemu-guest-agent
 ● qemu-guest-agent.service - QEMU Guest Agent
@@ -53,16 +70,12 @@ $ sudo reboot -h now
 
 
 May 15 21:32:18 ubuntu-799-2204 systemd[1]: Started QEMU Guest Agent will be start, check status. 
-$ Qemu agent will be useful in add additional context menu like reboot, sleep etc. for server. to have better interactions between wind GUI and linux
+$ Qemu agent will be useful in add additional context menu like reboot, sleep etc. for server. to have better interactions between with proxmox GUI and VM linux
 Also system will show IP address at this time to be connected using ssh keys, pass in cloud-init.
 
 use ssh given in cloud-int, to connect
 
 
-you will notice cloud-init is already installed, and you can see config in /etc/cloud-init
-sudo apt list | grep 'cloud-init'
-$ dpkg --get-selections | grep cloud-init
-sudo apt install cloud-init
 
 
 we will use ansible for basic installtions, 
