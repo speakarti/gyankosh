@@ -1,6 +1,90 @@
-Proxmox: Create a ubuntu 24.04 template using cloud image, for creating ubuntu machines in few seconds.
+https://medium.com/@ssnetanel/build-a-kubernetes-cluster-using-k3s-on-proxmox-via-ansible-and-terraform-c97c7974d4a5
+https://registry.terraform.io/modules/sdhibit/cloud-init-vm/proxmox/latest/examples/ubuntu_single_vm
+https://www.reddit.com/r/Proxmox/comments/1058ko7/installing_tools_into_a_cloudinit_image/
+open source software projects (including libvirt, LXD, and vagrant). I
+Using cli
+sudo apt-get install libguestfs-tools
+# mkdir ubuntu_2404_cludimage
+# cd ubuntu_2404_cludimage
+# wget https://cloud-images.ubuntu.com/minimal/releases/noble/release/ubuntu-24.04-minimal-cloudimg-amd64.img
+sudo virt-customize -a ubuntu-24.04-minimal-cloudimg-amd64.img --install qemu-guest-agent (TRY sudo virt-customize -a ubuntu-24.04-minimal-cloudimg-amd64.img --install qemu-guest-agent --run-command 'systemctl enable qemu-guest-agent.service') Also try installing other packages.
+sudo virt-customize -a jammy-server-cloudimg-amd64.img --run-command 'useradd simone'
+sudo virt-customize -a jammy-server-cloudimg-amd64.img --run-command 'mkdir -p /home/simone/.ssh'
+sudo virt-customize -a jammy-server-cloudimg-amd64.img --ssh-inject simone:file:id_ed25519.pub
+sudo virt-customize -a jammy-server-cloudimg-amd64.img --run-command 'chown -R simone:simone /home/simone'
 
 
+scp focal-server-cloudimg-amd64.img Proxmox_username@Proxmox_host:/path_on_Proxmox/focal-server-cloudimg-amd64.img
+qm create 9000 --name "ubuntu-24.04-minimal-cloudimg-amd64-template" --memory 2048 --net0 virtio,bridge=vmbr0
+mv ubuntu-24.04-minimal-cloudimg-amd64.img ubuntu-24.04-cloudimg-amd64.qcow2
+qm importdisk 9000 ubuntu-24.04-cloudimg-amd64.qcow2 local-lvm
+qm set 9000 --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-9000-disk-0
+qm set 9000 --ide2 local-lvm:cloudinit
+qm set 9000 --boot c --bootdisk scsi0
+qm set 9000 --serial0 socket --vga serial0
+qm set 9000 --agent enabled=1 (TRY this too)
+qm template 9000
+sudo qm clone 9000 999 --name test-cloud-init
+sudo qm set 999 --sshkey ~/.ssh/id_rsa.pub (TRY)
+sudo qm set 999 --ipconfig0 ip=10.10.1.20/24,gw=10.10.1.1 (TRY)
+sudo qm start 999
+ssh ubuntu@10.10.1.1
+sudo qm stop 999 && sudo qm destroy 999
+rm jammy-server-cloudimg-amd64.img
+
+
+Think of cloud-init as performing the basic things you need to do before you hand off to your configuration management tool. You can do as much or as little as you need to. This can include setting up login/SSH, usernames, time zones, packages, uploading files, and much more.
+
+setup keys, userid, password, enable qemu, DHCP 
+At this point you can edit files using the virt-edit commands found below. Or if you’re savvy you can edit the file which controls all cloud-init which is located at /etc/cloud/cloud.cfg
+virt-edit: Edit a file in a virtual machine
+root@pve-lab1:~/ubuntu_2404_cludimage# virt-edit --help
+virt-edit: Edit a file in a virtual machine
+Copyright (C) 2009-2020 Red Hat Inc.
+Usage:
+  virt-edit [--options] -d domname file [file ...]
+  virt-edit [--options] -a disk.img [-a disk.img ...] file [file ...]
+Options:
+  -a|--add image        Add image
+  -b|--backup .ext      Backup original as original.ext
+  --blocksize[=512|4096]
+                       Set sector size of the disk for -a option
+  -c|--connect uri      Specify libvirt URI for -d option
+  -d|--domain guest     Add disks from libvirt guest
+  --echo-keys           Don't turn off echo for passphrases
+  -e|--edit|--expr expr Non-interactive editing using Perl expr
+  --format[=raw|..]     Force disk format for -a option
+  --help                Display brief help
+  --key selector       Specify a LUKS key
+  --keys-from-stdin     Read passphrases from stdin
+  -m|--mount dev[:mnt[:opts[:fstype]]]
+                        Mount dev on mnt (if omitted, /)
+  -v|--verbose          Verbose messages
+  -V|--version          Display version and exit
+  -x                    Trace libguestfs API calls
+For more information, see the manpage virt-edit(1).
+
+e.g.
+virt-edit -a Rocky-8-GenericCloud-Base.latest.x86_64.qcow2 /etc/cloud/cloud.cfg
+virt-install virt-install or virt-manager
+
+Tips for editing cloud.cfg directly:
+
+You can change disable_root to 0 in order to be able to login as root
+lock_passwd can be changed to false to allow password based authentication
+We can also install packages by adding:
+packages:
+ - qemu-guest-agent
+ - nano
+ - wget
+ - curl
+ - net-tools
+Make sure to edit the /etc/ssh/sshd_config file to allow password authentication as well if desired. This can be done using the same virt-edit command above.
+PermitRootLogin yes
+PasswordAuthentication yes
+
+JUST WAW
+https://sysblob.com/posts/cloud-init/
 
 Proxmox: Create a ubuntu 22.04 template using cloud image, for creating ubuntu machines in few seconds.
      add ssh keys, to enable passwordless login
