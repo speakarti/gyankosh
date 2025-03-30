@@ -1,0 +1,35 @@
+## Clean up Duplicate Files from host 
+Delete duplicates, no confirmation is asked. DANGEROUS
+fdupes -dN -r /mnt/hgfs/ArtiPhonebackup/
+
+ls /mnt/hgfs/ArtiPhonebackup/
+find /mnt/hgfs/ArtiPhonebackup/ -empty -type f -delete
+find /mnt/hgfs/ArtiPhonebackup/ -empty -type d -delete
+
+
+ # Find duplicates and pipe output to awk
+    fdupes -r /mnt/hgfs/ArtiPhonebackup/ | awk '{if ($0 ~ "FolderName1") print $0}' | xargs rm -i
+    fdupes -r /mnt/hgfs/ArtiPhonebackup/ | awk '{if ($0 ~ "FolderName1") print "\"" $0 "\""}' | xargs -d '\n' rm -i
+    fdupes -r /mnt/hgfs/ArtiPhonebackup/ | awk '{if ($0 ~ "FolderName1") print "\"" $0 "\""}' | xargs echo -i
+
+    fdupes -r /mnt/hgfs/ArtiPhonebackup/ | awk '{if ($0 ~ "FolderName1") print $0 }' | xargs -d '\n' rm -i
+    above will prompt but will not delete
+
+    fdupes -r /mnt/hgfs/ArtiPhonebackup/ | awk '$0 ~ "FolderName1" {print $0}' | xargs -d '\n' rm -f
+
+
+
+
+## How to share folder of Windows host to Ubuntu 22.04 LTS Guest OS on Vmware Workstation 16.2
+Issue is related to VMware tools. 
+https://knowledge.broadcom.com/external/article?legacyId=60262
+https://youtu.be/S4n0Bh8iI_8
+
+Finally worked bcz of setting auto update VMwatre tools at VMware guest and VM host level
+VMware -> Edit -> Preferences -> UPdates -> Auto update VMware tools on VM
+VMware -> select VM-> VM Settings-> VMware Toosl -> update automatically
+
+$ vmware-toolbox-cmd -v
+12.4.5.49651 (build-23787635)
+
+$ vmware-hgfsclient

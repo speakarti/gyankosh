@@ -1,3 +1,7 @@
+Proxmox: Create a ubuntu 24.04 template using cloud image, for creating ubuntu machines in few seconds.
+
+
+
 Proxmox: Create a ubuntu 22.04 template using cloud image, for creating ubuntu machines in few seconds.
      add ssh keys, to enable passwordless login
      and configure default userid and password through cloud.init
@@ -10,34 +14,30 @@ https://cloud-images.ubuntu.com/minimal/releases/jammy/release/
 
 
 Got to proxmox gui -> 192.168.1.xxx:8006
-Create new VM -> vm id =900, name =ubuntu-2204-template, Dont use any media (as we are going to use cloud image), select QEMU agent (it will work if installed) to enable it, delete scsi0 disk as we will create and add it later, selct sockets/cores, memory 1024, continue with vmbr0, 
+Create new VM -> vm id =900, name =ubuntu-2404-template, Dont use any media (as we are going to use cloud image), select QEMU agent (it will work if installed) to enable it, delete scsi0 disk as we will create and add it later, selct sockets/cores, memory 1024, continue with vmbr0, 
 select this 900 VM (Proxmon GUI)-> go to Hardware Tab -> add cloudinit drive - > select local-lvm.
                               go to cloud-init tab - > set userid=artia, password=xxxx, ssh key= public key, IPconfig (network) =DHCP
 
 download cloud image, .img file (QCow2 UEFI/GPT Bootable disk image) on pve terminal / console
 ====================================
-# mkdir ubuntu_2204_cludimage
-# cd ubuntu_2204_cludimage
-# wget https://cloud-images.ubuntu.com/minimal/releases/jammy/release/ubuntu-22.04-minimal-cloudimg-amd64.img
+# mkdir ubuntu_2404_cludimage
+# cd ubuntu_2404_cludimage
+# wget https://cloud-images.ubuntu.com/minimal/releases/noble/release/ubuntu-24.04-minimal-cloudimg-amd64.img
 
-
+create a vga console
 # qm set 900 --serial0 socket --vga serial0
-# update VM 900: -serial0 socket -vga serial0
+# mv ubuntu-24.04-minimal-cloudimg-amd64.img ubuntu-24.04.qcow2
+# qemu-img resize ubuntu-24.04.qcow2 32G
+# qm importdisk 900 ubuntu-24.04.qcow2 local-lvm
+Successfully imported disk as 'unused0:local-lvm:vm-900-disk-0'
 
-# mv ubuntu-22.04-minimal-cloudimg-amd64.img ubuntu-22.04.qcow2
-# qemu-img resize ubuntu-22.04.qcow2 32G
-# qm importdisk 900 ubuntu-22.04.qcow2 local-lvm
-
-
-goto Proxmox GUI -> select ubuntu-2204-template -> goto Hardware -> Unused Disk 0-> Edit -> Add. This will start showing in Hard Disk (scsi0).
-goto Proxmox GUI -> select ubuntu-2204-template -> goto options -> boot order -> select newly added disk and move it to 2nd in order. select 'start at boot' as 'Yes'
-goto Proxmox GUI -> select ubuntu-2204-template -> convert to template
-
-
+goto Proxmox GUI -> select ubuntu-2404-template -> goto Hardware -> Unused Disk 0-> Edit -> Add. This will start showing in Hard Disk (scsi0).
+goto Proxmox GUI -> select ubuntu-2404-template -> goto options -> boot order -> select newly added disk and move it to 2nd in order. select 'start at boot' as 'Yes'
+goto Proxmox GUI -> select ubuntu-2404-template -> convert to template
 
 
 ## Create a new VM from Template
-goto Proxmox GUI -> select 900 (ubuntu-2204-template) -> 'clone' -> 799 as VM ID, Mode as 'Full Flone', let machine build
+goto Proxmox GUI -> select 900 (ubuntu-2404-template) -> 'clone' -> 799 as VM ID, Mode as 'Full Flone', let machine build, login with userid
 
 Review details in newly created VM be going through below VMs, you will notice IP is not allocated / shown up in display.
 Cloud-Init -> you will see user is already created, with given user id and password. and also ssh public key (to login into this)
@@ -69,11 +69,11 @@ $ systemctl status qemu-guest-agent
 $ sudo reboot -h now
 
 
-May 15 21:32:18 ubuntu-799-2204 systemd[1]: Started QEMU Guest Agent will be start, check status. 
+May 15 21:32:18 ubuntu-799-2404 systemd[1]: Started QEMU Guest Agent will be start, check status. 
 $ Qemu agent will be useful in add additional context menu like reboot, sleep etc. for server. to have better interactions between with proxmox GUI and VM linux
 Also system will show IP address at this time to be connected using ssh keys, pass in cloud-init.
 
-use ssh given in cloud-int, to connect
+use ssh given in cloud-int, to connect to this machine using ssh
 
 
 

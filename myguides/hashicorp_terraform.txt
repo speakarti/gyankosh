@@ -1,20 +1,223 @@
 install hashicorp terraform as per instructions in below article
+Kubernetes Cluster Setup : https://github.com/NatiSayada/k3s-proxmox-terraform-ansible
+https://medium.com/@ssnetanel/build-a-kubernetes-cluster-using-k3s-on-proxmox-via-ansible-and-terraform-c97c7974d4a5
+https://www.xda-developers.com/use-terraform-with-proxmox/
 https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
 https://www.itwonderlab.com/terraform-aws-ansible/
+proxmox api calling in python : https://github.com/xezpeleta/Ansible-Proxmox-inventory/blob/master/proxmox.py
+proxmox api: https://pve.proxmox.com/pve-docs/api-viewer/index.html#/nodes/{node}/apt
+https://pve.proxmox.com/wiki/Proxmox_VE_API
+https://192.168.xx.xxx:8006/api2/json
 
-validate installation
--------------
-terraform -help
-terraform -help plan
+TOO GOOD: https://pve.proxmox.com/wiki/Proxmox_VE_API
+CLI like pveum
+API : https://pve.proxmox.com/pve-docs/api-viewer/index.html#/nodes/{node}/apt - read more can create VM/LXC etc using curl or pvesh.
+Using 'pvesh' to Access the API 
+Community Maintained
+Python
+https://pypi.python.org/pypi/proxmoxer - Proxmox API over https liek curl, pvesh and ssh
+used in the ansible proxmox and proxmox_kvm modules
+https://github.com/remofritzsche/proxmox-utils (Console Client) - manage kvm
+https://github.com/baseblack/Proxmoxia (Wrapper)
+https://github.com/pcdummy/pmxc (Console Client)
+
+
+
+Just as boto3 is the primary Python SDK for interacting with AWS, other cloud providers also offer their own Python modules for managing resources.
+pip install azure-sdk
+pip install google-cloud
+pip install pyvmomi (Python SDK for managing VMware vSphere (which also works with VMware Workstation).)
+pip install ibm-cloud-sdk-core
+pip install oci
+pip install proxmoxer
+
+import boto3
+
+# Create an EC2 client
+ec2 = boto3.client('ec2')
+
+# Provision an EC2 instance
+response = ec2.run_instances(
+    ImageId='ami-12345678',
+    InstanceType='t2.micro',
+    MinCount=1,
+    MaxCount=1
+)
+
+print(response)
+In summary, the AWS provider in Terraform interacts with AWS’s native APIs to provision and manage resources. If you want to interact directly with AWS without Terraform, you can use AWS SDKs or AWS CLI to make similar API calls.
+
+
+AWS SDKs & AWS CLI: Terraform interacts with AWS APIs by using SDKs (Software Development Kits) like the AWS SDK for Go or Python (boto3), and directly invoking these APIs under the hood.
+However, you could use AWS's SDKs directly or utilize AWS CLI commands for custom automation if you don't want to use Terraform.
+
+
+root@pve-lab1:~/ubuntu_2404_cludimage# pvesh get /version
+┌─────────┬──────────────────┐
+│ key     │ value            │
+╞═════════╪══════════════════╡
+│ release │ 8.3              │
+├─────────┼──────────────────┤
+│ repoid  │ dac3aa88bac3f300 │
+├─────────┼──────────────────┤
+│ version │ 8.3.5            │
+└─────────┴──────────────────┘
+
+
+## Install terraform (on Dev Box, like on VMWare VM on HP laptop)
+https://developer.hashicorp.com/terraform/install
+wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform
+
+$ terraform --help
+$ terraform -version
+$ terraform -help plan
+
 
 After installtion, next we can test terraform with docker, awscli, proxmox, etc. let's install these one by one
+Terraform for Proxmox -
+=======================
+
+
+## setup proxmox provider - https://registry.terraform.io/providers/Telmate/proxmox/latest
+$ mkdir -p ~/cyberrange/terraform
+$ cat main.tf
+
+$ vi main.tf
+terraform {
+  required_providers {
+    proxmox = {
+      source  = "telmate/proxmox"
+    }
+  }
+}
+
+$ terraform init
+$ terraform plan
+
+$ terraform providers
+
+Providers required by configuration:
+.
+└── provider[registry.terraform.io/terraform-for-proxmox/proxmox] >= 1.0.0
+
+
+
+#create user on Proxmox pvr servers for teraform, create role, Group, for RBA, Token Secrets etc. using  Proxmox VE user management command-line tool (pveum help)
+#either pve or pam user can be created. pve can be created with commands and pam only by GUI.
+$ pveum user list
+$ pveum user token list terraform-prov@pve
+pveum role add TerraformProv -privs "Datastore.AllocateSpace Datastore.AllocateTemplate Datastore.Audit Pool.Allocate Sys.Audit Sys.Console Sys.Modify VM.Allocate VM.Audit VM.Clone VM.Config.CDROM VM.Config.Cloudinit VM.Config.CPU VM.Config.Disk VM.Config.HWType VM.Config.Memory VM.Config.Network VM.Config.Options VM.Migrate VM.Monitor VM.PowerMgmt SDN.Use"
+pveum user add terraform-prov@pve --password <password>
+pveum aclmod / -user terraform-prov@pve -role TerraformProv
+pveum user token delete terraform-prov@pve PROXMOX_TOKEN_ID_ON_srbLab (use if required)
+pveum user token modify terraform-prov@pve PROXMOX_TOKEN_ID_ON_srbLab --privsep=0(use if required)
+pveum user token add terraform-prov@pve PROXMOX_TOKEN_ID_ON_srbLab --privsep=0
+root@pve-lab1:~/ubuntu_2404_cludimage# pveum user token add terraform-prov@pve PROXMOX_TOKEN_ID_ON_srbLab --privsep=0
+┌──────────────┬───────────────────────────────────────────────┐
+│ key          │ value                                         │
+╞══════════════╪═══════════════════════════════════════════════╡
+│ full-tokenid │ xxxxxxxx │
+├──────────────┼───────────────────────────────────────────────┤
+│ info         │ {"privsep":"0"}                               │
+├──────────────┼───────────────────────────────────────────────┤
+│ value        │ xxxxxxxxx        │
+└──────────────┴───────────────────────────────────────────────┘
+
+OR USER, Group, Role Token all using GUI on proxmox GUI for this user (ENSURE TO UNCHECK PROVILEDGE SEPERATION CHECKBOX)
+Token ID: terraform-prov@pve!PROXMOX_TOKEN_ID_srbLab
+Secret: xxxxxxx
+
+
+
+## Update all above conection data in main.tf and test
+Update Terraform configuration file (e.g., main.tf), 
+understanding API interactions and exposing resources. The Proxmox provider uses the Proxmox API. 
+This provider exposes two resources: proxmox_vm_qemu and proxmox_lxc.  configure the VMs using the proxmox_vm_qemu resource. 
+
+cat main.tf
+$ cat main.tf
+
+terraform {
+  required_providers {
+    proxmox = {
+      source  = "telmate/proxmox"
+    }
+  }
+}
+
+provider "proxmox" {
+  pm_api_url   = "https://192.168.xx.XXX:8006/api2/json"
+  #pm_user      = "root"
+  #pm_password  = "XXXXX"
+  pm_api_token_id = "terraform-prov@pve!PROXMOX_TOKEN_ID_ON_srbLab"
+  pm_api_token_secret = "XXXXXXXX"
+  pm_tls_insecure = true
+}
+
+resource "proxmox_vm_qemu" "my_vm" {
+  name       = "my-vm"
+  target_node = "pve-lab1"
+  clone      = "ubuntu-2404-template"
+  full_clone = true
+
+  disk  {
+    storage    = "local-lvm"
+    size   = "2G"
+    type = "scsi"
+  }
+  cores      = 2
+  memory     = 2048
+
+  network  {
+    model = "virtio"
+    bridge = "vmbr0"
+    firewall = false
+    link_down = false
+  }
+}
+~
+~
+
+
+$ terraform init
+Initializing the backend...
+Initializing provider plugins...
+- Finding telmate/proxmox versions matching ">= 1.0.0"...
+- Installing telmate/proxmox v2.9.14...
+- Installed telmate/proxmox v2.9.14 (self-signed, key ID A9EBBE091B35AFCE)
+Partner and community providers are signed by their developers.
+If you'd like to know more about provider signing, you can read about it here:
+https://www.terraform.io/docs/cli/plugins/signing.html
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+
+$ terraform plan
+it wil lnot make changes, but will test all.
+
+$ terraform fmt
+$ terraform validate
+$ terraform apply
+
+
+
+
+
 
 
 test with docker enginer
 ------------------------
 
 
-  
+Terraform for aws
+=======================
+Terraform installs providers from the Terraform Registry by default. In this example configuration, the aws provider's source is defined as hashicorp/aws, which is shorthand for registry.terraform.io/hashicorp/aws.  
 install aws cli
 ------------------
 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
@@ -23,15 +226,12 @@ sudo apt list | grep awscli
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
-
-artia@dell001:~$ which aws
+$ which aws
 /usr/local/bin/aws
-artia@dell001:~$ aws --version
+$ aws --version
 aws-cli/2.17.56 Python/3.12.6 Linux/6.8.0-45-generic exe/x86_64.ubuntu.24
 
-Terraform installs providers from the Terraform Registry by default. In this example configuration, the aws provider's source is defined as hashicorp/aws, which is shorthand for registry.terraform.io/hashicorp/aws.
-
-artia@dell001:~/learn-terraform/terraform_aws$ terraform init
+$ terraform init
 Initializing the backend...
 Initializing provider plugins...
 - Finding hashicorp/aws versions matching "~> 4.16"...
@@ -53,32 +253,3 @@ rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 
 
-Terraform for Proxmox
-=======================
-artia@dell001:~/learn-terraform/terraform_proxmox$ terraform init
-Initializing the backend...
-Initializing provider plugins...
-- Finding telmate/proxmox versions matching ">= 1.0.0"...
-- Installing telmate/proxmox v2.9.14...
-- Installed telmate/proxmox v2.9.14 (self-signed, key ID A9EBBE091B35AFCE)
-Partner and community providers are signed by their developers.
-If you'd like to know more about provider signing, you can read about it here:
-https://www.terraform.io/docs/cli/plugins/signing.html
-Terraform has created a lock file .terraform.lock.hcl to record the provider
-selections it made above. Include this file in your version control repository
-so that Terraform can guarantee to make the same selections by default when
-you run "terraform init" in the future.
-
-Terraform has been successfully initialized!
-
-You may now begin working with Terraform. Try running "terraform plan" to see
-any changes that are required for your infrastructure. All Terraform commands
-should now work.
-
-If you ever set or change modules or backend configuration for Terraform,
-rerun this command to reinitialize your working directory. If you forget, other
-commands will detect it and remind you to do so if necessary.
-
-terraform fmt
-terraform validate
-terraform apply
