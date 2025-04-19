@@ -21,8 +21,9 @@ https://github.com/remofritzsche/proxmox-utils (Console Client) - manage kvm
 https://github.com/baseblack/Proxmoxia (Wrapper)
 https://github.com/pcdummy/pmxc (Console Client)
 
-
-
+======================
+aws - terraform setup
+======================
 Just as boto3 is the primary Python SDK for interacting with AWS, other cloud providers also offer their own Python modules for managing resources.
 pip install azure-sdk
 pip install google-cloud
@@ -51,7 +52,9 @@ In summary, the AWS provider in Terraform interacts with AWS’s native APIs to 
 AWS SDKs & AWS CLI: Terraform interacts with AWS APIs by using SDKs (Software Development Kits) like the AWS SDK for Go or Python (boto3), and directly invoking these APIs under the hood.
 However, you could use AWS's SDKs directly or utilize AWS CLI commands for custom automation if you don't want to use Terraform.
 
-
+======================
+proxmox - terraform setup
+======================
 root@pve-lab1:~/ubuntu_2404_cludimage# pvesh get /version
 ┌─────────┬──────────────────┐
 │ key     │ value            │
@@ -64,7 +67,7 @@ root@pve-lab1:~/ubuntu_2404_cludimage# pvesh get /version
 └─────────┴──────────────────┘
 
 
-## Install terraform (on Dev Box, like on VMWare VM on HP laptop)
+## Install terraform (on Dev Box, like on VMWare VM on personal laptop to connect with pve/proxmox server from Dev Box)
 https://developer.hashicorp.com/terraform/install
 wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
@@ -74,11 +77,12 @@ $ terraform --help
 $ terraform -version
 $ terraform -help plan
 
+curl -k https://192.168.21.111:8006/api2/json
 
 After installtion, next we can test terraform with docker, awscli, proxmox, etc. let's install these one by one
 Terraform for Proxmox -
+https://registry.terraform.io/browse/providers
 =======================
-
 
 ## setup proxmox provider - https://registry.terraform.io/providers/Telmate/proxmox/latest
 $ mkdir -p ~/cyberrange/terraform
@@ -104,7 +108,7 @@ Providers required by configuration:
 
 
 
-#create user on Proxmox pvr servers for teraform, create role, Group, for RBA, Token Secrets etc. using  Proxmox VE user management command-line tool (pveum help)
+#create user on Proxmox/pve server for terraform, create role, Group, for RBA, Token Secrets etc. using  Proxmox VE user management command-line tool (pveum help)
 #either pve or pam user can be created. pve can be created with commands and pam only by GUI.
 $ pveum user list
 $ pveum user token list terraform-prov@pve
@@ -207,6 +211,15 @@ $ terraform apply
 
 
 
+artia@ubuntu2404:~/cyberrange/terraform$ terraform apply
+╷
+│ Error: Get "https://192.168.21.111:8006/api2/json/access/users?full=1": EOF
+│
+│   with provider["registry.terraform.io/telmate/proxmox"],
+│   on main.tf line 9, in provider "proxmox":
+│    9: provider "proxmox" {
+│
+╵
 
 
 
