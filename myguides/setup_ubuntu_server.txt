@@ -1,0 +1,338 @@
+ubuntu 24.04
+=================
+download iso and make bootable flash drive and change bios order and complete installation
+sudo apt update & sudo apt upgrade -y
+sudo apt install qemu-guest-agent
+apt-utils
+git
+net-tools
+openssh-server
+
+
+change/set root password 
+$ sudo passwd root
+
+#sudo ufw enable
+#sudo ufw allow 22
+
+download and install git for windows
+
+#git -v
+#git status
+#git -h
+#git clone -v --progress https://github.com/lamapalden/cloud-assign4.git
+
+arnavchrismas tree scan 
+nmap -sX -Pn -p 22,443,5444,8444 45.33.32.156
+nmap -sS -Pn -p 22,443,5444,8444 45.33.32.156
+
+null scan
+nmap -sN -Pn -p 22,443,5444,8444 45.33.32.156
+
+nmap --script banner -p 22,443,5444,8444 45.33.32.156
+
+
+NIST 8286
+https://www.youtube.com/watch?v=Reb14TMSI9Y
+
+March 11-15 Spring Break. Classes do not meet. University offices will be open.
+
+
+
+bitwarden
+
+for ssh key use OpenSSH format for Cmdline and putty format for putty
+----------------------------------------------------------------------
+scp -i C:\Users\aggar\Desktop\ssh-keys\ssh_jump_host_1_OpenSSH_privatekey -r -p D:\g580_smb_share_ro_fullbackup ubuntu@192.168.22.10:/home/ubuntu/backups/offline-disk/artiHDDBackup24Feb2024/
+
+D:\g580_smb_share_ro_fullbackup
+
+Note: VMWare licenses provided by UTSA, Virtualbox is free, Parallels is $50/yr
+
+mobaxterm
+
+
+Setup Ubuntu Server from ISO downloaded from web
+=================================================
+-> Download ISO & make USB
+$ sudo apt update & sudo apt upgrade -y
+$ sudo snap refresh
+-> get/set hostname
+$ sudo hostname ubuntu2204
+change in /etc/hosts and /etc/hostname
+
+-> set root passwd - 
+$ sudo passwd root
+
+-> create a non-root sudo user to work with ssh with bash as default shell and a home dir. change/set password (ssh for root is not enabled by default, and so this user is prefered )
+#useradd -m psana
+sudo usermod -s /bin/bash -aG sudo psana
+su - psana
+change default passwd for current user (agupta) -> #passwd
+sudo deluser --remove-home psan (delete user)
+
+-> check internet
+$ ping 8.8.8.8 (www.google.com)
+
+-> install required softwares like net-tools for ifconfig
+$ sudo apt install xfce4 xfce4-terminal
+sudo apt install xfce4 xfce4-goodies -y
+$ sudo apt install net-tools git
+$ openssh-server nmap wireshark docker xterm  python3 python3-pip python3-tk curl zoom teams 
+
+-> setup Ubuntu Remote Desktop for : ssh, VNC, RDP. Ubuntu's built-in remote desktop tool, you can use SSH, VNC, and RDP in the same app. Ubuntu (and many other Linux distributions) comes with a preinstalled remote desktop viewer. VNC client, such as VNC Viewer (from VNC Connect),
+-> setup default prompt
+export PS1="$ "
+
+-> check id / ip / hostname / uname / lsb_release -a |mantic 
+#id
+-> check ip assigned, subnet, default gateway,  and ineterfaces
+#ifconfig -a
+
+->scan other systems in this subnet range
+sudo nmap -sN 192.168.29.1/24
+ping 192.168.29.22
+
+->setup putty for ssh using private /public keys
+->login using ssh
+ssh agupta@192.168.29.22
+
+->find IP address of the router and open router config in browser
+agupta@hpchanchal:~$ ip r | grep default
+default via 192.168.29.1 dev ens3 proto dhcp src 192.168.29.22 metric 100 
+Browser -> 192.168.29.1 -> admin/password
+
+
+
+
+Remotely manage ubuntu server with SSH
+=======================================
+sudo apt update && sudo apt upgrade
+sudo service ssh status, it should be installed active and running
+sudo apt install openssh-server (no need as i got it installed while installing ubuntu)
+
+sudo systemctl status ssh
+sudo systemctl enable ssh
+sudo systemctl start ssh
+sudo systemctl status ssh
+
+sudo nano /etc/ssh/ssh_config
+Uncomment the below line in ssh_config file:
+#Port 22
+and add the line MaxAuthTries
+MaxAuthTries 4
+
+$ ssh [username]@[remote server] [Port Number]
+add the user to the list of known hosts
+
+ssh psan@192.168.29.22
+
+ssh-keygen: SSH Key Based Authentication on windows putty
+======================================================
+https://www.liquidweb.com/kb/putty-ssh-keys/
+https://www.youtube.com/watch?v=a7B1x_Xdl5g
+
+Download on your Windows system. PuTTY (putty.exe) and PuTTYgen (puttygen.exe)
+using puttygen generate keys and save keys generated under desktop/ssh-keys
+
+copy public key to targetted hosts (.ssh under user's home, in a file authorized_keys)
+psan@hl102:~$ scp -r .ssh psan@192.168.1.224:/home/psan/
+
+https://docs.rackspace.com/docs/log-into-a-linux-server-with-an-ssh-private-key-on-windows
+
+
+Install ubuntu desktop (any one, if required )
+=======================
+#sudo apt install ubuntu-desktop
+
+$ sudo apt-get install ubuntu-desktop		#Default Ubuntu desktop
+$ sudo apt install ubuntu-gnome-desktop	        #Ubuntu Gnome (Official flavor)
+$ sudo apt-get install xfce4			#LXDE
+$ sudo apt-get install lxde			#LXDE
+$ sudo apt-get install kubuntu-desktop		#KDE
+
+
+Networking
+==================
+get Public IP from Terminal on Linux Ubuntu 22.04
+$ dig +short myip.opendns.com @resolver1.opendns.com
+$ host myip.opendns.com resolver1.opendns.com
+$ wget -qO- http://ipecho.net/plain | xargs echo
+$ curl ifconfig.co
+$ curl ifconfig.me && echo
+$ curl icanhazip.com && echo
+
+
+install git and clone repo. 
+============================
+//todo check-in updated files in github repo, using tokens etc.
+git --version
+
+mkdir gyankosh_git
+cd gyankosh_git
+
+use init for new repo and clone for existing repor
+git clone https://github.com/speakarti/gyankosh.git
+git remote -v (to get origin for fetch and push)
+git config --list
+git config --list --show-origin
+git config --get user.name
+git config --get user.email
+
+set user details
+---------------------
+git config --global user.email "arti.aggarwal@my.utsa.edu"
+git config --global user.name "Arti Aggarwal"
+
+
+git init ()
+
+git add . (it will add all files in staging area)
+git status
+git commit -m "commit mesage"
+git branch -M dev (use master if required)
+git remote add origin https://github.com/speakarti/gyankosh.git
+git push -u origin dev (use master if required)
+
+
+git clone https://github.com/speakarti/gyankosh.git
+git config --global user.email "arti.aggarwal@my.utsa.edu"
+git config --global user.name "Arti Aggarwal"
+git checkout
+git push
+
+remote: Support for password authentication was removed on August 13, 2021.
+remote: Please see https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.
+fatal: Authentication failed for 'https://github.com/arti1977/gyankosh.git/'
+
+
+
+
+Win: wsl (Windows Subsystem for Linux is a feature of Windows that allows developers to run a Linux environment )
+===
+wsl --list --online
+wsl --install -d Ubuntu-22.04
+
+
+https://www.cyberithub.com/how-to-install-snap-on-ubuntu-22-04/
+sudo apt install snapd
+dpkg -L snapd
+sudo snap install abc
+
+
+
+
+
+scp "C:\sharedfolder\proxmox_share\testshare.txt" artia@192.168.50.108:/home/artia/shared/
+echo $XDG_CURRENT_DESKTOP
+XFCE
+sudo apt install kali-desktop-xfce
+
+download kali container template
+========================================
+https://us.lxd.images.canonical.com/
+https://jenkins.linuxcontainers.org/
+https://us.lxd.images.canonical.com/images/kali/current/amd64/default
+https://us.lxd.images.canonical.com/images/kali/current/amd64/default/20230830_17:14/rootfs.tar.xz
+https://us.lxd.images.canonical.com/images/ubuntu/mantic/amd64/default/20230830_07:42/rootfs.tar.xz
+
+create container
+
+
+create template
+===============
+1) create a fully working ubuntu machine
+2) login through shell, or console
+
+sudo apt clean
+sudo apt autoremove
+cd /etc/ssh/
+sudo rm ssh_host_*
+cat /etc/machine-id
+sudo truncase -s 0 /etc/machine-id
+sudo poweroff
+create template
+clone and create container
+connect to host through ssh
+sudo rm ssh_host_*
+sudo dpkg-reconfigure openssh-server
+logout
+
+
+
+Kali machine
+=============
+#create vm machines and follow below steps to configure
+local -> /var/lib/vz
+/var/lib/vz/template/iso:
+download ISO image of kali -> https://www.kali.org/get-kali/#kali-installer-images
+https://cdimage.kali.org/kali-2023.3/kali-linux-2023.3-installer-amd64.iso
+https://ubuntu.com/download/desktop/thank-you?version=22.04.3&architecture=amd64
+https://releases.ubuntu.com/22.04.3/ubuntu-22.04.3-desktop-amd64.iso
+https://releases.ubuntu.com/23.10.1/ubuntu-23.10.1-desktop-amd64.iso
+
+
+
+
+Win10
+=====
+https://www.microsoft.com/en-us/software-download/windows10ISO
+download and make ISO
+
+
+autologin
+=========
+ubuntu: sudo nano /etc/gdm3/custom.conf
+disable auto screen lock -> setting -> privacy - disable
+
+kali: sudo nano /etc/lightdm/lightdm.conf
+autologin-user=username
+autologin-user-timeout=0
+
+
+
+OpenStack
+==============
+
+
+cloud-init
+==============
+to check if its already installed
+dpkg --get-selections | grep cloud-init
+apt remove --purge cloud-init
+sudo apt install cloud-init
+
+
+
+
+
+MAAS
+=====
+it works on VM but not on a container
+got a new ubuntu 22.04 VM (ulab107), configured ssh server
+created & added a new additional network bridge #1 (vmbr0 and vmbr1)
+installed maas using snapd, It required installation of a test database and finally a running web application by giving a URL, configured it like added OS images etc, DHCP etc.
+sudo apt install snapd, net-tools
+sudo snap install maas
+sudo snap instal maas-test-db
+sudo maas createadmin
+maas init
+netstat -plnt | grep 5240
+http://192.168.21.101:5240/MAAS/r/machine/pf6r8q/summary
+
+
+
+created a new empty VM, without OS, added this VM in newly created network bridge #1 (vmbr1), started (or set it as start after cretaed), it was polling for iPXE server. and it got sensed by maas which discovered it in hosts and started OS installation as per configuration and later followed deply and other other steps to make it working and added in Maas as a fully working node.
+
+created a new node, VM, no HDD, bridge +1, start after build. It added a new machine in Maas and put in commissioing mode and gave ip as 10.0.0.101 and finally stopped machine. and marked status as NEW in Mass GUI.
+
+opened MASS GUI -> test cpu
+Unconfigured power type. Please configure the power type and try again.
+
+started VM, it moved beyon iPXE and running scripts, cloud-init
+
+
+NFS - setup 
+============
+https://bluexp.netapp.com/blog/azure-anf-blg-linux-nfs-server-how-to-set-up-server-and-client
+101 - failed server installtion on a container due to dependency, so tried on ubuntu /vm 102

@@ -1,0 +1,194 @@
+sudo apt update & sudo apt upgrade -y
+sudo apt install qemu-guest-agent, nano, vim, git, openssh-server, apt-utils, net-tools, nmap, file
+
+ensure ssh is instaled and configured
+ssh -V
+sudo systemctl enable ssh
+sudo systemctl start ssh
+sudo systemctl status ssh
+
+ensure both private and public keys have same name.
+private key file name no extension and public key ha .pub extension (id_rsa and id_rsa.pub). a). If your key is in the default location and follows the default naming conventions (id_rsa, id_ed25519, etc.), SSH will use it automatically. and it will not be mandatory to use -i <private key> for ssh conenct
+if used putty key gen, then in public key file copy conents from top box which is for authorize key, and for private key use "Export OPEN SSH (use new key fomrat), else it will create many issues.
+b) Use the ~/.ssh/config file for custom keys with specific hosts (if we want to use differnt keys for different hoss).
+c) Use the SSH agent to hold your keys in memory for easy use across sessions. (eval $(ssh-agent) and ssh-add ~/.ssh/id_rsa, ssh-add -l)
+
+created ansible.cfg under /home/username/ansible-project/ansible.cfg to make ping work from ansible controller to all hosts. added host_key_checking as false to make ssh work well.
+nano ~/ansible-project/ansible.cfg
+[defaults]
+inventory = inventory.ini
+host_key_checking = False
+retry_files_enabled = False
+
+
+
+
+ls .ssh
+python3 --version
+
+
+sudo apt install ansible
+ansible --version
+ansible-doc -t inventory -l
+sudo apt install nmap
+sudo nmap -v -n -p- -sT -sV -O --osscan-limit --max-os-tries 1 -oX $HOME/home_scan.xml 192.168.21.0/24
+mkdir ~/ansible-project
+cd ~/ansible-project
+
+
+
+touch inventory.ini
+vi inventory.ini
+[k8s]
+k8s-master ansible_host=192.168.21.126 ansible_user=artia
+k8s-node1 ansible_host=192.168.21.104 ansible_user=artia
+k8s-node2 ansible_host=192.168.21.249 ansible_user=artia
+k8s-node3 ansible_host=192.168.21.182 ansible_user=artia
+k8s-node4 ansible_host=192.168.21.246 ansible_user=artia
+
+[ubuntu]
+k8s-dev ansible_host=192.168.21.231 ansible_user=artia
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+
+
+
+
+ansible-inventory --list -y
+artia@k8s-dev:~/ansible-project$ ansible-inventory --list -y
+all:
+  children:
+    k8s:
+      hosts:
+        k8s-master:
+          ansible_host: 192.168.21.126
+          ansible_python_interpreter: /usr/bin/python3
+          ansible_user: artia
+        k8s-node1:
+          ansible_host: 192.168.21.104
+          ansible_python_interpreter: /usr/bin/python3
+          ansible_user: artia
+        k8s-node2:
+          ansible_host: 192.168.21.249
+          ansible_python_interpreter: /usr/bin/python3
+          ansible_user: artia
+        k8s-node3:
+          ansible_host: 192.168.21.182
+          ansible_python_interpreter: /usr/bin/python3
+          ansible_user: artia
+        k8s-node4:
+          ansible_host: 192.168.21.246
+          ansible_python_interpreter: /usr/bin/python3
+          ansible_user: artia
+    ubuntu:
+      hosts:
+        k8s-dev:
+          ansible_host: 192.168.21.231
+          ansible_python_interpreter: /usr/bin/python3
+          ansible_user: artia
+artia@k8s-dev:~/ansible-project$
+
+
+
+
+GOAL 1 : Test the host machine access
+==========================
+ansible all -m ping -i inventory.ini
+artia@k8s-dev:~/ansible-project$ ansible all -m ping -i inventory.ini
+k8s-master | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+k8s-node1 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+k8s-node2 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+k8s-node3 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+k8s-node4 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+k8s-dev | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+
+==========================
+
+
+==========================
+GOAL 2: TOO GOOD: this will pull all data about all nodes. its OS, CPU, MEmory, disks fs etc etc. like systemgrains in salt. these can used with 'when' to conditinally configure hosts.
+The setup module fetches all the data from the remote target nodes and displays it on your terminal. e.g. update cache when "ansible_distribution": "Ubuntu",
+ansible all -m setup
+==========================
+
+
+GOAL 3: update ubuntu apt packages / cache
+ansible-playbook -i inventory.ini playbook_apt_update.yml
+
+Goal 4 : 
+ansible-playbook -i inventory.ini install-common-tools.yml
+
+kubernetes cluster
+https://infotechys.com/install-kubernetes-using-ansible-on-ubuntu-24-04/
+
+
+
+GOAL 1
+touch k8s.yml
+  ---
+  - name: Set up a web server
+    hosts: webservers
+    become: true
+    tasks:
+      - name: Ensure Apache is installed
+        apt:
+          name: apache2
+          state: present
+
+      - name: Ensure Apache is running
+        service:
+          name: apache2
+          state: started
+          enabled: true
+
+      - name: Deploy custom index.html
+        copy:
+          src: /path/to/your/local/index.html
+          dest: /var/www/html/index.html
+          mode: 0644
+
+
+
+
+
+
+
+
+
+Ansible Nmap plugin: 
+inventory.yml : Ansible inventory file: Write your own inventory script to generate inventories dynamically. use nmap
+============================
+/etc/ansible/hosts
+
+
+
+artia@k8s-dev:~$ ansible --version
+ansible [core 2.16.3]
+  config file = None
+  configured module search path = ['/home/artia/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/artia/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible
+  python version = 3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0] (/usr/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
