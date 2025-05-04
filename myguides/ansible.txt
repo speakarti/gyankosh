@@ -140,8 +140,11 @@ ansible-playbook -i inventory.ini install-common-tools.yml
 
 kubernetes cluster
 https://infotechys.com/install-kubernetes-using-ansible-on-ubuntu-24-04/
-
-
+https://infotechys.com/install-kubernetes-using-ansible-on-ubuntu-24-04/
+https://www.youtube.com/watch?v=raIcSbX0AzI&t=381s
+https://github.com/HouseOfLogicGH/KubernetesOnProxmoxWithTerraformAndAnsible
+https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/
+https://www.cherryservers.com/blog/install-kubernetes-ubuntu
 
 GOAL 1
 touch k8s.yml
