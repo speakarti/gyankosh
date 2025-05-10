@@ -1,0 +1,87 @@
+ILO Server SSH access via openwrt
+=================================
+login to openwrt
+opkg update
+opkg install openssh-client
+
+iLO SSH server is offering only older, less secure key exchange algorithms (like diffie-hellman-group14-sha1 and diffie-hellman-group1-sha1), which are not enabled by default in newer SSH clients due to security concerns.
+so use below to connect 
+/usr/bin/ssh -oKexAlgorithms=diffie-hellman-group14-sha1 -oHostKeyAlgorithms=ssh-rsa artia@192.168.2.110
+
+
+commands which worked on HP Proliant 
+======================================
+show -a
+power reset (worked)
+show /system1 (worked)
+help 
+power off
+power on
+
+
+POWER    : Control server power.
+UID      : Control Unit-ID light.
+ONETIMEBOOT: Access One-Time Boot setting.
+NMI      : Generate an NMI.
+VM       : Virtual media commands.
+LANGUAGE : Command to set or get default language
+VSP      : Invoke virtual serial port.
+TEXTCONS : Invoke Remote Text Console.
+TESTTRAP : Sends a test SNMP trap to the configured alert destinations.
+
+
+</>hpiLO-> help power
+
+status=0
+status_tag=COMMAND COMPLETED
+Sat May 10 02:03:54 2025
+
+
+POWER  : The power command is used to change the power state of the server
+ and is limited to users with the Power and Reset privilege
+Usage:
+  power          -- Displays the current server power state
+  power on       -- Turns the server on
+  power off      -- Turns the server off
+  power off hard -- Force the server off using press and hold
+  power reset    -- Reset the server
+
+
+</>hpiLO-> show /map1
+
+status=0
+status_tag=COMMAND COMPLETED
+Sat May 10 02:31:59 2025
+
+
+
+/map1
+  Targets
+    firmware1
+    accounts1
+    log1
+    enetport1
+    dhcpendpt1
+    dnsendpt1
+    gateway1
+    dnsserver1
+    dnsserver2
+    dnsserver3
+    settings1
+    config1
+    snmp1
+    oemhp_dircfg1
+    oemhp_vm1
+    vlan1
+    oemhp_ssocfg1
+    oemhp_syslog1
+    oemhp_alertmail1
+    oemhp_ahs1
+    oemhp_license1
+  Properties
+    name=iLO 4
+    license=xxxxxxxxxxxxxxxxxxxx5RQR2
+    oemhp_licensetype=iLO Advanced
+    manual_iLO_reset=no
+  Verbs
+    cd version exit show reset set oemhp_ping oemhp_clearRESTAPIstate

@@ -1,11 +1,17 @@
-sudo apt update & sudo apt upgrade -y
-sudo apt install qemu-guest-agent, nano, vim, git, openssh-server, apt-utils, net-tools, nmap, file
+#setup dev server, install ubuntu server 24.04, 
+$ sudo apt update & sudo apt upgrade -y
+$ sudo apt install qemu-guest-agent, nano, vim, git, openssh-server, apt-utils, net-tools, nmap, file
+# setup git and ssh on dev server, git need ssh server. 
 
-ensure ssh is instaled and configured
-ssh -V
-sudo systemctl enable ssh
-sudo systemctl start ssh
-sudo systemctl status ssh
+# ensure ssh is instaled and configured
+$ ssh -V
+$ sudo systemctl enable ssh
+$ sudo systemctl start ssh
+$ sudo systemctl status ssh
+
+
+# setup git connection
+
 
 ensure both private and public keys have same name.
 private key file name no extension and public key ha .pub extension (id_rsa and id_rsa.pub). a). If your key is in the default location and follows the default naming conventions (id_rsa, id_ed25519, etc.), SSH will use it automatically. and it will not be mandatory to use -i <private key> for ssh conenct
@@ -29,7 +35,7 @@ python3 --version
 
 sudo apt install ansible
 ansible --version
-ansible-doc -t inventory -l
+ansible-doc -t inventory -l (show documentation for Ansible modules and plugins, lists all available inventory plugins in Ansible)
 sudo apt install nmap
 sudo nmap -v -n -p- -sT -sV -O --osscan-limit --max-os-tries 1 -oX $HOME/home_scan.xml 192.168.21.0/24
 mkdir ~/ansible-project
@@ -93,7 +99,7 @@ artia@k8s-dev:~/ansible-project$
 
 
 
-GOAL 1 : Test the host machine access
+GOAL 1 : Test the host machine access, use ping module
 ==========================
 ansible all -m ping -i inventory.ini
 artia@k8s-dev:~/ansible-project$ ansible all -m ping -i inventory.ini
@@ -128,7 +134,7 @@ k8s-dev | SUCCESS => {
 ==========================
 GOAL 2: TOO GOOD: this will pull all data about all nodes. its OS, CPU, MEmory, disks fs etc etc. like systemgrains in salt. these can used with 'when' to conditinally configure hosts.
 The setup module fetches all the data from the remote target nodes and displays it on your terminal. e.g. update cache when "ansible_distribution": "Ubuntu",
-ansible all -m setup
+$ ansible all -m setup
 ==========================
 
 
@@ -139,7 +145,6 @@ Goal 4 :
 ansible-playbook -i inventory.ini install-common-tools.yml
 
 kubernetes cluster
-https://infotechys.com/install-kubernetes-using-ansible-on-ubuntu-24-04/
 https://infotechys.com/install-kubernetes-using-ansible-on-ubuntu-24-04/
 https://www.youtube.com/watch?v=raIcSbX0AzI&t=381s
 https://github.com/HouseOfLogicGH/KubernetesOnProxmoxWithTerraformAndAnsible
