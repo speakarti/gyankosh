@@ -9,8 +9,7 @@ $ sudo systemctl enable ssh
 $ sudo systemctl start ssh
 $ sudo systemctl status ssh
 
-
-# setup git connection
+# setup git connection - on dev server
 
 
 ensure both private and public keys have same name.
