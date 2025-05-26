@@ -1,22 +1,28 @@
 #setup dev server, install ubuntu server 24.04, 
+$ ip a (192.168.2.156)
 $ sudo apt update & sudo apt upgrade -y
-$ sudo apt install qemu-guest-agent, nano, vim, git, openssh-server, apt-utils, net-tools, nmap, file
+$ sudo apt install qemu-guest-agent, nano, vim, git, openssh-server, apt-utils, net-tools, nmap, file, ansible
 # setup git and ssh on dev server, git need ssh server. 
 
-# ensure ssh is instaled and configured
+# ensure ssh is installed and configured. prvate and public keys are added. and we are able to connec to his server from local ssh client i.e ssh -i id_rsa artia@server
 $ ssh -V
 $ sudo systemctl enable ssh
 $ sudo systemctl start ssh
 $ sudo systemctl status ssh
 
+# copy id_rsa and id_rsa.pub keys in ~/.ssh folders
+# copy public key ()id_rsa.pub) contents in ~/.sshauthoried_keys file (to enable ssh connection among dev and k8s servers/nodes)
+# also to connect to these servers from outside proxmox
+# dev host on srb pve (192.168.21.231) 
+# ensure both private and public keys have same name.
+# private key file name no extension and public key ha .pub extension (id_rsa and id_rsa.pub). a). If your key is in the default location and follows the default naming conventions (id_rsa, id_ed25519, etc.), SSH will use it automatically. and it will not be mandatory to use -i <private key> for ssh conenct
+#if used putty key gen, then in public key file copy conents from top box which is for authorize key, and for private key use "Export OPEN SSH (use new key fomrat), else it will create many issues.
+#b) Use the ~/.ssh/config file for custom keys with specific hosts (if we want to use differnt keys for different hoss).
+#c) Use the SSH agent to hold your keys in memory for easy use across sessions. (eval $(ssh-agent) and ssh-add ~/.ssh/id_rsa, ssh-add -l)
+
 # setup git connection - on dev server
+# Goal ssh -Tv git@github.com shoudl work (refer git_gyan.txt)
 
-
-ensure both private and public keys have same name.
-private key file name no extension and public key ha .pub extension (id_rsa and id_rsa.pub). a). If your key is in the default location and follows the default naming conventions (id_rsa, id_ed25519, etc.), SSH will use it automatically. and it will not be mandatory to use -i <private key> for ssh conenct
-if used putty key gen, then in public key file copy conents from top box which is for authorize key, and for private key use "Export OPEN SSH (use new key fomrat), else it will create many issues.
-b) Use the ~/.ssh/config file for custom keys with specific hosts (if we want to use differnt keys for different hoss).
-c) Use the SSH agent to hold your keys in memory for easy use across sessions. (eval $(ssh-agent) and ssh-add ~/.ssh/id_rsa, ssh-add -l)
 
 created ansible.cfg under /home/username/ansible-project/ansible.cfg to make ping work from ansible controller to all hosts. added host_key_checking as false to make ssh work well.
 nano ~/ansible-project/ansible.cfg
@@ -32,9 +38,9 @@ ls .ssh
 python3 --version
 
 
-sudo apt install ansible
-ansible --version
-ansible-doc -t inventory -l (show documentation for Ansible modules and plugins, lists all available inventory plugins in Ansible)
+$ sudo apt install ansible (if not already installed)
+$ ansible --version
+$ ansible-doc -t inventory -l (show documentation for Ansible modules and plugins, lists all available inventory plugins in Ansible)
 sudo apt install nmap
 sudo nmap -v -n -p- -sT -sV -O --osscan-limit --max-os-tries 1 -oX $HOME/home_scan.xml 192.168.21.0/24
 mkdir ~/ansible-project
@@ -61,7 +67,11 @@ ansible_python_interpreter=/usr/bin/python3
 
 
 
-ansible-inventory --list -y
+$ ansible-inventory --list -y
+{}
+
+#create ansible-inventory
+
 artia@k8s-dev:~/ansible-project$ ansible-inventory --list -y
 all:
   children:
@@ -138,7 +148,7 @@ $ ansible all -m setup
 
 
 GOAL 3: update ubuntu apt packages / cache
-ansible-playbook -i inventory.ini playbook_apt_update.yml
+ansible-playbook -i inventory.ini ./playbooks/update_ubuntu.yml
 
 Goal 4 : 
 ansible-playbook -i inventory.ini install-common-tools.yml

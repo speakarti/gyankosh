@@ -1,0 +1,285 @@
+Here are a few examples of how to create deployments in Kubernetes, along with some exercises that will help you learn key Kubernetes features.
+
+1. Basic Deployment:
+Let’s start with a simple example of deploying an Nginx application.
+
+Create a Deployment for Nginx:
+
+First, create a YAML file (nginx-deployment.yaml):
+
+yaml
+Copy
+Edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+Apply the deployment using kubectl:
+
+
+kubectl apply -f nginx-deployment.yaml
+Check the Deployment:
+
+
+kubectl get deployments
+kubectl get pods
+This will show you the number of pods running for your Nginx deployment.
+
+2. Expose Deployment with a Service:
+Now, let’s expose the Nginx deployment using a Kubernetes service to allow external access.
+
+Create a Service to Expose Nginx Deployment:
+
+Create another YAML file (nginx-service.yaml):
+
+yaml
+Copy
+Edit
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+Apply the service:
+
+
+kubectl apply -f nginx-service.yaml
+Verify the Service:
+
+
+kubectl get svc
+This will show the external IP or LoadBalancer address (if using cloud environments) where your Nginx service can be accessed.
+
+3. Update a Deployment:
+Now, let’s practice updating an existing deployment by changing the Nginx image version.
+
+Update the Deployment Image:
+
+Use the following command to update the deployment to a new image:
+
+
+kubectl set image deployment/nginx-deployment nginx=nginx:1.19.0
+Verify the Update:
+
+You can check the rollout status:
+
+
+kubectl rollout status deployment/nginx-deployment
+To check if the deployment was successfully updated:
+
+
+kubectl get pods
+This will show the updated pods with the new image.
+
+4. Scaling a Deployment:
+You can scale the deployment to run more or fewer replicas.
+
+Scale the Deployment:
+
+To scale the deployment to 5 replicas:
+
+
+kubectl scale deployment/nginx-deployment --replicas=5
+Verify the Scaling:
+
+
+kubectl get deployments
+kubectl get pods
+5. Rolling Back a Deployment:
+In case the update has issues, you can roll back to the previous version.
+
+Rollback to Previous Version:
+
+Use the following command to roll back the deployment to the previous stable state:
+
+
+kubectl rollout undo deployment/nginx-deployment
+Check the Rollback:
+
+
+kubectl get pods
+6. Create a Deployment with Environment Variables:
+Let’s create a deployment where the container uses environment variables.
+
+Deployment YAML with Environment Variables:
+
+Create a new YAML file (env-deployment.yaml):
+
+yaml
+Copy
+Edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: env-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: env-example
+  template:
+    metadata:
+      labels:
+        app: env-example
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        env:
+        - name: MY_ENV_VAR
+          value: "Hello, Kubernetes!"
+        ports:
+        - containerPort: 80
+Apply the deployment:
+
+
+kubectl apply -f env-deployment.yaml
+Check the Environment Variables:
+
+To check the environment variables of the running container, run:
+
+
+kubectl exec -it <pod-name> -- env
+7. Using ConfigMaps and Secrets in Deployments:
+Kubernetes ConfigMaps and Secrets allow you to store non-sensitive and sensitive data, respectively, to be consumed by containers.
+
+ConfigMap:
+Create a ConfigMap from a File:
+
+Suppose you have a configuration file (nginx.conf), and you want to create a ConfigMap from it:
+
+
+kubectl create configmap nginx-config --from-file=nginx.conf
+Use ConfigMap in a Deployment:
+
+Create a deployment that uses the nginx.conf from the ConfigMap.
+
+Example of nginx-deployment-with-configmap.yaml:
+
+yaml
+Copy
+Edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+        ports:
+        - containerPort: 80
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+Apply the deployment:
+
+
+kubectl apply -f nginx-deployment-with-configmap.yaml
+Secrets:
+Create a Secret:
+
+Create a secret using a command:
+
+
+kubectl create secret generic db-password --from-literal=password='mysecretpassword'
+Use the Secret in a Deployment:
+
+Modify the deployment YAML to use the secret. Example:
+
+yaml
+Copy
+Edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: postgres:latest
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-password
+              key: password
+        ports:
+        - containerPort: 5432
+Apply the deployment:
+
+
+kubectl apply -f db-deployment-with-secret.yaml
+8. Clean Up Resources:
+Delete a Deployment:
+
+
+kubectl delete deployment nginx-deployment
+Delete a Service:
+
+
+kubectl delete service nginx-service
+Delete All Resources in a Namespace:
+
+
+kubectl delete all --all -n <namespace>
+Learning Tasks to Practice:
+Create a multi-container pod with two containers: one running a web server (like Nginx) and the other running a logging container. Use shared volumes for logs.
+
+Set up Horizontal Pod Autoscaling (HPA) based on CPU usage. Create a deployment with 3 replicas, and configure HPA to automatically scale when CPU usage exceeds a threshold.
+
+Deploy a StatefulSet for a database that requires persistent storage (e.g., MySQL or MongoDB), and use a PersistentVolume and PersistentVolumeClaim.
+
+Set up a Helm Chart to deploy a complex application (like WordPress with MySQL) and practice managing it via Helm.
+
+Configure Network Policies to allow communication between certain services in your cluster but block others.
+
+Create an Ingress Controller with an example of routing external HTTP traffic to services inside your Kubernetes cluster.
+

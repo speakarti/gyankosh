@@ -1,0 +1,125 @@
+k8s Cluster setup using ansible
+====================================
+
+ansible-playbook -i inventory.ini ../k8s-cicd-setup/ansible/playbooks/update_ubuntu.yml
+ansible-playbook -i inventory.ini ../k8s-cicd-setup/ansible/playbooks/install_common_tools.yml
+
+
+Disabling swap
+Installing dependencies
+Initializing the master
+Distributing the join token
+Joining workers
+
+✅ 1. Prerequisites on All Nodes
+Disabled swap:
+sudo swapoff -a (Comment out swap in /etc/fstab to make it persistent.)
+
+Installed:
+kubeadm
+kubelet
+kubectl (on the master)
+containerd or docker (container runtime)
+Set cgroupDriver=systemd if using containerd or Docker.
+
+
+✅ 2. Initialize Kubernetes Master
+On the master node:
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+Save the kubeadm join ... command it outputs — this will be used to join worker nodes.
+
+Set up kubectl config (as a non-root user):
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+✅ 3. Install Pod Network Plugin
+For example, with Flannel:
+
+
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+Other options: Calico, Weave, Cilium.
+
+✅ 4. Join Worker Nodes
+Use the kubeadm join ... command on each worker node, for example:
+
+
+sudo kubeadm join <master-ip>:6443 --token abcdef.0123456789abcdef \
+  --discovery-token-ca-cert-hash sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+You can use Ansible to automatically run this command on all workers if you save the token output.
+
+✅ 5. Verify the Cluster
+Back on the master node:
+
+
+kubectl get nodes
+You should see the master and all four worker nodes listed as Ready.
+
+
+
+
+
+
+artia@k8s-master:~$ kubectl cordon k8s-node1
+node/k8s-node1 cordoned
+artia@k8s-master:~$ kubectl cordon k8s-node2
+node/k8s-node2 cordoned
+artia@k8s-master:~$ kubectl cordon k8s-node3
+node/k8s-node3 cordoned
+artia@k8s-master:~$ kubectl cordon k8s-node4
+node/k8s-node4 cordoned
+artia@k8s-master:~$ kubectl get nodes
+NAME         STATUS                     ROLES           AGE     VERSION
+k8s-master   Ready                      control-plane   5h27m   v1.33.0
+k8s-node1    Ready,SchedulingDisabled   <none>          4h30m   v1.33.0
+k8s-node2    Ready,SchedulingDisabled   <none>          4h30m   v1.33.0
+k8s-node3    Ready,SchedulingDisabled   <none>          4h30m   v1.33.0
+k8s-node4    Ready,SchedulingDisabled   <none>          4h30m   v1.33.0
+artia@k8s-master:~$ kubectl drain k8s-node1 --ignore-daemonsets --delete-local-data
+error: unknown flag: --delete-local-data
+See 'kubectl drain --help' for usage.
+artia@k8s-master:~$ kubectl drain k8s-node1 --ignore-daemonsets
+node/k8s-node1 already cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-d5s7m, kube-system/kube-proxy-b2nxl
+node/k8s-node1 drained
+artia@k8s-master:~$ kubectl drain k8s-node2 --ignore-daemonsets
+node/k8s-node2 already cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-jgqrq, kube-system/kube-proxy-jg9pm
+node/k8s-node2 drained
+artia@k8s-master:~$ kubectl drain k8s-node3 --ignore-daemonsets
+node/k8s-node3 already cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-hr9kb, kube-system/kube-proxy-45w74
+node/k8s-node3 drained
+artia@k8s-master:~$ kubectl drain k8s-node4 --ignore-daemonsets
+node/k8s-node4 already cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-pkzlw, kube-system/kube-proxy-v44hc
+node/k8s-node4 drained
+artia@k8s-master:~$
+Broadcast message from root@k8s-master on pts/3 (Sun 2025-05-11 05:52:01 UTC):
+
+
+
+
+artia@k8s-dev:~/cyberranges/k8s-cluster$ ansible-playbook -i inventory.ini ./playbooks/shutdown.yml
+
+PLAY [Shutdown all servers] **********************************************************************************************************************************
+
+TASK [Gathering Facts] ***************************************************************************************************************************************
+ok: [k8s-node3]
+ok: [k8s-node1]
+ok: [k8s-node2]
+ok: [k8s-master]
+ok: [k8s-dev]
+ok: [k8s-node4]
+
+TASK [Shut down the server] **********************************************************************************************************************************
+
+Broadcast message from root@k8s-dev on pts/7 (Sun 2025-05-11 05:52:01 UTC):
+
+Shutdown initiated by Ansible
+The system will power off now!
+
+changed: [k8s-node3]
+
+Remote side unexpectedly closed network connection
+

@@ -59,7 +59,8 @@ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 sudo apt-get update
 sudo apt-get install -y kubeadm kubectl kubelet
 
-create a template of node instance
+
+create a template of node instance (this is for kubernetes node, so that we can have multiple nodes from this stage, master and worker)
 ---------------------------------
 $ sudo cloud-init clean
 $ sudo rm -rf  /var/lib/cloud/instances

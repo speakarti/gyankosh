@@ -64,30 +64,41 @@ following two files will be generated
 ~/.ssh/id_ed25519.pub
 ~/.ssh/id_ed25519
 
-#Use private key (id_ed25519) on local server and Copy public key to a remote server to connect, in this case its github.
+#keep private key (id_ed25519) on local server, where you want to connect to git from and Copy public key to a remote server to connect, in this case its github.
 #Use below command if we need to access/copy this private key file from another unix server
-$ scp -i ~/.ssh/ssh_rsa_hl001_privatekey_artia_opensshformat  ~/.ssh/id_ed25519 artia@192.168.1.169:/home/artia/.ssh/
+# upload these both keys from your storage to ~/.ssh
+$ scp -i ~/.ssh/id_ed25519 artia@192.168.1.169:/home/artia/.ssh/
 
 # On github portal - go to main github account settings -> ssh and GPG keys ->  new ssh keys - > 
 githubkey_agupta_speakarti_repo
 # paste .pub key contents
+# it will display SHA256 code, which you can cross check at any time with command ssh-keygen -lf .\id_ed25519.pub
+$ chmod 600 id_id_ed25519 (Protect private key to be rw only by owner)
+$ chmod 644 id_id_ed25519.pub (public key to be r by all, but write by owner)
 
 # Test ssh connection
 # test ssh keys connection from local server having private key
-$ ssh -T git@github.com
+$ ssh -Tv git@github.com
 Hi speakarti! You've successfully authenticated, but GitHub does not provide shell access.
 
 #Configure Remote Repository
-
-Push changes to remote repo
-================================
-move to local repository (folder where above cloned repository is available)
-git remote
-git remote add origin git@github.com:speakarti/gyankosh.git
-git remote set-url origin git@github.com:speakarti/gyankosh.git
-
+==========================
+# Test Push changes to remote repo, move to local repository (folder where above cloned repository is available) git@github.com:speakarti/gyankosh.git
 $ git config --global user.email speakarti@gmail.com
 $ git config --global user.name speakarti
+
+# use existing repo
+$ cd <projectfolder>
+$ git clone git@github.com:speakarti/cyberranges.git
+$ cd cyberranges
+$ git remote -v
+origin  git@github.com:speakarti/cyberranges.git (fetch)
+origin  git@github.com:speakarti/cyberranges.git (push)
+
+# OR create a new repo and set origin
+$ git init (to create a new repo) 
+$ git remote add origin git@github.com:speakarti/gyankosh.git
+$ git remote set-url origin git@github.com:speakarti/gyankosh.git
 
 $ git remote -v
 origin  https://github.com/speakarti/gyankosh.git (fetch)
@@ -162,3 +173,14 @@ git clone git@bitbucket.org:mail2artia/gyankosh.git OR
 git clone git@bitbucket.org:mail2artia/gyankosh.git gyankosh_bitbucket
 
 
+#create feature branch under develop branch
+########################
+git fetch --all
+git checkout -b develop origin/develop
+git checkout -b feature/k8s_cluster_setup develop
+mkdir -p k8s-cicd-setup/ansible
+mkdir -p k8s-cicd-setup/terraform
+tounch k8s-cicd-setup/ansible/inventory.ini
+git add .
+git commit -m "basic k8s setup"
+git push --set-upstream origin feature/k8s_cluster_setup

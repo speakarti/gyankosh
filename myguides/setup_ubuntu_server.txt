@@ -102,9 +102,6 @@ agupta@hpchanchal:~$ ip r | grep default
 default via 192.168.29.1 dev ens3 proto dhcp src 192.168.29.22 metric 100 
 Browser -> 192.168.29.1 -> admin/password
 
-
-
-
 Remotely manage ubuntu server with SSH
 =======================================
 sudo apt update && sudo apt upgrade
