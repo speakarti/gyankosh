@@ -1,0 +1,18 @@
+proxmox - Core Proxmox CLI Tools for Automation
+=======
+qm	Manage QEMU/KVM virtual machines (create, start, stop, snapshot, etc.)
+pvesh	Access the Proxmox API via CLI – powerful for scripting and automation
+pvesm	Manage storage volumes – list, create, remove volumes, upload ISO, etc.
+pveum	Proxmox User Manager – manage users, groups, permissions
+zpool, zfs	Manage ZFS pools and datasets (if using ZFS)
+lvs, vgs, pvs	LVM-related tools – used to manage logical volumes
+pct	Manage LXC containers (similar to qm but for containers)
+pvecm	Manage Proxmox VE cluster membership (add/remove nodes, quorum, etc.)
+pvectl	Internal CLI used by PVE – usually not called manually
+pveam	Proxmox Appliance Manager – list/download LXC templates
+pveproxy	Proxmox Web GUI service proxy – mostly managed by systemd
+pveperf	Run a quick performance benchmark (CPU, disk I/O, etc.)
+pvereport	Generates a system report useful for debugging or support
+pvesubscription	Manage subscription status of the node
+pvecfs	Proxmox Cluster File System (PMXCFS) related tool
+pveversion	Show installed PVE version and package info
