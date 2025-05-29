@@ -89,51 +89,21 @@ Sat May 10 02:31:59 2025
 
 
 Method 1: Remove Power-On Password via BIOS (If You Know the Password)
-Steps:
-Reboot the server.
-
+Steps:Reboot the server.
 When prompted, enter the Power-On Password to proceed.
-
 Press F9 to enter System Utilities.
-
-Go to:
-
-pgsql
-Copy
-Edit
-System Configuration → BIOS/Platform Configuration → Security Options
+Go to:System Configuration → BIOS/Platform Configuration → Security Options
 Find the Power-On Password option.
-
 Choose Change Password.
-
 When prompted:
-
 Enter the current password.
-
 Leave the new password and confirm password fields blank.
-
 Save and exit (F10).
-
 This will clear the power-on password.
 
 
 Hp proliant DL380 gen 9 change Controller mode from RAID to HBA
 https://support.hpe.com/connect/s/product?kmpmoid=7274889&tab=driversAndSoftware
-Sort by:
-Severity
-Sorted: None	
-Type | Subtype
-
-Sort by:
-Title
-Sorted: None
-
-Sort by:
-Version
-Sorted Descending
-
-Environment
-
 Firmware | Storage Controller
 Online ROM Flash Component for Windows (x64) - HPE 12Gb/s SAS Expander Firmware for HPE Smart Array Controllers and HPE HBA Controllers
 5.15(D)
@@ -177,7 +147,7 @@ HPG3(J)
 
 
 
-pdate the Smart Array P440ar controller firmware to enable HBA mod
+Update the Smart Array P440ar controller firmware to enable HBA mod
 to change frm RAID to HBA vice versa, ensure no logical drive is enabled, bcz it use all physical ports to RAID, there are options to chnage all or a mixed mode of HBA.
 
 controller mode : HBA
@@ -186,15 +156,10 @@ all disks are enabled fo rHBA
 f your HP Smart Array P440ar controller is now in HBA mode, that means your disks will be presented directly to the operating system as individual, unconfigured drives — no RAID layer in between.
 
 Disks show up as raw devices (e.g., /dev/sda, /dev/sdb, etc.) — ideal for:
-
 ZFS
-
 Linux software RAID (mdadm)
-
 Ceph
-
 VM passthrough
-
 No Smart Array RAID features (caching, striping, mirroring, etc.) will be active.
 
 
@@ -207,7 +172,7 @@ zfs create zfspool/data
 zfs list
 You’ll now have a mountable directory at /zfspool/data or similar.
 
-root@pve:~# fdisk -l /dev/sda
+# fdisk -l /dev/sda
 Disk /dev/sda: 3.64 TiB, 4000787030016 bytes, 7814037168 sectors
 Disk model: SMBP4000S5xeN7.2
 Units: sectors of 1 * 512 = 512 bytes
@@ -219,28 +184,25 @@ Disk identifier: BDC274B7-B7DE-3147-BA08-2AC3CDC53FD6
 Device          Start        End    Sectors  Size Type
 /dev/sda1        2048 7814019071 7814017024  3.6T Solaris /usr & Apple ZFS
 /dev/sda9  7814019072 7814035455      16384    8M Solaris reserved 1
-root@pve:~#
+#
 
-root@pve:~# zfs list
+# zfs list
 NAME           USED  AVAIL  REFER  MOUNTPOINT
 zfspool        540K  3.51T    96K  /zfspool
 zfspool/data    96K  3.51T    96K  /zfspool/data
 
 
 Pool name: zfspool
-
 Dataset: zfspool/data
-
 Mountpoint: /zfspool/data
-
 Free space: ~3.51 TiB available
 
 
-root@pve:~# zfs list
+# zfs list
 NAME           USED  AVAIL  REFER  MOUNTPOINT
 zfspool        540K  3.51T    96K  /zfspool
 zfspool/data    96K  3.51T    96K  /zfspool/data
-root@pve:~# cd /zfspool/data
+# cd /zfspool/data
 
 Use it as storage for Proxmox VMs/containers
 create more datasets
@@ -253,23 +215,14 @@ root@pve:/zfspool/data#
 
 Optional: Add It to Proxmox Storage
 If you're using this for VMs:
-
 Go to Datacenter → Storage → Add → ZFS.
-
 Set:
-
 ID: local-zfs
-
 Pool: zfspool
-
 Content: Disk image, container
-
 Save.
-
 Now you can store VM disks on this ZFS pool.
-
 https://www.youtube.com/watch?v=-qk_P9SKYK4
-
 sudo rsync -aAXv /source/ /destination/
 
 
@@ -369,7 +322,7 @@ root@pve:/#
 sudo apt install smartmontools
 sudo smartctl -t short /dev/sda
 
-root@pve:~# zpool status -v
+# zpool status -v
   pool: zfspool
  state: SUSPENDED
 status: One or more devices are faulted in response to IO failures.
@@ -382,7 +335,7 @@ config:
           wwn-0x5000c500ae8390c3  ONLINE       3     0     0
 
 errors: List of errors unavailable: pool I/O is currently suspended
-root@pve:~# 
+# 
 
 
 ls -l /dev/disk/by-id/
@@ -400,7 +353,7 @@ zpool labelclear -f /dev/sdX
 
 ls -l /dev/disk/by-id/
 
-root@pve:~# lsblk -o NAME,SIZE,TYPE,MOUNTPOINT,MODEL
+# lsblk -o NAME,SIZE,TYPE,MOUNTPOINT,MODEL
 NAME                           SIZE TYPE MOUNTPOINT MODEL
 sda                            3.6T disk            SMBP4000S5xeN7.2
 sdb                            3.6T disk            SMBP4000S5xeN7.2
@@ -425,7 +378,7 @@ sdc                          111.8G disk            HP SSD S700 120GB
       ├─pve-vm--100--disk--1     8G lvm             
       └─pve-vm--101--disk--0     8G lvm             
 sr0                           1024M rom             HPE DVDRW DU8AESH
-root@pve:~# ls -l /dev/disk/by-id/
+# ls -l /dev/disk/by-id/
 total 0
 lrwxrwxrwx 1 root root  9 May 19 20:05 ata-HPE_DVDRW_DU8AESH_446644917596 -> ../../sr0
 lrwxrwxrwx 1 root root  9 May 19 20:05 ata-HP_SSD_S700_120GB_HBSA10263801487 -> ../../sdc
@@ -451,9 +404,9 @@ lrwxrwxrwx 1 root root  9 May 19 20:05 wwn-0x5000c500ae8390c3 -> ../../sdb
 lrwxrwxrwx 1 root root 10 May 19 20:05 wwn-0x5000c500ae8390c3-part1 -> ../../sdb1
 lrwxrwxrwx 1 root root 10 May 19 20:05 wwn-0x5000c500ae8390c3-part9 -> ../../sdb9
 lrwxrwxrwx 1 root root  9 May 19 20:05 wwn-0x5000c500c9abd3b3 -> ../../sda
-root@pve:~# 
+# 
 
-root@pve:~# ls -l /dev/disk/by-id/ | grep -E 'wwn|scsi-' | grep -E 'sd[a-z]$' | awk '{print $9, "->", $11}' | sort
+# ls -l /dev/disk/by-id/ | grep -E 'wwn|scsi-' | grep -E 'sd[a-z]$' | awk '{print $9, "->", $11}' | sort
 scsi-35000c500ae8390c3 -> ../../sdb
 scsi-35000c500c9abd3b3 -> ../../sda
 wwn-0x5000c500ae8390c3 -> ../../sdb
@@ -490,13 +443,13 @@ zpool create artizpool mirror \
   /dev/disk/by-id/wwn-0x5000c500c9abd3b3 \
   /dev/disk/by-id/wwn-0x5000c500ae8390c3
 
-root@pve:~# zfs list
+# zfs list
 NAME        USED  AVAIL  REFER  MOUNTPOINT
 artizpool   360K  3.51T    96K  /artizpool
-root@pve:~# 
+# 
 
 
-root@pve:~# zpool status
+# zpool status
   pool: artizpool
  state: ONLINE
 config:
@@ -508,7 +461,7 @@ config:
             wwn-0x5000c500ae8390c3  ONLINE       0     0     0
 
 errors: No known data errors
-root@pve:~# 
+# 
 
 zfs create artizpool/backups-hdds-20May2025
 
@@ -547,50 +500,31 @@ nmcli connection modify "OpenWrt24" connection.autoconnect-priority 10
 nmcli connection modify "svuesa" connection.autoconnect yes
 nmcli connection modify "svuesa" connection.autoconnect-priority 5
 
-artia@dell001:~$ nmcli connection show
+$ nmcli connection show
 NAME            UUID                                  TYPE      DEVICE
 OpenWrt24       c86141e2-8768-4f72-8ce0-e368c26db109  wifi      wlp2s0
 lo              f58ff821-86e9-4bd8-8ecf-9143ff01ffae  loopback  lo
 Chefdee         b5a9a806-e1a3-4c82-a326-02a508b31455  wifi      --
 netplan-enp1s0  cac41fbe-bc18-3d87-bba7-af2af7f8ffab  ethernet  --
 svuesa          8844be8b-d96b-4206-b97a-04e700ed6ecf  wifi      --
-artia@dell001:~$
+$
 
 
 
 
-artia@dell001:~$ nmcli -f NAME,UUID,TYPE,AUTOCONNECT,AUTOCONNECT-PRIORITY connection show
+$ nmcli -f NAME,UUID,TYPE,AUTOCONNECT,AUTOCONNECT-PRIORITY connection show
 NAME            UUID                                  TYPE      AUTOCONNECT  AUTOCONNECT-PRIORITY
 OpenWrt24       c86141e2-8768-4f72-8ce0-e368c26db109  wifi      yes          0
 lo              f58ff821-86e9-4bd8-8ecf-9143ff01ffae  loopback  no           0
 Chefdee         b5a9a806-e1a3-4c82-a326-02a508b31455  wifi      yes          0
 netplan-enp1s0  cac41fbe-bc18-3d87-bba7-af2af7f8ffab  ethernet  yes          0
 svuesa          8844be8b-d96b-4206-b97a-04e700ed6ecf  wifi      yes          0
-artia@dell001:~$
+$
 
 
 nmap -sL 192.168.1.0/24 | awk '/Nmap scan report/{print $NF}'
-
-root@100:~# nmap -sn 192.168.1.0/24 -oG - | awk '/Up$/{print $2}'
-192.168.1.1
-192.168.1.12
-192.168.1.50
-192.168.1.81
-192.168.1.106
-192.168.1.111
-192.168.1.171
-192.168.1.180
-root@100:~# 
-
-root@100:~# nmap -sn 192.168.2.0/24 -oG - | awk '/Up$/{print $2}'
-192.168.2.1
-192.168.2.110
-192.168.2.125
-192.168.2.210
-192.168.2.225
-192.168.2.236
-192.168.2.172
-root@100:~# 
+# nmap -sn 192.168.1.0/24 -oG - | awk '/Up$/{print $2}'
+# nmap -sn 192.168.2.0/24 -oG - | awk '/Up$/{print $2}'
 
 
 sudo nohup rsync -aAXXv /mnt/ST500LT012-9WS142 /artizpool/backups-hdds-20May2025/ST500LT012 > /tmp/STBAckup.log 2>&1 &
@@ -598,4 +532,3 @@ sudo nohup rsync -aAXXv /mnt/ST500LT012-9WS142 /artizpool/backups-hdds-20May2025
 root@pve:/# sudo nohup rsync -aAXXv /mnt/ST500LT012-9WS142 /artizpool/backups-hdds-20May2025/ST500LT012/ > /tmp/STBAckup.log 2>&1 &
 [1] 16927
 root@pve:/#
-
