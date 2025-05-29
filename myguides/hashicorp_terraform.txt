@@ -67,9 +67,10 @@ root@pve-lab1:~/ubuntu_2404_cludimage# pvesh get /version
 └─────────┴──────────────────┘
 
 
-## Install terraform (on Dev Box, like on VMWare VM on personal laptop to connect with pve/proxmox server from Dev Box)
+## Install terraform (on Dev Box, like on VMWare VM on personal laptop to connect with pve/proxmox server from Dev Box). wget command waits for password, until we provide password it appears hanged.
+=============================
 https://developer.hashicorp.com/terraform/install
-wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg  (wget command waits for password, until we provide password it appears hanged.)
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 sudo apt update && sudo apt install terraform
 
@@ -226,9 +227,10 @@ artia@ubuntu2404:~/cyberrange/terraform$ terraform apply
 
 test with docker enginer
 ------------------------
+-====================
 
 
-Terraform for aws
+Terraform for aws cli and pyhton boto3
 =======================
 Terraform installs providers from the Terraform Registry by default. In this example configuration, the aws provider's source is defined as hashicorp/aws, which is shorthand for registry.terraform.io/hashicorp/aws.  
 install aws cli

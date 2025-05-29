@@ -128,5 +128,6 @@ wipefs -a /dev/sdb1
 pve GUI -> create ZFS (now drive is available in pool)
 
 
-Use conatiner - turnkey-fileserver
+Use container - turnkey-fileserver
 ===================================
+it will expose GUI based file server at port 12321

@@ -2,15 +2,13 @@ ubuntu 24.04
 =================
 download iso and make bootable flash drive and change bios order and complete installation
 sudo apt update & sudo apt upgrade -y
-sudo apt install qemu-guest-agent
-apt-utils
-git
-net-tools
-openssh-server
+sudo apt install qemu-guest-agent apt-utils git net-tools openssh-server curl unzip tar wget
 
 
-change/set root password 
+change/set root's password 
 $ sudo passwd root
+
+usermod -aG sudo artia
 
 #sudo ufw enable
 #sudo ufw allow 22

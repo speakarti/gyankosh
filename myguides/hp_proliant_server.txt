@@ -85,3 +85,517 @@ Sat May 10 02:31:59 2025
     manual_iLO_reset=no
   Verbs
     cd version exit show reset set oemhp_ping oemhp_clearRESTAPIstate
+
+
+
+Method 1: Remove Power-On Password via BIOS (If You Know the Password)
+Steps:
+Reboot the server.
+
+When prompted, enter the Power-On Password to proceed.
+
+Press F9 to enter System Utilities.
+
+Go to:
+
+pgsql
+Copy
+Edit
+System Configuration → BIOS/Platform Configuration → Security Options
+Find the Power-On Password option.
+
+Choose Change Password.
+
+When prompted:
+
+Enter the current password.
+
+Leave the new password and confirm password fields blank.
+
+Save and exit (F10).
+
+This will clear the power-on password.
+
+
+Hp proliant DL380 gen 9 change Controller mode from RAID to HBA
+https://support.hpe.com/connect/s/product?kmpmoid=7274889&tab=driversAndSoftware
+Sort by:
+Severity
+Sorted: None	
+Type | Subtype
+
+Sort by:
+Title
+Sorted: None
+
+Sort by:
+Version
+Sorted Descending
+
+Environment
+
+Firmware | Storage Controller
+Online ROM Flash Component for Windows (x64) - HPE 12Gb/s SAS Expander Firmware for HPE Smart Array Controllers and HPE HBA Controllers
+5.15(D)
+2025-03-17
+Firmware | Storage Controller
+Supplemental Update / Online ROM Flash Component for Linux (x64) – HPE 12Gb/s SAS Expander Firmware for HPE Smart Array Controllers and HPE HBA Controllers
+5.15(D)
+2024-11-22
+Firmware | SATA Storage Disk
+Online HDD/SSD Flash Component for Windows (x64) - VK000240GWTSV, VK000480GWTTA, VK000960GWTTB, VK001920GWTTC, VK003840GWTTD, MK000480GWTTH, MK000960GWTTK, MK001920GWTTL and MK003840GWTTN Drives
+HPG7
+2023-04-25
+Firmware | SATA Storage Disk
+Online HDD/SSD Flash Component for Linux (x64) - VK000240GWTSV, VK000480GWTTA, VK000960GWTTB, VK001920GWTTC, VK003840GWTTD, MK000480GWTTH, MK000960GWTTK, MK001920GWTTL and MK003840GWTTN Drives
+HPG7
+2023-04-25
+Firmware | SATA Storage Disk
+Online HDD/SSD Flash Component for Linux (x64) - MK000480GWXFF, MK000960GWXFH, MK001920GWXFK and MK003840GWXFL Drives
+HPG3
+2023-04-14
+Firmware | SATA Storage Disk
+Online HDD/SSD Flash Component for Windows (x64) - MK000480GWXFF, MK000960GWXFH, MK001920GWXFK and MK003840GWXFL Drives
+HPG3
+2023-04-14
+Firmware | SAS Storage Disk
+Online HDD/SSD Flash Component for Linux (x64) - VO000800JWZJP, VO001600JWZJQ, VO003200JWZJR and VO006400JWZJT Drives
+HPD4(E)
+2023-04-07
+Firmware | SAS Storage Disk
+Online HDD/SSD Flash Component for Windows (x64) - MB008000JWWQP and MB006000JWWQN Drives
+HPD8(B)
+2023-04-07
+Firmware | SAS Storage Disk
+Online HDD/SSD Flash Component for Linux (x64) - MB004000JWWQB and MB002000JWWQA Drives
+HPD8(C)
+2023-04-07
+Firmware | SATA Storage Disk
+Online HDD/SSD Flash Component for Linux (x64) - MK000240GWCEU, MK000480GWCEV, MK000960GWCFA and MK001920GWCFB Drives
+HPG3(J)
+2023-04-07
+
+
+
+pdate the Smart Array P440ar controller firmware to enable HBA mod
+to change frm RAID to HBA vice versa, ensure no logical drive is enabled, bcz it use all physical ports to RAID, there are options to chnage all or a mixed mode of HBA.
+
+controller mode : HBA
+all disks are enabled fo rHBA
+
+f your HP Smart Array P440ar controller is now in HBA mode, that means your disks will be presented directly to the operating system as individual, unconfigured drives — no RAID layer in between.
+
+Disks show up as raw devices (e.g., /dev/sda, /dev/sdb, etc.) — ideal for:
+
+ZFS
+
+Linux software RAID (mdadm)
+
+Ceph
+
+VM passthrough
+
+No Smart Array RAID features (caching, striping, mirroring, etc.) will be active.
+
+
+
+✅ A. Use /dev/sda with ZFS (Recommended for Proxmox)
+zpool create zfspool /dev/sda
+zpool status
+And you can mount the dataset like:
+zfs create zfspool/data
+zfs list
+You’ll now have a mountable directory at /zfspool/data or similar.
+
+root@pve:~# fdisk -l /dev/sda
+Disk /dev/sda: 3.64 TiB, 4000787030016 bytes, 7814037168 sectors
+Disk model: SMBP4000S5xeN7.2
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+Disklabel type: gpt
+Disk identifier: BDC274B7-B7DE-3147-BA08-2AC3CDC53FD6
+
+Device          Start        End    Sectors  Size Type
+/dev/sda1        2048 7814019071 7814017024  3.6T Solaris /usr & Apple ZFS
+/dev/sda9  7814019072 7814035455      16384    8M Solaris reserved 1
+root@pve:~#
+
+root@pve:~# zfs list
+NAME           USED  AVAIL  REFER  MOUNTPOINT
+zfspool        540K  3.51T    96K  /zfspool
+zfspool/data    96K  3.51T    96K  /zfspool/data
+
+
+Pool name: zfspool
+
+Dataset: zfspool/data
+
+Mountpoint: /zfspool/data
+
+Free space: ~3.51 TiB available
+
+
+root@pve:~# zfs list
+NAME           USED  AVAIL  REFER  MOUNTPOINT
+zfspool        540K  3.51T    96K  /zfspool
+zfspool/data    96K  3.51T    96K  /zfspool/data
+root@pve:~# cd /zfspool/data
+
+Use it as storage for Proxmox VMs/containers
+create more datasets
+root@pve:/zfspool/data# zfs create zfspool/vmstorage
+root@pve:/zfspool/data# df -h /zfspool/data
+Filesystem      Size  Used Avail Use% Mounted on
+zfspool/data    3.6T  128K  3.6T   1% /zfspool/data
+root@pve:/zfspool/data#
+
+
+Optional: Add It to Proxmox Storage
+If you're using this for VMs:
+
+Go to Datacenter → Storage → Add → ZFS.
+
+Set:
+
+ID: local-zfs
+
+Pool: zfspool
+
+Content: Disk image, container
+
+Save.
+
+Now you can store VM disks on this ZFS pool.
+
+https://www.youtube.com/watch?v=-qk_P9SKYK4
+
+sudo rsync -aAXv /source/ /destination/
+
+
+
+make zfs disk
+=====================
+wipe disk
+------------
+umount /dev/sda2
+sudo wipefs -a /dev/sda2
+sudo dd if=/dev/zero of=/dev/sda2 bs=1M count=100
+
+
+sudo zpool create zpoolhdd3gb /dev/sda2
+
+zpool status
+zfs list
+
+
+sudo zpool offline zpoolhdd3gb sda
+
+
+
+sudo rsync -aAXXv /mnt/hdd3gb_lenovo/home/artia /zfspool/disksBackup_18May2025/hdd3gb_lenovo/
+
+
+lsblk -o NAME,SIZE,TYPE,MOUNTPOINT,MODEL
+
+sda                          298.1G disk            WDC WD3200BEVT-75A23T0
+├─sda1                           1G part            
+└─sda2                         297G part            
+sdb                            3.6T disk            SMBP4000S5xeN7.2
+├─sdb1                         3.6T part            
+└─sdb9                           8M part            
+sdc                          111.8G disk            HP SSD S700 120GB
+├─sdc1                        1007K part            
+├─sdc2                           1G part /boot/efi  
+└─sdc3                       110.8G part            
+  ├─pve-swap                     8G lvm  [SWAP]     
+  ├─pve-root                  37.7G lvm  /          
+  ├─pve-data_tmeta               1G lvm             
+  │ └─pve-data-tpool          49.3G lvm             
+  │   ├─pve-data              49.3G lvm             
+  │   ├─pve-vm--100--disk--0     8G lvm             
+  │   ├─pve-vm--100--disk--1     8G lvm             
+  │   └─pve-vm--101--disk--0     8G lvm             
+  └─pve-data_tdata            49.3G lvm             
+    └─pve-data-tpool          49.3G lvm             
+      ├─pve-data              49.3G lvm             
+      ├─pve-vm--100--disk--0     8G lvm             
+      ├─pve-vm--100--disk--1     8G lvm             
+      └─pve-vm--101--disk--0     8G lvm             
+sdd                          465.8G disk            ST500LT012-9WS142
+├─sdd1                        1000M part            
+├─sdd2                         260M part            
+├─sdd3                        1000M part            
+├─sdd4                         128M part            
+├─sdd5                       417.5G part            
+├─sdd6                         451M part            
+├─sdd7                         507M part            
+├─sdd8                          25G part            
+└─sdd9                          20G part            
+sr0                           1024M rom             HPE DVDRW DU8AESH
+root@pve:/# 
+
+
+root@pve:/# sudo smartctl --scan
+/dev/sda -d scsi # /dev/sda, SCSI device
+/dev/sdb -d scsi # /dev/sdb, SCSI device
+/dev/sdc -d scsi # /dev/sdc, SCSI device
+/dev/sdd -d sat # /dev/sdd [SAT], ATA device
+root@pve:/# 
+
+sudo smartctl -i /dev/sda
+root@pve:/# sudo smartctl -i /dev/sda
+smartctl 7.3 2022-02-28 r5338 [x86_64-linux-6.8.12-9-pve] (local build)
+Copyright (C) 2002-22, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Model Family:     Western Digital Scorpio Blue Serial ATA
+Device Model:     WDC WD3200BEVT-75A23T0
+Serial Number:    WD-WXF1A60J7264
+LU WWN Device Id: 5 0014ee 204bb816f
+Firmware Version: 01.01A01
+User Capacity:    320,072,933,376 bytes [320 GB]
+Sector Size:      512 bytes logical/physical
+Rotation Rate:    5400 rpm
+Device is:        In smartctl database 7.3/5319
+ATA Version is:   ATA8-ACS (minor revision not indicated)
+SATA Version is:  SATA 2.6, 3.0 Gb/s
+Local Time is:    Mon May 19 11:50:12 2025 CDT
+SMART support is: Available - device has SMART capability.
+SMART support is: Enabled
+
+root@pve:/# 
+
+sudo apt install smartmontools
+sudo smartctl -t short /dev/sda
+
+root@pve:~# zpool status -v
+  pool: zfspool
+ state: SUSPENDED
+status: One or more devices are faulted in response to IO failures.
+action: Make sure the affected devices are connected, then run 'zpool clear'.
+   see: https://openzfs.github.io/openzfs-docs/msg/ZFS-8000-HC
+config:
+
+        NAME                      STATE     READ WRITE CKSUM
+        zfspool                   ONLINE       0     0     0
+          wwn-0x5000c500ae8390c3  ONLINE       3     0     0
+
+errors: List of errors unavailable: pool I/O is currently suspended
+root@pve:~# 
+
+
+ls -l /dev/disk/by-id/
+
+lrwxrwxrwx 1 root root  9 May 19 19:03 scsi-35000c500ae8390c3 -> ../../sdf
+lrwxrwxrwx 1 root root 10 May 19 19:03 scsi-35000c500ae8390c3-part1 -> ../../sdf1
+lrwxrwxrwx 1 root root 10 May 19 19:03 scsi-35000c500ae8390c3-part9 -> ../../sdf9
+
+zpool online zfspool /dev/disk/by-id/scsi-35000c500ae8390c3
+
+
+wipefs -a /dev/sdX
+zpool labelclear -f /dev/sdX
+
+
+ls -l /dev/disk/by-id/
+
+root@pve:~# lsblk -o NAME,SIZE,TYPE,MOUNTPOINT,MODEL
+NAME                           SIZE TYPE MOUNTPOINT MODEL
+sda                            3.6T disk            SMBP4000S5xeN7.2
+sdb                            3.6T disk            SMBP4000S5xeN7.2
+├─sdb1                         3.6T part            
+└─sdb9                           8M part            
+sdc                          111.8G disk            HP SSD S700 120GB
+├─sdc1                        1007K part            
+├─sdc2                           1G part /boot/efi  
+└─sdc3                       110.8G part            
+  ├─pve-swap                     8G lvm  [SWAP]     
+  ├─pve-root                  37.7G lvm  /          
+  ├─pve-data_tmeta               1G lvm             
+  │ └─pve-data-tpool          49.3G lvm             
+  │   ├─pve-data              49.3G lvm             
+  │   ├─pve-vm--100--disk--0     8G lvm             
+  │   ├─pve-vm--100--disk--1     8G lvm             
+  │   └─pve-vm--101--disk--0     8G lvm             
+  └─pve-data_tdata            49.3G lvm             
+    └─pve-data-tpool          49.3G lvm             
+      ├─pve-data              49.3G lvm             
+      ├─pve-vm--100--disk--0     8G lvm             
+      ├─pve-vm--100--disk--1     8G lvm             
+      └─pve-vm--101--disk--0     8G lvm             
+sr0                           1024M rom             HPE DVDRW DU8AESH
+root@pve:~# ls -l /dev/disk/by-id/
+total 0
+lrwxrwxrwx 1 root root  9 May 19 20:05 ata-HPE_DVDRW_DU8AESH_446644917596 -> ../../sr0
+lrwxrwxrwx 1 root root  9 May 19 20:05 ata-HP_SSD_S700_120GB_HBSA10263801487 -> ../../sdc
+lrwxrwxrwx 1 root root 10 May 19 20:05 ata-HP_SSD_S700_120GB_HBSA10263801487-part1 -> ../../sdc1
+lrwxrwxrwx 1 root root 10 May 19 20:05 ata-HP_SSD_S700_120GB_HBSA10263801487-part2 -> ../../sdc2
+lrwxrwxrwx 1 root root 10 May 19 20:05 ata-HP_SSD_S700_120GB_HBSA10263801487-part3 -> ../../sdc3
+lrwxrwxrwx 1 root root 10 May 19 20:05 dm-name-pve-root -> ../../dm-1
+lrwxrwxrwx 1 root root 10 May 19 20:05 dm-name-pve-swap -> ../../dm-0
+lrwxrwxrwx 1 root root 10 May 19 20:05 dm-name-pve-vm--100--disk--0 -> ../../dm-6
+lrwxrwxrwx 1 root root 10 May 19 20:05 dm-name-pve-vm--100--disk--1 -> ../../dm-7
+lrwxrwxrwx 1 root root 10 May 19 20:05 dm-name-pve-vm--101--disk--0 -> ../../dm-8
+lrwxrwxrwx 1 root root 10 May 19 20:05 dm-uuid-LVM-gfFg2sIfPrlTzBxbNNTvHVQt3CIzprsY2oK0mMgH9qG68V8lURo1atk502SaRmVK -> ../../dm-8
+lrwxrwxrwx 1 root root 10 May 19 20:05 dm-uuid-LVM-gfFg2sIfPrlTzBxbNNTvHVQt3CIzprsY3em1FNIM5unnreHBnt5DKGciWuusdTBt -> ../../dm-1
+lrwxrwxrwx 1 root root 10 May 19 20:05 dm-uuid-LVM-gfFg2sIfPrlTzBxbNNTvHVQt3CIzprsYnk7ZtdrL35AQJYPfhg2LoYgaA2l0PNK1 -> ../../dm-0
+lrwxrwxrwx 1 root root 10 May 19 20:05 dm-uuid-LVM-gfFg2sIfPrlTzBxbNNTvHVQt3CIzprsYRexKdK4MXq2jetpyMmJcos0O2pHycwGK -> ../../dm-7
+lrwxrwxrwx 1 root root 10 May 19 20:05 dm-uuid-LVM-gfFg2sIfPrlTzBxbNNTvHVQt3CIzprsYYH73YZgjTOZSNA6MFwACt2kOOpcnLCTE -> ../../dm-6
+lrwxrwxrwx 1 root root 10 May 19 20:05 lvm-pv-uuid-XPe5Yf-feof-xesN-AHe6-k5LO-xLAS-RLkIUS -> ../../sdc3
+lrwxrwxrwx 1 root root  9 May 19 20:05 scsi-35000c500ae8390c3 -> ../../sdb
+lrwxrwxrwx 1 root root 10 May 19 20:05 scsi-35000c500ae8390c3-part1 -> ../../sdb1
+lrwxrwxrwx 1 root root 10 May 19 20:05 scsi-35000c500ae8390c3-part9 -> ../../sdb9
+lrwxrwxrwx 1 root root  9 May 19 20:05 scsi-35000c500c9abd3b3 -> ../../sda
+lrwxrwxrwx 1 root root  9 May 19 20:05 wwn-0x5000c500ae8390c3 -> ../../sdb
+lrwxrwxrwx 1 root root 10 May 19 20:05 wwn-0x5000c500ae8390c3-part1 -> ../../sdb1
+lrwxrwxrwx 1 root root 10 May 19 20:05 wwn-0x5000c500ae8390c3-part9 -> ../../sdb9
+lrwxrwxrwx 1 root root  9 May 19 20:05 wwn-0x5000c500c9abd3b3 -> ../../sda
+root@pve:~# 
+
+root@pve:~# ls -l /dev/disk/by-id/ | grep -E 'wwn|scsi-' | grep -E 'sd[a-z]$' | awk '{print $9, "->", $11}' | sort
+scsi-35000c500ae8390c3 -> ../../sdb
+scsi-35000c500c9abd3b3 -> ../../sda
+wwn-0x5000c500ae8390c3 -> ../../sdb
+wwn-0x5000c500c9abd3b3 -> ../../sda
+
+Instead of /dev/sda or /dev/sdb, use:
+
+bash
+Copy
+Edit
+/dev/disk/by-id/wwn-0x5000c500c9abd3b3  # for sda
+/dev/disk/by-id/wwn-0x5000c500ae8390c3  # for sdb
+
+. Persistent Device Naming (e.g., in fstab, ZFS, LVM)
+Avoid using /dev/sdX since that can change. Use WWNs instead for reliability.
+
+Example for /etc/fstab:
+/dev/disk/by-id/wwn-0x5000c500c9abd3b3  /mnt/storage  ext4  defaults  0 2
+Why? Disk order (e.g., sda/sdb) might change after reboot, breaking mounts. WWN avoids that.
+
+✅ 2. ZFS Pools
+When creating ZFS pools, prefer WWNs:
+
+zpool create mypool /dev/disk/by-id/wwn-0x5000c500c9abd3b3
+
+Use Case	Why WWN Helps
+fstab	Prevent mount failures on reboot
+ZFS	Consistent pool devices
+LVM	Predictable device references
+
+
+create a pool 
+zpool create artizpool mirror \
+  /dev/disk/by-id/wwn-0x5000c500c9abd3b3 \
+  /dev/disk/by-id/wwn-0x5000c500ae8390c3
+
+root@pve:~# zfs list
+NAME        USED  AVAIL  REFER  MOUNTPOINT
+artizpool   360K  3.51T    96K  /artizpool
+root@pve:~# 
+
+
+root@pve:~# zpool status
+  pool: artizpool
+ state: ONLINE
+config:
+
+        NAME                        STATE     READ WRITE CKSUM
+        artizpool                   ONLINE       0     0     0
+          mirror-0                  ONLINE       0     0     0
+            wwn-0x5000c500c9abd3b3  ONLINE       0     0     0
+            wwn-0x5000c500ae8390c3  ONLINE       0     0     0
+
+errors: No known data errors
+root@pve:~# 
+
+zfs create artizpool/backups-hdds-20May2025
+
+sudo rsync -aAXXv /mnt/Hitachi500gb/ /artizpool/backups-hdds-20May2025/Hitachi500gb
+
+
+
+zfs create mypool/media
+zfs create mypool/backups-HDDs-20May2025
+
+zpool export zpool
+zpool destroy zpool
+sudo wipefs -a /dev/disk/by-id/wwn-0x5000c500c9abd3b3
+sudo wipefs -a /dev/disk/by-id/wwn-0x5000c500ae8390c3
+sudo zpool labelclear /dev/disk/by-id/wwn-0x5000c500c9abd3b3
+sudo zpool labelclear /dev/disk/by-id/wwn-0x5000c500ae8390c3
+
+221
+nmcli dev wifi list
+*       7C:DB:98:EB:3C:42  OpenWrt24                 Infra  1     260 Mbit/s  60      ▂▄▆_  WPA>
+        F4:52:46:C4:5C:11  svuesa                    Infra  11    260 Mbit/s  57      ▂▄▆_  WPA>
+ 
+ nmcli dev wifi connect "svuesa"
+ nmcli dev wifi connect "svuesa" password "YOUR_PASSWORD"
+ 
+ nmcli connection modify "OpenWrt24" connection.autoconnect yes
+ nmcli connection modify "svuesa" connection.autoconnect yes
+ nmcli connection modify "OpenWrt24" connection.autoconnect-priority 10
+ sudo systemctl restart NetworkManager
+
+# Set autoconnect and priority for connection B (preferred)
+nmcli connection modify "OpenWrt24" connection.autoconnect yes
+nmcli connection modify "OpenWrt24" connection.autoconnect-priority 10
+
+# Set autoconnect and lower priority for connection A
+nmcli connection modify "svuesa" connection.autoconnect yes
+nmcli connection modify "svuesa" connection.autoconnect-priority 5
+
+artia@dell001:~$ nmcli connection show
+NAME            UUID                                  TYPE      DEVICE
+OpenWrt24       c86141e2-8768-4f72-8ce0-e368c26db109  wifi      wlp2s0
+lo              f58ff821-86e9-4bd8-8ecf-9143ff01ffae  loopback  lo
+Chefdee         b5a9a806-e1a3-4c82-a326-02a508b31455  wifi      --
+netplan-enp1s0  cac41fbe-bc18-3d87-bba7-af2af7f8ffab  ethernet  --
+svuesa          8844be8b-d96b-4206-b97a-04e700ed6ecf  wifi      --
+artia@dell001:~$
+
+
+
+
+artia@dell001:~$ nmcli -f NAME,UUID,TYPE,AUTOCONNECT,AUTOCONNECT-PRIORITY connection show
+NAME            UUID                                  TYPE      AUTOCONNECT  AUTOCONNECT-PRIORITY
+OpenWrt24       c86141e2-8768-4f72-8ce0-e368c26db109  wifi      yes          0
+lo              f58ff821-86e9-4bd8-8ecf-9143ff01ffae  loopback  no           0
+Chefdee         b5a9a806-e1a3-4c82-a326-02a508b31455  wifi      yes          0
+netplan-enp1s0  cac41fbe-bc18-3d87-bba7-af2af7f8ffab  ethernet  yes          0
+svuesa          8844be8b-d96b-4206-b97a-04e700ed6ecf  wifi      yes          0
+artia@dell001:~$
+
+
+nmap -sL 192.168.1.0/24 | awk '/Nmap scan report/{print $NF}'
+
+root@100:~# nmap -sn 192.168.1.0/24 -oG - | awk '/Up$/{print $2}'
+192.168.1.1
+192.168.1.12
+192.168.1.50
+192.168.1.81
+192.168.1.106
+192.168.1.111
+192.168.1.171
+192.168.1.180
+root@100:~# 
+
+root@100:~# nmap -sn 192.168.2.0/24 -oG - | awk '/Up$/{print $2}'
+192.168.2.1
+192.168.2.110
+192.168.2.125
+192.168.2.210
+192.168.2.225
+192.168.2.236
+192.168.2.172
+root@100:~# 
+
+
+sudo nohup rsync -aAXXv /mnt/ST500LT012-9WS142 /artizpool/backups-hdds-20May2025/ST500LT012 > /tmp/STBAckup.log 2>&1 &
+
+root@pve:/# sudo nohup rsync -aAXXv /mnt/ST500LT012-9WS142 /artizpool/backups-hdds-20May2025/ST500LT012/ > /tmp/STBAckup.log 2>&1 &
+[1] 16927
+root@pve:/#
+

@@ -16,3 +16,13 @@ pvereport	Generates a system report useful for debugging or support
 pvesubscription	Manage subscription status of the node
 pvecfs	Proxmox Cluster File System (PMXCFS) related tool
 pveversion	Show installed PVE version and package info
+
+ubuntu 24.04 server image
+https://abqix.mm.fcix.net/ubuntu-releases/24.04.2/ubuntu-24.04.2-live-server-amd64.iso
+
+download ISO in proxmox 
+wget https://abqix.mm.fcix.net/ubuntu-releases/24.04.2/ubuntu-24.04.2-live-server-amd64.iso -P /var/lib/vz/template/iso/
+
+
+qm create 1001 --name ubuntu-vm --memory 32768 --cores 4 --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-pci --scsi0 local-lvm:30 --ide2 local:iso/ubuntu-24.04.2-live-server-amd64.iso,media=cdrom --boot order="scsi0;ide2" --ostype l26
+
