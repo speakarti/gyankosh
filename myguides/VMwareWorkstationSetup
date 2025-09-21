@@ -9,6 +9,9 @@ net start "VMware DHCP Service"
 net start "VMware NAT Service"
 =====================================================================
 
+create a shared folder between VM and host and access it 
+
+
 
 ## Clean up Duplicate Files from host 
 Delete duplicates, no confirmation is asked. DANGEROUS
