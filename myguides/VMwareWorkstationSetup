@@ -1,3 +1,15 @@
+Troubleshooting after restart internet on ubuntu doesn't comeup:
+=====================================================================
+vmware workstattion installed on windows:
+created w ubuntu machine with NAT
+
+net stop "VMware NAT Service"
+net stop "VMware DHCP Service"
+net start "VMware DHCP Service"
+net start "VMware NAT Service"
+=====================================================================
+
+
 ## Clean up Duplicate Files from host 
 Delete duplicates, no confirmation is asked. DANGEROUS
 fdupes -dN -r /mnt/hgfs/ArtiPhonebackup/
