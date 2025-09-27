@@ -1,0 +1,30 @@
+constants:
+  default_sleep_time_runner_setup: 10 # value in seconds
+  default_sleep_time_runner_delete: 5 # value in seconds
+  runner_api_polling_interval: 600 # value in seconds
+  runner_cool_down_period: 300 # value in seconds
+groups:
+  - name: "bb.hilabs.misc.eks.runner.001"
+    workspace: "{246da2d8-9eba-4e39-af4b-b33a3b41e759}" # include the curly braces
+    # repository: "{repository_uuid}" # optional, only needed if you want repository runners - include the curly braces
+    labels: # each runner will be created with this label list
+      - "label.oauth.bb.hilabs.misc.eksrunner.001"
+    namespace: "bitbucket-runner" # target namespace, where runner will be created.
+    strategy: "percentageRunnersIdle"
+    # Set up the parameters for runners to create/delete via Bitbucket API.
+    parameters:
+      min: 1  # recommended minimum 1 must be in UI because fails, when new build is starting.
+      max: 10  #
+      scale_up_threshold: 0.5  # The percentage of busy runners at which the number of desired runners are re-evaluated to scale up.
+      scale_down_threshold: 0.2  # The percentage of busy runners at which the number of desired runners are re-evaluated to scale up.
+      scale_up_multiplier: 1.5  #  scale_up_multiplier > 1.
+      scale_down_multiplier: 0.5  #  0 < scale_down_multiplier < 1.
+    # Set up the resources for kubernetes job template.
+    # This section is optional. If not provided the default values for memory "4Gi" and cpu "1000m" in requests and limits will be used
+    resources:  # Autoscaler kubernetes job template resources available for tuning.
+      requests:
+        memory: "1Gi"
+        cpu: "500m"
+      limits:
+        memory: "2Gi"
+        cpu: "1000m"
