@@ -134,6 +134,13 @@ copy public key to targetted hosts (.ssh under user's home, in a file authorized
 psan@hl102:~$ scp -r .ssh psan@192.168.1.224:/home/psan/
 
 https://docs.rackspace.com/docs/log-into-a-linux-server-with-an-ssh-private-key-on-windows
+sudo apt update
+sudo apt install openssh-server -y
+sudo systemctl status ssh
+sudo systemctl enable ssh
+sudo systemctl restart ssh
+sudo ss -tulpn | grep ssh
+
 
 
 Install ubuntu desktop (any one, if required )
