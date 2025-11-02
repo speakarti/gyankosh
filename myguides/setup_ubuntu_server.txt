@@ -111,6 +111,8 @@ sudo systemctl enable ssh
 sudo systemctl start ssh
 sudo systemctl status ssh
 
+sudo ss -tulpn | grep ssh (sockets stats or sockets status)
+
 sudo nano /etc/ssh/ssh_config
 Uncomment the below line in ssh_config file:
 #Port 22
