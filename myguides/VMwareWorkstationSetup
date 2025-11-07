@@ -1,3 +1,21 @@
+share folder
+===========
+Power off the VM.
+Go to VM Settings → Options tab → Shared Folders.
+Enable:
+✔️ “Always enabled” or “Enabled until next power off”
+Click Add… → Choose a folder on your Windows host to share.
+vmware-toolbox-cmd -v
+sudo apt update
+sudo apt install open-vm-tools open-vm-tools-desktop -y
+sudo mkdir -p /mnt/hgfs
+sudo mount -t fuse.vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other
+
+
+
+
+Start your VM again.
+
 Troubleshooting after restart internet on ubuntu doesn't comeup:
 =====================================================================
 vmware workstattion installed on windows:
